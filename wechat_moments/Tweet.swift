@@ -8,7 +8,7 @@
 import Foundation
 
 struct Tweet: Codable {
-    let content : String?
+    var content : String?
     let images : [Image]?
     let sender : Sender?
     let comments : [Comment]?
@@ -310,44 +310,7 @@ let momentAll = """
 ]
 """
 
-let momentItem = """
-{
-  "images": [
-    {
-      "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/001.jpeg"
-    },
-    {
-      "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/002.jpeg"
-    },
-    {
-      "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/003.jpeg"
-    }
-  ],
-  "sender": {
-    "username": "cyao",
-    "nick": "Cheng Yao",
-    "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
-  },
-  "comments": [
-    {
-      "content": "Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.⏰",
-      "sender": {
-        "username": "leihuang",
-        "nick": "Lei Huang",
-        "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/002.jpeg"
-      }
-    },
-    {
-      "content": "Like it too",
-      "sender": {
-        "username": "weidong",
-        "nick": "WeiDong Gu",
-        "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/003.jpeg"
-      }
-    }
-  ]
-}
-"""
+
 
 
 
