@@ -11,13 +11,13 @@ import UIKit
 // Task2: viewController获取解析后的数据
 
 class TweetViewController: UIViewController {
-    
+    let viewModel = TweetViewModel()
+    @IBOutlet var tableView: UITableView!
+    var allTweet: [Tweet]?
     override func viewDidLoad() {
         super.viewDidLoad()
-        let viewModel = TweetViewModel()
-        var AllTweet = viewModel.getAllTweet()
-        AllTweet?.removeAll(where: {$0.content == nil && $0.images == nil})
-        print(AllTweet!)
+        allTweet = viewModel.getAllTweet()
+        tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
