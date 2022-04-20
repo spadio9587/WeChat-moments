@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BCA280E531C0044AE25 /* AppDelegate.swift */; };
 		AC2D7BCD280E531C0044AE25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BCC280E531C0044AE25 /* SceneDelegate.swift */; };
-		AC2D7BCF280E531C0044AE25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BCE280E531C0044AE25 /* ViewController.swift */; };
+		AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */; };
 		AC2D7BD2280E531C0044AE25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2D7BD0280E531C0044AE25 /* Main.storyboard */; };
 		AC2D7BD4280E53210044AE25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC2D7BD3280E53210044AE25 /* Assets.xcassets */; };
 		AC2D7BD7280E53210044AE25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC2D7BD5280E53210044AE25 /* LaunchScreen.storyboard */; };
@@ -42,7 +42,7 @@
 		AC2D7BC7280E531C0044AE25 /* wechat_moments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wechat_moments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2D7BCA280E531C0044AE25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC2D7BCC280E531C0044AE25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AC2D7BCE280E531C0044AE25 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		AC2D7BD1280E531C0044AE25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC2D7BD3280E53210044AE25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC2D7BD6280E53210044AE25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			children = (
 				AC2D7BCA280E531C0044AE25 /* AppDelegate.swift */,
 				AC2D7BCC280E531C0044AE25 /* SceneDelegate.swift */,
-				AC2D7BCE280E531C0044AE25 /* ViewController.swift */,
+				AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */,
 				AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */,
 				AC2D7BD0280E531C0044AE25 /* Main.storyboard */,
 				AC2D7BD3280E53210044AE25 /* Assets.xcassets */,
@@ -268,7 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */,
-				AC2D7BCF280E531C0044AE25 /* ViewController.swift in Sources */,
+				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
 				AC2D7BFB280E537D0044AE25 /* TweetView.swift in Sources */,

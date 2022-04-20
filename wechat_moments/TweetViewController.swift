@@ -10,7 +10,7 @@ import UIKit
 // Task1：在viewModel里面解析json数据
 // Task2: viewController获取解析后的数据
 
-class ViewController: UIViewController {
+class TweetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return UITableViewCell()
