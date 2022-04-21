@@ -12,31 +12,36 @@ import UIKit
 
 class TweetViewController: UIViewController {
     let viewModel = TweetViewModel()
+    var backgroundImageView = UIImageView()
     @IBOutlet var tableView: UITableView!
     var allTweet: [Tweet]?
     override func viewDidLoad() {
         super.viewDidLoad()
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        tableView.dataSource = self
+        tableView.rowHeight = 190
+        view.addSubview(backgroundImageView)
+        configureBackgroundImageView()
+        func configureBackgroundImageView(){
+            backgroundImageView.contentMode = .scaleAspectFit
+            backgroundImageView.image = UIImage.init(named: "testImage3")
+            backgroundImageView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
+        }
     }
 }
-
 extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
             return UITableViewCell()
         }
+        //item没有传进来！
+        tweet.setTweet(tweet: allTweet?[indexPath.row])
         return tweet
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return allTweet!.count
     }
-    
-    
-    
 }
 
