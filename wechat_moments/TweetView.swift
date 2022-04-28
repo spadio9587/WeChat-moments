@@ -27,13 +27,14 @@ class TweetView: UIView {
         configureSender()
         configureContainerView()
         configureContent()
-//      configureImageArea()
-        configureContentImage()
+        configureImageArea()
+//        configureContentImage()
         configureComment()
  
     }
     // 命名规范
     // 还要注意解包的使用
+    //  将String转成Image
     func loadImage(from imageUrl: String?) -> UIImage? {
         guard let imageUrl = imageUrl,
             let url = URL(string: imageUrl),
@@ -48,8 +49,8 @@ class TweetView: UIView {
         sender.text = tweet.sender?.username
         avaterSender.image = loadImage(from: tweet.sender?.avatar)
         updateContent(tweet.content)
-        updateImages(tweet.images)
-        updateComments(tweet.comments)
+//        updateImages(tweet.images)
+//        updateComments(tweet.comments)
 //        updateConstraints(with: tweet)
     }
     
@@ -121,57 +122,98 @@ class TweetView: UIView {
         containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
         containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: 8).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
     }
     
     func configureContent() {
         containerView.addArrangedSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
-        content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor,constant: 10).isActive = true
-        content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
-        content.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8).isActive = true
+        content.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 5).isActive = true
         content.numberOfLines = 0
+        content.backgroundColor = .lightGray
         //content的高度并没有自适应 会重叠起来
     }
     
-//    func configureImageArea(){
-//        containerView.addArrangedSubview(imageArea)
-//        imageArea.translatesAutoresizingMaskIntoConstraints = false
-//        imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor,constant: 10).isActive = true
-//        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10).isActive = true
-//        imageArea.topAnchor.constraint(equalTo: content.bottomAnchor, constant: 5).isActive = true
-//        imageArea.widthAnchor.constraint(equalToConstant: 30).isActive = true
-//        imageArea.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//    }
-    
-    func configureContentImage() {
-        let i = contentImage.count
-        switch i {
-        case 1,2,3:
-            for seperateImage in contentImage {
-                print("\(seperateImage.bounds.size.width)")
-                seperateImage.leadingAnchor.constraint(equalTo: imageArea.leftAnchor).isActive = true
-                seperateImage.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: 5).isActive = true
-                seperateImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
-                seperateImage.heightAnchor.constraint(equalToConstant: 10).isActive = true
-                imageArea.addSubview(seperateImage)
-                }
-            
-        default: break
-            }
+    func configureImageArea(){
+        imageArea.backgroundColor = .orange
+        //为什么不显示imageArea的背景颜色
+        imageArea.translatesAutoresizingMaskIntoConstraints = false
+        
+        containerView.addArrangedSubview(imageArea)
+        //需要把image的数据导入进去
+        
+        for i in 0...8 {
+            let imageView = UIImageView()
+            imageView.backgroundColor = .blue
+            imageArea.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            let width = (containerView.bounds.size.width - 4 * 8) / 3
+            let height = width
+            let left = CGFloat((i % 3 + 1)) * 8 + CGFloat(i % 3) * width
+            let top = CGFloat((i / 3 + 1)) * 8 + CGFloat(i / 3) * height
+            NSLayoutConstraint.activate([
+                imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
+                imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
+                imageView.widthAnchor.constraint(equalToConstant: width),
+                imageView.heightAnchor.constraint(equalToConstant: height),
+            ])
         }
+        if let view = imageArea.subviews.last {
+            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 8).isActive = true
+        }
+    }
+    
+//    func configureContentImage() {
+//        let i = contentImage.count
+//        switch i {
+//        case 1,2,3:
+//            for seperateImage in contentImage {
+//                print("\(seperateImage.bounds.size.width)")
+//                seperateImage.leadingAnchor.constraint(equalTo: imageArea.leftAnchor).isActive = true
+//                seperateImage.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: 5).isActive = true
+//                seperateImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
+//                seperateImage.heightAnchor.constraint(equalToConstant: 10).isActive = true
+//                imageArea.addSubview(seperateImage)
+//                }
+//
+//        default: break
+//            }
+//        }
             
     
 
     func configureComment() {
-        for seperateComment in commentsContent {
-            seperateComment.backgroundColor = .lightGray
-            containerView.addArrangedSubview(seperateComment)
-            seperateComment.leadingAnchor.constraint(equalTo: imageArea.leadingAnchor,constant: 5).isActive = true
-            seperateComment.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-            seperateComment.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: -5).isActive = true
-            seperateComment.numberOfLines = 0
-        }
+//        for seperateComment in commentsContent {
+//            seperateComment.backgroundColor = .lightGray
+//            containerView.addArrangedSubview(seperateComment)
+//            seperateComment.leadingAnchor.constraint(equalTo: imageArea.leadingAnchor,constant: 5).isActive = true
+//            seperateComment.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+//            seperateComment.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: -5).isActive = true
+//            seperateComment.numberOfLines = 0
+//        }
+        let attributeLabel = UILabel()
+        attributeLabel.backgroundColor = .lightGray
+        containerView.addArrangedSubview(attributeLabel)
+        attributeLabel.translatesAutoresizingMaskIntoConstraints = false
+        attributeLabel.numberOfLines = 0
+        let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: "思骁：我真的会谢", attributes: [.kern: -0.5]))
+        mutableAttribString.addAttributes(
+          [.foregroundColor: UIColor.blue],
+          range: NSRange(location: 0, length: "思骁：".count)
+        )
+        attributeLabel.attributedText = mutableAttribString
+        
+        let attributeLabel2 = UILabel()
+        attributeLabel2.backgroundColor = .lightGray
+        containerView.addArrangedSubview(attributeLabel2)
+        attributeLabel2.translatesAutoresizingMaskIntoConstraints = false
+        attributeLabel2.numberOfLines = 0
+        let mutableAttribString2 = NSMutableAttributedString(attributedString: NSAttributedString(string: "liepng：我真的会谢", attributes: [.kern: -0.5]))
+        mutableAttribString2.addAttributes(
+          [.foregroundColor: UIColor.blue],
+          range: NSRange(location: 0, length: "liepng：".count)
+        )
+        attributeLabel2.attributedText = mutableAttribString2
     }
 }
 
