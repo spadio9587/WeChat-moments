@@ -10,30 +10,24 @@ import UIKit
 // Task1：在viewModel里面解析json数据
 // Task2: viewController获取解析后的数据
 
-class TweetViewController: UIViewController {
+class TweetCellViewController: UIViewController {
     let viewModel = TweetViewModel()
-    var backgroundImageView = UIImageView()
-    @IBOutlet var tableView: UITableView!
+    let tableView = UITableView()
+    let contentview = UIView()
     var allTweet: [Tweet]?
     override func viewDidLoad() {
         super.viewDidLoad()
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
-//        tableView.estimatedRowHeight = 44
         tableView.dataSource = self
-        view.addSubview(backgroundImageView)
-        configureBackgroundImageView()
-    }
-    override func viewDidLayoutSubviews() {
-        <#code#>
+        tableView.addSubview(contentview)
     }
 }
-extension TweetViewController: UITableViewDataSource {
+extension TweetCellViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
             return UITableViewCell()
         }
-        //item没有传进来！
         tweet.setTweet(tweet: allTweet?[indexPath.row])
         return tweet
     }
@@ -41,10 +35,6 @@ extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allTweet!.count
     }
-    func configureBackgroundImageView(){
-        backgroundImageView.contentMode = .scaleAspectFit
-        backgroundImageView.image = UIImage.init(named: "testImage3")
-        backgroundImageView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
-    }
 }
+
 

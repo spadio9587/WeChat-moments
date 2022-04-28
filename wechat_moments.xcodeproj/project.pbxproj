@@ -20,6 +20,7 @@
 		AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFC280E53A00044AE25 /* Tweet.swift */; };
 		AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */; };
 		AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */; };
+		AC60A0372818EF0700BF2489 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60A0362818EF0700BF2489 /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		AC2D7BFC280E53A00044AE25 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		AC60A0362818EF0700BF2489 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				AC2D7BD0280E531C0044AE25 /* Main.storyboard */,
 				AC2D7BD5280E53210044AE25 /* LaunchScreen.storyboard */,
 				AC2D7BD8280E53210044AE25 /* Info.plist */,
+				AC60A0362818EF0700BF2489 /* TestViewController.swift */,
 			);
 			path = wechat_moments;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */,
 				AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */,
+				AC60A0372818EF0700BF2489 /* TestViewController.swift in Sources */,
 				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
