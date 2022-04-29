@@ -24,9 +24,6 @@ class TweetViewController: UIViewController {
         view.addSubview(backgroundImageView)
         configureBackgroundImageView()
     }
-    override func viewDidLayoutSubviews() {
-        <#code#>
-    }
 }
 extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
