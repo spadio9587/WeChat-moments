@@ -30,34 +30,32 @@ class TweetView: UIView {
         configureContainerView()
         configureContent()
         configureImageArea()
-//        configureContentImage()
-        configureComment()
- 
+        configureCommentsArea()
+        
     }
     // 命名规范
     // 还要注意解包的使用
     //  将String转成Image
     func loadImage(from imageUrl: String?) -> UIImage? {
         guard let imageUrl = imageUrl,
-            let url = URL(string: imageUrl),
-            let data = try? Data(contentsOf: url),
-            let image = UIImage(data: data) else {
-            return nil
-        }
+              let url = URL(string: imageUrl),
+              let data = try? Data(contentsOf: url),
+              let image = UIImage(data: data) else {
+                  return nil
+              }
         return image
     }
-    func getTweet(tweet: Tweet) {
+    func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
         avaterSender.image = loadImage(from: tweet.sender?.avatar)
         updateContent(tweet.content)
-//        updateImages(tweet.images)
-//        updateComments(tweet.comments)
-//        updateConstraints(with: tweet)
+        updateImages(tweet.images)
+        updateComments(tweet.comments)
     }
     
     //依旧是解包，当content内容不为空的时候，不隐藏content的内容
-
+    
     func updateContent(_ content: String?) {
         if let content = content {
             self.content.text = content
@@ -75,7 +73,6 @@ class TweetView: UIView {
                 imageArea.isHidden = false
             }
         }else{
-            //隐藏contentImage的内容
             imageArea.isHidden = true
         }
     }
