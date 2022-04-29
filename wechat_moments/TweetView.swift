@@ -112,34 +112,41 @@ class TweetView: UIView {
     }
     
     func configureAvaterSender() {
-        avaterSender.translatesAutoresizingMaskIntoConstraints = false
-        avaterSender.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        avaterSender.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        avaterSender.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        avaterSender.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         avaterSender.contentMode = .scaleAspectFill
+        avaterSender.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            avaterSender.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            avaterSender.widthAnchor.constraint(equalToConstant: 30),
+            avaterSender.heightAnchor.constraint(equalToConstant: 30),
+            avaterSender.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+        ])
+        
     }
     
     func configureSender() {
-        sender.translatesAutoresizingMaskIntoConstraints = false
-        sender.topAnchor.constraint(equalTo: avaterSender.topAnchor).isActive = true
-        sender.leadingAnchor.constraint(equalTo: avaterSender.trailingAnchor, constant: 5).isActive = true
-        sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 5).isActive = true
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
         sender.font = UIFont.systemFont(ofSize: 17)
+        sender.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            sender.topAnchor.constraint(equalTo: avaterSender.topAnchor),
+            sender.leadingAnchor.constraint(equalTo: avaterSender.trailingAnchor, constant: 5),
+        ])
+        
     }
     
     func configureContainerView() {
         containerView.axis = .vertical
         containerView.alignment = .leading
         containerView.distribution = .equalSpacing
-        containerView.spacing = 8
+        containerView.spacing = margin
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
-        containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: 8).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
+        NSLayoutConstraint.activate([
+            containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
+            containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: margin),
+            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin),
+        ])
     }
     
     func configureContent() {
@@ -152,17 +159,15 @@ class TweetView: UIView {
     func configureImageArea(){
         containerView.addArrangedSubview(imageArea)
         imageArea.translatesAutoresizingMaskIntoConstraints = false
-        print("+++++++++\(contentImage.count)")
         if (contentImage.count != 0) {
             for i in 0...(contentImage.count-1) {
                 let imageView = contentImage[i]
-                imageView.backgroundColor = .blue
                 imageArea.addSubview(imageView)
                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                let width = (containerView.bounds.size.width - 4 * 8) / 3
+                let width = (containerView.bounds.size.width - 4 * margin) / 3
                 let height = width
-                let left = CGFloat((i % 3 + 1)) * 8 + CGFloat(i % 3) * width
-                let top = CGFloat((i / 3 + 1)) * 8 + CGFloat(i / 3) * height
+                let left = CGFloat((i % 3 + 1)) * margin + CGFloat(i % 3) * width
+                let top = CGFloat((i / 3 + 1)) * margin + CGFloat(i / 3) * height
                 NSLayoutConstraint.activate([
                     imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
                     imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
@@ -171,13 +176,12 @@ class TweetView: UIView {
                 ])
             }
             if let view = imageArea.subviews.last {
-                imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 8).isActive = true
+                imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
             }
         }
     }
     
     func configureCommentsArea(){
-        commentsArea.backgroundColor = .orange
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         containerView.addArrangedSubview(commentsArea)
         //需要把image的数据导入进去
@@ -188,16 +192,16 @@ class TweetView: UIView {
                 seperateComment.backgroundColor = .lightGray
                 seperateComment.translatesAutoresizingMaskIntoConstraints = false
                 seperateComment.numberOfLines = 0
-                let top = CGFloat((i + 1) * 3) + CGFloat((i - 1) * 5)
-                seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top).isActive = true
+                //计算单条评论的高度
+                let top = CGFloat((i + 1) * 3) + CGFloat((i - 1) * 8)
+                NSLayoutConstraint.activate([
+                    seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
+                ])
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
-                let str = seperateComment.text!
-                let number = str.firstIndex(of: ":")
-                let begin = str[..<number!]
-                let length = begin.count
+                let number = seperateComment.text!.firstIndex(of: ":")
                 mutableAttribString.addAttributes(
                     [.foregroundColor: UIColor.blue],
-                    range: NSRange(location: 0, length: length)
+                    range: NSRange(location: 0, length: seperateComment.text![..<number!].count)
                 )
                 seperateComment.attributedText = mutableAttribString
                 

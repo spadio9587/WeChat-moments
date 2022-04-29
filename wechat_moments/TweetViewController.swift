@@ -19,7 +19,6 @@ class TweetViewController: UIViewController {
         super.viewDidLoad()
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
-//        tableView.estimatedRowHeight = 44
         tableView.dataSource = self
         view.addSubview(backgroundImageView)
         configureBackgroundImageView()
@@ -30,7 +29,6 @@ extension TweetViewController: UITableViewDataSource {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
             return UITableViewCell()
         }
-        //item没有传进来！
         tweet.setTweet(tweet: allTweet?[indexPath.row])
         return tweet
     }
