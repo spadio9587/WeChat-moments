@@ -10,6 +10,7 @@ import UIKit
 
 class TweetView: UIView {
     var tweet : Tweet?
+    let margin : CGFloat = 8
     let avaterSender = UIImageView()
     let sender = UILabel()
     var containerView = UIStackView()
@@ -19,36 +20,54 @@ class TweetView: UIView {
     var commentsArea = UIView()
     var commentsContent = [UILabel]()
     
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.addSubview(avaterSender)
         self.addSubview(sender)
         self.addSubview(containerView)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         configureAvaterSender()
         configureSender()
         configureContainerView()
         configureContent()
         configureImageArea()
         configureCommentsArea()
-        
     }
+    
     // 命名规范
     // 还要注意解包的使用
     //  将String转成Image
-    func loadImage(from imageUrl: String?) -> UIImage? {
-        guard let imageUrl = imageUrl,
-              let url = URL(string: imageUrl),
-              let data = try? Data(contentsOf: url),
-              let image = UIImage(data: data) else {
-                  return nil
-              }
-        return image
+    func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
+        DispatchQueue.global().async {
+            if let imageUrl = imageUrl,
+               let url = URL(string: imageUrl),
+               let data = try? Data(contentsOf: url),
+               let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    callback(image)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    callback(nil)
+                }
+            }
+        }
+        
     }
     func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
-        avaterSender.image = loadImage(from: tweet.sender?.avatar)
+        loadImage(from: tweet.sender?.avatar) { image in
+            self.avaterSender.image = image
+        }
         updateContent(tweet.content)
         updateImages(tweet.images)
         updateComments(tweet.comments)
@@ -68,7 +87,9 @@ class TweetView: UIView {
         if let images = images {
             for (index,_) in images.enumerated() {
                 let imageView = UIImageView()
-                imageView.image = loadImage(from: images[index].url)
+                loadImage(from: images[index].url) { image in
+                    imageView.image = image
+                }
                 contentImage.append(imageView)
                 imageArea.isHidden = false
             }
@@ -82,7 +103,6 @@ class TweetView: UIView {
             for (index,_) in comments.enumerated() {
                 let labelView = UILabel()
                 labelView.text = comments[index].sender.username + ": " + comments[index].content
-                print("\(String(describing: labelView.text))")
                 commentsContent.append(labelView)
                 commentsArea.isHidden = false
             }

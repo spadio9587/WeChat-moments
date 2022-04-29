@@ -30,6 +30,7 @@ class TweetCell: UITableViewCell {
         tweetView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         tweetView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
+    
     func setTweet(tweet: Tweet?) {
         guard let tweet = tweet else {return}
         tweetView.setTweet(tweet: tweet)
