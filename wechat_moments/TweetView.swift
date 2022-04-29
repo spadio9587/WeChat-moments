@@ -81,16 +81,15 @@ class TweetView: UIView {
         if let comments = comments {
             for (index,_) in comments.enumerated() {
                 let labelView = UILabel()
-                labelView.text = comments[index].content
+                labelView.text = comments[index].sender.username + ": " + comments[index].content
+                print("\(String(describing: labelView.text))")
                 commentsContent.append(labelView)
+                commentsArea.isHidden = false
             }
         }else{
-            commentsContent.removeAll()
-            }
+            commentsArea.isHidden = true
         }
-    
-    
-    func updateConstraints(with tweet: Tweet) {}
+    }
     
     func configureAvaterSender() {
         avaterSender.translatesAutoresizingMaskIntoConstraints = false
