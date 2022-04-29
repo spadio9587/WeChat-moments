@@ -20,6 +20,8 @@ class TweetViewController: UIViewController {
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableView.automaticDimension
         view.addSubview(backgroundImageView)
         configureBackgroundImageView()
     }

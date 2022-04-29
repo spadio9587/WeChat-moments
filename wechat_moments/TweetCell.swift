@@ -14,6 +14,7 @@ class TweetCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier);
         tweetView = TweetView()
         self.contentView.addSubview(tweetView)
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

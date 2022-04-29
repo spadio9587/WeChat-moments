@@ -25,7 +25,7 @@ class TweetView: UIView {
         self.addSubview(avaterSender)
         self.addSubview(sender)
         self.addSubview(containerView)
-        
+        configureContainerView()
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +36,7 @@ class TweetView: UIView {
         super.layoutSubviews()
         configureAvaterSender()
         configureSender()
-        configureContainerView()
+ 
         configureContent()
         configureImageArea()
         configureCommentsArea()
@@ -45,6 +45,7 @@ class TweetView: UIView {
     // 命名规范
     // 还要注意解包的使用
     //  将String转成Image
+    //异步加载图片并callback到主线程里面来
     func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             if let imageUrl = imageUrl,
@@ -65,6 +66,7 @@ class TweetView: UIView {
     func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
+        //尾随闭包
         loadImage(from: tweet.sender?.avatar) { image in
             self.avaterSender.image = image
         }
@@ -131,6 +133,7 @@ class TweetView: UIView {
         NSLayoutConstraint.activate([
             sender.topAnchor.constraint(equalTo: avaterSender.topAnchor),
             sender.leadingAnchor.constraint(equalTo: avaterSender.trailingAnchor, constant: 5),
+            sender.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
         ])
         
     }
@@ -141,6 +144,10 @@ class TweetView: UIView {
         containerView.distribution = .equalSpacing
         containerView.spacing = margin
         containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addArrangedSubview(content)
+        containerView.addArrangedSubview(imageArea)
+        containerView.addArrangedSubview(commentsArea)
+        
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
@@ -150,14 +157,13 @@ class TweetView: UIView {
     }
     
     func configureContent() {
-        containerView.addArrangedSubview(content)
+       
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
         //content的高度并没有自适应 会重叠起来
     }
     
     func configureImageArea(){
-        containerView.addArrangedSubview(imageArea)
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         if (contentImage.count != 0) {
             for i in 0...(contentImage.count-1) {
@@ -175,15 +181,18 @@ class TweetView: UIView {
                     imageView.heightAnchor.constraint(equalToConstant: height),
                 ])
             }
-            if let view = imageArea.subviews.last {
-                imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
-            }
+            
+        }else{
+            imageArea.isHidden = true
+        }
+        if let view = imageArea.subviews.last {
+            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
         }
     }
     
     func configureCommentsArea(){
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addArrangedSubview(commentsArea)
+        
         //需要把image的数据导入进去
         if (commentsContent.count) != 0 {
             for i in 0...(commentsContent.count - 1) {
@@ -206,9 +215,12 @@ class TweetView: UIView {
                 seperateComment.attributedText = mutableAttribString
                 
             }
-            if let comment = commentsArea.subviews.last{
-                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor,constant: 8).isActive = true
-            }
+            
+        }else{
+            commentsArea.isHidden = true
+        }
+        if let comment = commentsArea.subviews.last{
+            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor,constant: margin).isActive = true
         }
     }
 }
