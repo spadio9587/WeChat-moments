@@ -31,3 +31,4 @@ task6
 2. comments也为多个， 需要通过计算来显示相对应地每条评论的高度
 3. 给comment的attribute的text进行属性的设定
 
+

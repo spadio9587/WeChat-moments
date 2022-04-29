@@ -16,7 +16,9 @@ class TweetView: UIView {
     var content = UILabel()
     var imageArea = UIView()
     var contentImage = [UIImageView]()
+    var commentsArea = UIView()
     var commentsContent = [UILabel]()
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()

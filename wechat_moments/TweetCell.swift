@@ -32,6 +32,6 @@ class TweetCell: UITableViewCell {
     }
     func setTweet(tweet: Tweet?) {
         guard let tweet = tweet else {return}
-        tweetView.getTweet(tweet: tweet)
+        tweetView.setTweet(tweet: tweet)
     }
 }
