@@ -202,7 +202,7 @@ class TweetView: UIView {
                 seperateComment.translatesAutoresizingMaskIntoConstraints = false
                 seperateComment.numberOfLines = 0
                 //计算单条评论的高度
-                let top = CGFloat((i + 1) * 3) + CGFloat((i - 1) * 8)
+                let top = CGFloat((i + 1) * 3) + CGFloat(CGFloat((i - 1)) * CGFloat(seperateComment.bounds.size.height))
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
                 ])
