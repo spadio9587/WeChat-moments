@@ -26,8 +26,8 @@ class TweetCell: UITableViewCell {
 
     func configureTweetView(){
         tweetView.translatesAutoresizingMaskIntoConstraints = false
-        tweetView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        tweetView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        tweetView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        tweetView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         tweetView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         tweetView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }

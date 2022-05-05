@@ -15,6 +15,7 @@ class TweetViewController: UIViewController {
     let headerView = HeaderView()
     @IBOutlet var tableView: UITableView!
     var allTweet: [Tweet]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         allTweet = viewModel.getAllTweet()

@@ -20,6 +20,7 @@ class TweetView: UIView {
     var commentsArea = UIView()
     var commentsContent = [UILabel]()
     
+    //初始化
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(avaterSender)
@@ -116,10 +117,10 @@ class TweetView: UIView {
         avaterSender.contentMode = .scaleAspectFill
         avaterSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            avaterSender.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
+            avaterSender.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 10),
             avaterSender.widthAnchor.constraint(equalToConstant: 30),
             avaterSender.heightAnchor.constraint(equalToConstant: 30),
-            avaterSender.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            avaterSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
         ])
         
     }
@@ -159,11 +160,26 @@ class TweetView: UIView {
        
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
+        NSLayoutConstraint.activate([
+            content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            content.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 5),
+        ])
+        if content.text == nil {
+            content.isHidden = true
+        }
         //content的高度并没有自适应 会重叠起来
     }
     
     func configureImageArea(){
         imageArea.translatesAutoresizingMaskIntoConstraints = false
+        imageArea.translatesAutoresizingMaskIntoConstraints  = false
+        imageArea.topAnchor.constraint(equalTo: content.bottomAnchor,constant: 5).isActive = true
+        imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        if (contentImage.count > 9){
+            imageArea.isHidden = true
+        }
         if (contentImage.count != 0) {
             for i in 0...(contentImage.count-1) {
                 let imageView = contentImage[i]
@@ -191,7 +207,9 @@ class TweetView: UIView {
     
     func configureCommentsArea(){
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
-        
+        commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor,constant: 5).isActive = true
         //需要把image的数据导入进去
         if (commentsContent.count) != 0 {
             for i in 0...(commentsContent.count - 1) {
@@ -201,7 +219,7 @@ class TweetView: UIView {
                 seperateComment.translatesAutoresizingMaskIntoConstraints = false
                 seperateComment.numberOfLines = 0
                 //计算单条评论的高度
-                let top = CGFloat((i + 1) * 3) + CGFloat(CGFloat((i - 1)) * CGFloat(seperateComment.bounds.size.height))
+                let top = CGFloat((i + 1) * 5) + CGFloat(CGFloat((i)) * CGFloat(seperateComment.bounds.size.height))
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
                 ])
