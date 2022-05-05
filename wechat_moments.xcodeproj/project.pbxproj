@@ -20,6 +20,7 @@
 		AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFC280E53A00044AE25 /* Tweet.swift */; };
 		AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */; };
 		AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */; };
+		AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60A0382823731C00BF2489 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		AC2D7BFC280E53A00044AE25 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		AC60A0382823731C00BF2489 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				AC2D7BCA280E531C0044AE25 /* AppDelegate.swift */,
 				AC2D7BFC280E53A00044AE25 /* Tweet.swift */,
 				AC2D7BFA280E537D0044AE25 /* TweetView.swift */,
+				AC60A0382823731C00BF2489 /* HeaderView.swift */,
 				AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */,
 				AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */,
 				AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */,
@@ -277,6 +280,7 @@
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
 				AC2D7BFB280E537D0044AE25 /* TweetView.swift in Sources */,
 				AC2D7BCD280E531C0044AE25 /* SceneDelegate.swift in Sources */,
+				AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
