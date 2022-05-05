@@ -37,10 +37,5 @@ extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allTweet!.count
     }
-    func configureBackgroundImageView(){
-        backgroundImageView.contentMode = .scaleAspectFit
-        backgroundImageView.image = UIImage.init(named: "testImage3")
-        backgroundImageView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
-    }
 }
 
