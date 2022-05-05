@@ -36,7 +36,6 @@ class TweetView: UIView {
         super.layoutSubviews()
         configureAvaterSender()
         configureSender()
- 
         configureContent()
         configureImageArea()
         configureCommentsArea()

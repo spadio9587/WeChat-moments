@@ -12,7 +12,7 @@ import UIKit
 
 class TweetViewController: UIViewController {
     let viewModel = TweetViewModel()
-    var backgroundImageView = UIImageView()
+    let headerView = HeaderView()
     @IBOutlet var tableView: UITableView!
     var allTweet: [Tweet]?
     override func viewDidLoad() {
@@ -22,8 +22,7 @@ class TweetViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
-        view.addSubview(backgroundImageView)
-        configureBackgroundImageView()
+        view.addSubview(headerView)
     }
 }
 extension TweetViewController: UITableViewDataSource {
