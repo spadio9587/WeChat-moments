@@ -186,7 +186,7 @@ class TweetView: UIView {
                 imageArea.addSubview(imageView)
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 let width = (containerView.bounds.size.width - 4 * margin) / 3
-                let height = width
+                let height = (containerView.bounds.size.width - 4 * margin) / 3
                 let left = CGFloat((i % 3 + 1)) * margin + CGFloat(i % 3) * width
                 let top = CGFloat((i / 3 + 1)) * margin + CGFloat(i / 3) * height
                 NSLayoutConstraint.activate([

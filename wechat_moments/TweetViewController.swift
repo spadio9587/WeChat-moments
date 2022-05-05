@@ -21,10 +21,14 @@ class TweetViewController: UIViewController {
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 0
+        tableView.estimatedSectionFooterHeight = 0
+        tableView.estimatedSectionHeaderHeight = 0
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         view.addSubview(headerView)
     }
+
 }
 extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
