@@ -31,4 +31,7 @@ task6
 2. comments也为多个， 需要通过计算来显示相对应地每条评论的高度
 3. 给comment的attribute的text进行属性的设定
 
+task7
+1. 添加backgroundView的图片以及sender的图片以及user的nameLabel
+
 
