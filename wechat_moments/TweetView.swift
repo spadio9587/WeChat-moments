@@ -26,7 +26,7 @@ class TweetView: UIView {
         self.addSubview(avaterSender)
         self.addSubview(sender)
         self.addSubview(containerView)
-        configureContainerView()
+ 
     }
     
     required init?(coder: NSCoder) {
@@ -37,9 +37,11 @@ class TweetView: UIView {
         super.layoutSubviews()
         configureAvaterSender()
         configureSender()
+        configureContainerView()
         configureContent()
         configureImageArea()
         configureCommentsArea()
+        
     }
     
     // 命名规范
