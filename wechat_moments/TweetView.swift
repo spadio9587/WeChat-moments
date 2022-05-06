@@ -26,7 +26,9 @@ class TweetView: UIView {
         self.addSubview(avaterSender)
         self.addSubview(sender)
         self.addSubview(containerView)
- 
+        configureAvaterSender()
+        configureSender()
+        configureContainerView()
     }
     
     required init?(coder: NSCoder) {
@@ -35,9 +37,6 @@ class TweetView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        configureAvaterSender()
-        configureSender()
-        configureContainerView()
         configureContent()
         configureImageArea()
         configureCommentsArea()
@@ -162,9 +161,10 @@ class TweetView: UIView {
        
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
+        content.font = UIFont.systemFont(ofSize: 14)
+        content.textAlignment = .center
         NSLayoutConstraint.activate([
             content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             content.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 5),
         ])
         if content.text == nil {
@@ -175,7 +175,6 @@ class TweetView: UIView {
     
     func configureImageArea(){
         imageArea.translatesAutoresizingMaskIntoConstraints = false
-        imageArea.translatesAutoresizingMaskIntoConstraints  = false
         imageArea.topAnchor.constraint(equalTo: content.bottomAnchor,constant: 5).isActive = true
         imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
@@ -224,6 +223,7 @@ class TweetView: UIView {
                 let top = CGFloat((i + 1) * 5) + CGFloat(CGFloat((i)) * CGFloat(seperateComment.bounds.size.height))
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
+                    seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor, constant: 5)
                 ])
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
                 let number = seperateComment.text!.firstIndex(of: ":")

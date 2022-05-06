@@ -21,20 +21,27 @@ class TweetViewController: UIViewController {
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 0
-        tableView.estimatedSectionFooterHeight = 0
-        tableView.estimatedSectionHeaderHeight = 0
-        tableView.estimatedRowHeight = 150
+//        tableView.estimatedRowHeight = 0
+//        tableView.estimatedSectionFooterHeight = 0
+//        tableView.estimatedSectionHeaderHeight = 0
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        //估计高度，帮助提高性能
+        //表单的高度大多数是固定的
+        //表单高度有可能是不固定的（textview多行）（textfield单行）
         view.addSubview(headerView)
     }
 
 }
 extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
+//        guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
+//            return UITableViewCell()
+//        }
+        guard let tweet = tableView.cellForRow(at: indexPath) as? TweetCell else{
             return UITableViewCell()
         }
+        
         tweet.setTweet(tweet: allTweet?[indexPath.row])
         return tweet
     }

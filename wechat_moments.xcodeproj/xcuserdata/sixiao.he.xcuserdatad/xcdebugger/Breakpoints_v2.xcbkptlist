@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "8D975134-C750-4E95-9CF1-BEDE2B2CEA1A"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wechat_moments/jsontest.swift"
@@ -30,6 +30,99 @@
             symbolName = ""
             moduleName = "">
             <Locations>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9543BCD9-309C-4F8E-92B7-F82CCE809AAF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wechat_moments/TweetViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "TweetViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "9543BCD9-309C-4F8E-92B7-F82CCE809AAF - 1f2ff4e7125120ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wechat_moments.TweetViewController.__allocating_init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; wechat_moments.TweetViewController"
+                  moduleName = "wechat_moments"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sixiao.he/Swift/WeChat-moments/wechat_moments/TweetViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "9543BCD9-309C-4F8E-92B7-F82CCE809AAF - 39f181721866ed46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wechat_moments.TweetViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; wechat_moments.TweetViewController"
+                  moduleName = "wechat_moments"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sixiao.he/Swift/WeChat-moments/wechat_moments/TweetViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "141">
+               </Location>
+               <Location
+                  uuid = "9543BCD9-309C-4F8E-92B7-F82CCE809AAF - e21e94198847d523"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wechat_moments.TweetViewController.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;wechat_moments.TweetViewController&gt;"
+                  moduleName = "wechat_moments"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sixiao.he/Swift/WeChat-moments/wechat_moments/TweetViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  uuid = "9543BCD9-309C-4F8E-92B7-F82CCE809AAF - 5b13ac05529a5e02"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wechat_moments.TweetViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;wechat_moments.TweetViewController&gt;"
+                  moduleName = "wechat_moments"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sixiao.he/Swift/WeChat-moments/wechat_moments/TweetViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "98">
+               </Location>
+               <Location
+                  uuid = "9543BCD9-309C-4F8E-92B7-F82CCE809AAF - e5440c0e77b8952c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "wechat_moments.TweetViewController.__deallocating_deinit"
+                  moduleName = "wechat_moments"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sixiao.he/Swift/WeChat-moments/wechat_moments/TweetViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
