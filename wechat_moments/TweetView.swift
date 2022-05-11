@@ -20,7 +20,6 @@ class TweetView: UIView {
     var commentsArea = UIView()
     var commentsContent = [UILabel]()
     
-    //初始化
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(avaterSender)
@@ -43,10 +42,6 @@ class TweetView: UIView {
         
     }
     
-    // 命名规范
-    // 还要注意解包的使用
-    //  将String转成Image
-    //异步加载图片并callback到主线程里面来
     func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             if let imageUrl = imageUrl,
@@ -63,19 +58,18 @@ class TweetView: UIView {
             }
         }
     }
+    
     func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
         //尾随闭包
-        loadImage(from: tweet.sender?.avatar) { image in
-            self.avaterSender.image = image
+        loadImage(from: tweet.sender?.avatar) {
+            image in self.avaterSender.image = image
         }
         updateContent(tweet.content)
         updateImages(tweet.images)
         updateComments(tweet.comments)
     }
-    
-    //依旧是解包，当content内容不为空的时候，不隐藏content的内容
     
     func updateContent(_ content: String?) {
         if let content = content {
@@ -113,7 +107,6 @@ class TweetView: UIView {
         }
     }
     
-    //设定头像的上边距，左边距以及宽和高
     func configureAvaterSender() {
         avaterSender.contentMode = .scaleAspectFill
         avaterSender.translatesAutoresizingMaskIntoConstraints = false
@@ -125,7 +118,6 @@ class TweetView: UIView {
         ])
     }
     
-    // 设定名字的上左右边距
     func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
@@ -136,10 +128,8 @@ class TweetView: UIView {
             sender.leadingAnchor.constraint(equalTo: avaterSender.trailingAnchor, constant: 5),
             sender.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5)
         ])
-        
     }
     
-    //在stackview里面添加相对应的内容以及图像，评论区域！
     func configureContainerView() {
         containerView.axis = .vertical
         containerView.alignment = .leading
@@ -171,19 +161,16 @@ class TweetView: UIView {
         if content.text == nil {
             content.isHidden = true
         }
-        //content的高度并没有自适应 会重叠起来
     }
     
     func configureImageArea(){
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         imageArea.topAnchor.constraint(equalTo: content.bottomAnchor,constant: margin).isActive = true
         imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-//        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        print("xxxxxx\(contentImage.count)")
+        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         if (contentImage.count != 0) {
             for i in 0...(contentImage.count-1) {
                 let imageView = contentImage[i]
-                print("yyyy\(i)")
                 imageArea.addSubview(imageView)
                 imageView.translatesAutoresizingMaskIntoConstraints = false
                 switch contentImage.count{
@@ -233,7 +220,6 @@ class TweetView: UIView {
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor,constant: 5).isActive = true
-        //需要把image的数据导入进去
         if (commentsContent.count) != 0 {
             for i in 0...(commentsContent.count - 1) {
                 let seperateComment = commentsContent[i]
@@ -247,9 +233,6 @@ class TweetView: UIView {
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor, constant: 5)
                 ])
-//                let _ = self.commentsArea.subviews.map{
-//                    $0.removeFromSuperview()
-//                }
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
                 let number = seperateComment.text!.firstIndex(of: ":")
                 mutableAttribString.addAttributes(
@@ -257,7 +240,6 @@ class TweetView: UIView {
                     range: NSRange(location: 0, length: seperateComment.text![..<number!].count)
                 )
                 seperateComment.attributedText = mutableAttribString
-                
             }
             if let comment = commentsArea.subviews.last{
                 commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor,constant: margin).isActive = true
@@ -265,7 +247,6 @@ class TweetView: UIView {
         }else{
             commentsArea.isHidden = true
         }
-        
     }
 }
 

@@ -22,14 +22,14 @@ class TweetCell: UITableViewCell {
     override func layoutSubviews() {
         configureWechatView()
     }
-
-        func configureWechatView(){
-            wechatView.translatesAutoresizingMaskIntoConstraints = false
-            wechatView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-            wechatView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-            wechatView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-            wechatView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        }
+    
+    func configureWechatView(){
+        wechatView.translatesAutoresizingMaskIntoConstraints = false
+        wechatView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        wechatView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        wechatView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        wechatView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
     
     func setTweet(tweet: Tweet?) {
         guard let tweet = tweet else {return}

@@ -19,7 +19,6 @@ class WechatView: UIView {
     var contentImage = [UIImageView]()
     var commentsArea = UIView()
     var commentsContent = [UILabel]()
-    var commentStackView = UIStackView()
     
     //初始化
     override init(frame: CGRect) {
@@ -255,7 +254,7 @@ class WechatView: UIView {
                 var top : CGFloat = 0.0
                 let attrStrSize: CGSize = (seperateComment.sizeThatFits(CGSize.init(width: UIScreen.main.bounds.size.width - 60 - 25, height: UIScreen.main.bounds.size.height)))
                 seperateComment.frame = CGRect(x: 5.0, y: 3.0, width: attrStrSize.width, height: attrStrSize.height)
-                top = attrStrSize.height + CGFloat(i) * 80
+                top = CGFloat(i) * attrStrSize.height + CGFloat(i) * 18
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor, constant: 8),
@@ -276,42 +275,4 @@ class WechatView: UIView {
             commentsArea.isHidden = true
         }
     }
-    
-    func configureCommentsStackview(){
-        commentStackView.axis = .vertical
-        commentStackView.alignment = .leading
-        commentStackView.distribution = .equalSpacing
-        commentStackView.spacing = margin
-        commentStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            commentStackView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 5),
-            commentStackView.leftAnchor.constraint(equalTo: containerView.leftAnchor),
-            commentStackView.rightAnchor.constraint(equalTo: containerView.rightAnchor),
-            commentStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: -5)
-        ])
-        print("sssss\(commentsContent.count)")
-        if (commentsContent.count) != 0 {
-            for i in 0...(commentsContent.count - 1) {
-                let seperateComment = commentsContent[i]
-                commentStackView.addArrangedSubview(seperateComment)
-                seperateComment.backgroundColor = .lightGray
-                seperateComment.translatesAutoresizingMaskIntoConstraints = false
-                seperateComment.numberOfLines = 0
-                let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
-                let number = seperateComment.text!.firstIndex(of: ":")
-                mutableAttribString.addAttributes(
-                    [.foregroundColor: UIColor.blue],
-                    range: NSRange(location: 0, length: seperateComment.text![..<number!].count)
-                )
-                seperateComment.attributedText = mutableAttribString
-            }
-            if let comment = commentStackView.arrangedSubviews.last{
-                commentStackView.bottomAnchor.constraint(equalTo: comment.bottomAnchor,constant: margin).isActive = true
-            }
-        }else{
-            commentStackView.isHidden = true
-            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-        }
-    }
-    
 }

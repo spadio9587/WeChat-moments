@@ -34,4 +34,10 @@ task6
 task7
 1. 添加backgroundView的图片以及sender的图片以及user的nameLabel
 
+task8
+1. 通过print发现， comments的数目在不断增加，
+找到Update comments的函数，数组在不断累加，解决方法添加removeall，让数组不再累加，每次只显示需要的个数
+2. 发现comments 和 image会发生重叠， 
+猜想到可以通过removeFromSubview的方法对其进行清空，但是位置刚开始出错
+最后在加载comments 和 image的configure的地方进行清空，使得显示的时候没有重叠的部分！
 
