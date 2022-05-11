@@ -10,9 +10,9 @@ import UIKit
 
 class TweetView: UIView {
     var tweet : Tweet?
-    let margin : CGFloat = 8
-    let avaterSender = UIImageView()
-    let sender = UILabel()
+    var margin : CGFloat = 8
+    var avaterSender = UIImageView()
+    var sender = UILabel()
     var containerView = UIStackView()
     var content = UILabel()
     var imageArea = UIView()
@@ -62,7 +62,6 @@ class TweetView: UIView {
                 }
             }
         }
-        
     }
     func setTweet(tweet: Tweet) {
         self.tweet = tweet
@@ -114,18 +113,19 @@ class TweetView: UIView {
         }
     }
     
+    //设定头像的上边距，左边距以及宽和高
     func configureAvaterSender() {
         avaterSender.contentMode = .scaleAspectFill
         avaterSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            avaterSender.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 10),
+            avaterSender.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: margin),
             avaterSender.widthAnchor.constraint(equalToConstant: 30),
             avaterSender.heightAnchor.constraint(equalToConstant: 30),
-            avaterSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            avaterSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: margin),
         ])
-        
     }
     
+    // 设定名字的上左右边距
     func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
@@ -139,6 +139,7 @@ class TweetView: UIView {
         
     }
     
+    //在stackview里面添加相对应的内容以及图像，评论区域！
     func configureContainerView() {
         containerView.axis = .vertical
         containerView.alignment = .leading
@@ -158,14 +159,14 @@ class TweetView: UIView {
     }
     
     func configureContent() {
-       
+        
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
         content.font = UIFont.systemFont(ofSize: 14)
-        content.textAlignment = .center
         NSLayoutConstraint.activate([
             content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            content.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 5),
+            content.topAnchor.constraint(equalTo: containerView.topAnchor,constant: margin),
+            content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: margin)
         ])
         if content.text == nil {
             content.isHidden = true

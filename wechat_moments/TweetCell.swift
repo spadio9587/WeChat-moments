@@ -8,12 +8,11 @@
 import UIKit
 
 class TweetCell: UITableViewCell {
-//    var tweet: Tweet?
-    var tweetView: TweetView!
+    var wechatView: WechatView!
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier);
-        tweetView = TweetView()
-        self.contentView.addSubview(tweetView)
+        wechatView = WechatView()
+        self.contentView.addSubview(wechatView)
         
     }
     required init?(coder: NSCoder) {
@@ -21,19 +20,19 @@ class TweetCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        configureTweetView()
+        configureWechatView()
     }
 
-    func configureTweetView(){
-        tweetView.translatesAutoresizingMaskIntoConstraints = false
-        tweetView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        tweetView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        tweetView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        tweetView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    }
+        func configureWechatView(){
+            wechatView.translatesAutoresizingMaskIntoConstraints = false
+            wechatView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            wechatView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            wechatView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            wechatView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        }
     
     func setTweet(tweet: Tweet?) {
         guard let tweet = tweet else {return}
-        tweetView.setTweet(tweet: tweet)
+        wechatView.setTweet(tweet: tweet)
     }
 }
