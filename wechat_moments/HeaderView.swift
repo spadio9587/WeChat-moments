@@ -42,8 +42,8 @@ class HeaderView: UIView {
         
     }
     func configureUserNameLabel(){
-        userNameLabel.text = "Huan Huan"
-        userNameLabel.frame = CGRect(x: 240, y: 322, width: 120, height: 52)
+        userNameLabel.text = "Shawn"
+        userNameLabel.frame = CGRect(x: 260, y: 322, width: 120, height: 52)
     }
     
 }
