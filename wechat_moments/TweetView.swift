@@ -247,6 +247,9 @@ class TweetView: UIView {
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor, constant: 5)
                 ])
+//                let _ = self.commentsArea.subviews.map{
+//                    $0.removeFromSuperview()
+//                }
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
                 let number = seperateComment.text!.firstIndex(of: ":")
                 mutableAttribString.addAttributes(
@@ -256,13 +259,13 @@ class TweetView: UIView {
                 seperateComment.attributedText = mutableAttribString
                 
             }
-            
+            if let comment = commentsArea.subviews.last{
+                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor,constant: margin).isActive = true
+            }
         }else{
             commentsArea.isHidden = true
         }
-        if let comment = commentsArea.subviews.last{
-            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor,constant: margin).isActive = true
-        }
+        
     }
 }
 
