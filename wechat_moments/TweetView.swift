@@ -176,34 +176,55 @@ class TweetView: UIView {
     
     func configureImageArea(){
         imageArea.translatesAutoresizingMaskIntoConstraints = false
-        imageArea.topAnchor.constraint(equalTo: content.bottomAnchor,constant: 5).isActive = true
+        imageArea.topAnchor.constraint(equalTo: content.bottomAnchor,constant: margin).isActive = true
         imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        if (contentImage.count > 9){
-            imageArea.isHidden = true
-        }
+//        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        print("xxxxxx\(contentImage.count)")
         if (contentImage.count != 0) {
             for i in 0...(contentImage.count-1) {
                 let imageView = contentImage[i]
+                print("yyyy\(i)")
                 imageArea.addSubview(imageView)
                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                let width = (containerView.bounds.size.width - 4 * margin) / 3
-                let height = (containerView.bounds.size.width - 4 * margin) / 3
-                let left = CGFloat((i % 3 + 1)) * margin + CGFloat(i % 3) * width
-                let top = CGFloat((i / 3 + 1)) * margin + CGFloat(i / 3) * height
-                NSLayoutConstraint.activate([
-                    imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
-                    imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
-                    imageView.widthAnchor.constraint(equalToConstant: width),
-                    imageView.heightAnchor.constraint(equalToConstant: height),
-                ])
+                switch contentImage.count{
+                case 1 :
+                    let width = (containerView.bounds.size.width - 2 * margin)
+                    let height = width
+                    NSLayoutConstraint.activate([
+                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: margin),
+                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: margin),
+                        imageView.widthAnchor.constraint(equalToConstant: width),
+                        imageView.heightAnchor.constraint(equalToConstant: height),
+                    ])
+                case 2 , 4 :
+                    let width = (containerView.bounds.size.width - 3 * margin) / 2
+                    let height = width
+                    let left = CGFloat((i % 2 + 1)) * margin + CGFloat(i % 2) * width
+                    let top = CGFloat((i / 2 + 1)) * margin + CGFloat(i / 2) * height
+                    NSLayoutConstraint.activate([
+                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
+                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
+                        imageView.widthAnchor.constraint(equalToConstant: width),
+                        imageView.heightAnchor.constraint(equalToConstant: height),
+                    ])
+                default :
+                    let width = (containerView.bounds.size.width - 4 * margin) / 3
+                    let height = (containerView.bounds.size.width - 4 * margin) / 3
+                    let left = CGFloat((i % 3 + 1)) * margin + CGFloat(i % 3) * width
+                    let top = CGFloat((i / 3 + 1)) * margin + CGFloat(i / 3) * height
+                    NSLayoutConstraint.activate([
+                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
+                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
+                        imageView.widthAnchor.constraint(equalToConstant: width),
+                        imageView.heightAnchor.constraint(equalToConstant: height),
+                    ])
+                }
             }
-            
+            if let view = imageArea.subviews.last {
+                imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
+            }
         }else{
             imageArea.isHidden = true
-        }
-        if let view = imageArea.subviews.last {
-            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
         }
     }
     
