@@ -16,7 +16,6 @@
 		AC2D7BE2280E53220044AE25 /* wechat_momentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BE1280E53220044AE25 /* wechat_momentsTests.swift */; };
 		AC2D7BEC280E53220044AE25 /* wechat_momentsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BEB280E53220044AE25 /* wechat_momentsUITests.swift */; };
 		AC2D7BEE280E53220044AE25 /* wechat_momentsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BED280E53220044AE25 /* wechat_momentsUITestsLaunchTests.swift */; };
-		AC2D7BFB280E537D0044AE25 /* TweetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFA280E537D0044AE25 /* TweetView.swift */; };
 		AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFC280E53A00044AE25 /* Tweet.swift */; };
 		AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */; };
 		AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */; };
@@ -55,7 +54,6 @@
 		AC2D7BE7280E53220044AE25 /* wechat_momentsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = wechat_momentsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2D7BEB280E53220044AE25 /* wechat_momentsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wechat_momentsUITests.swift; sourceTree = "<group>"; };
 		AC2D7BED280E53220044AE25 /* wechat_momentsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wechat_momentsUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		AC2D7BFA280E537D0044AE25 /* TweetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetView.swift; sourceTree = "<group>"; };
 		AC2D7BFC280E53A00044AE25 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
@@ -115,7 +113,6 @@
 				AC2D7BFC280E53A00044AE25 /* Tweet.swift */,
 				AC60A0382823731C00BF2489 /* HeaderView.swift */,
 				AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */,
-				AC2D7BFA280E537D0044AE25 /* TweetView.swift */,
 				ACB3036E282A36CC0075662E /* WechatView.swift */,
 				AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */,
 				AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */,
@@ -155,6 +152,7 @@
 				AC2D7BC3280E531C0044AE25 /* Sources */,
 				AC2D7BC4280E531C0044AE25 /* Frameworks */,
 				AC2D7BC5280E531C0044AE25 /* Resources */,
+				ACB30372282E0A8C0075662E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -271,6 +269,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		ACB30372282E0A8C0075662E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AC2D7BC3280E531C0044AE25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -281,7 +299,6 @@
 				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
-				AC2D7BFB280E537D0044AE25 /* TweetView.swift in Sources */,
 				ACB3036F282A36CC0075662E /* WechatView.swift in Sources */,
 				AC2D7BCD280E531C0044AE25 /* SceneDelegate.swift in Sources */,
 				AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */,

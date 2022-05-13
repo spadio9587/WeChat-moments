@@ -30,7 +30,7 @@ class WechatView: UIView {
         configureAvaterSender()
         configureSender()
         configureContainerView()
-        
+
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -84,7 +84,7 @@ class WechatView: UIView {
             for subview in self.imageArea.subviews {
                 subview.removeFromSuperview()
             }
-            for (index,_) in images.enumerated() {
+            for index in images.indices {
                 let imageView = UIImageView()
                 loadImage(from: images[index].url) { image in
                     imageView.image = image
@@ -101,10 +101,10 @@ class WechatView: UIView {
     func updateComments(_ comments: [Comment]?) {
         if let comments = comments {
             commentsContent.removeAll()
-            for subView in commentsArea.subviews{
+            for subView in commentsArea.subviews {
                 subView.removeFromSuperview()
             }
-            for (index,_) in comments.enumerated() {
+            for index in comments.indices {
                 let labelView = UILabel()
                 labelView.text = comments[index].sender.username + ":" + comments[index].content
                 commentsContent.append(labelView)
@@ -191,7 +191,7 @@ class WechatView: UIView {
                         imageView.widthAnchor.constraint(equalToConstant: width),
                         imageView.heightAnchor.constraint(equalToConstant: height)
                     ])
-                case 2 , 4 :
+                case 2, 4 :
                     let width = (containerView.bounds.size.width - 3 * margin) / 2
                     let height = width
                     let left = CGFloat((count % 2 + 1)) * margin + CGFloat(count % 2) * width

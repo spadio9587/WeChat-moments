@@ -37,6 +37,8 @@ let userInfo = """
   "username": "hengzeng"
 }
 """
+
+//  网络请求里面拿数据
 let momentAll = """
 [
   {
@@ -309,7 +311,7 @@ let momentAll = """
     "unknown error": "STARCRAFT2"
   },
   {
-    "content": "- The data json will be hosted in Nibs or storyboards are prohibited- Implement cache mechanism by you own if needed- Unit tests is appreciated.- Functional programming is appreciated- Deployment Target should be 7.0- Utilise Git for source control, for git log is the directly evidence of the development process- Utilise GCD for multi-thread operation- Only binary, framework or cocopods dependency is allowed. do not copy other developer's source code(*.h, *.m) into your project- Keep your code clean as much as possible",
+    "content": "- The data json will be hosted in Nibs or storyboards are prohibited- Implement cache mechanism by you own if needed- Unit tests is appreciated. Functional programming is appreciated- Deployment Target should be 7.0- Utilise Git for source control, for git log is the directly evidence of the development process- Utilise GCD for multi-thread operation- Only binary, framework or cocopods dependency is allowed. do not copy other developer's source code(*.h, *.m) into your project- Keep your code clean as much as possible",
     "sender": {
       "username": "hengzeng",
       "nick": "Huan Huan",

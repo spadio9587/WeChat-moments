@@ -31,10 +31,8 @@ extension TweetCellViewController: UITableViewDataSource {
         tweet.setTweet(tweet: allTweet?[indexPath.row])
         return tweet
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allTweet!.count
     }
 }
-
-
