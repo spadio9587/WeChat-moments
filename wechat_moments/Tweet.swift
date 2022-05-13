@@ -8,25 +8,25 @@
 import Foundation
 
 struct Tweet: Codable {
-    let content : String?
-    let images : [Image]?
-    let sender : Sender?
-    let comments : [Comment]?
+    let content: String?
+    let images: [Image]?
+    let sender: Sender?
+    let comments: [Comment]?
 }
 
 struct Image: Codable {
-    let url : String
+    let url: String
 }
 
-struct Sender : Codable {
-    let username : String
+struct Sender: Codable {
+    let username: String
     let nick: String
     let avatar: String
 }
 
 struct Comment: Codable {
-    let content : String
-    let sender : Sender
+    let content: String
+    let sender: Sender
 }
 
 let userInfo = """
@@ -318,12 +318,3 @@ let momentAll = """
   }
 ]
 """
-
-
-
-
-
-
-
-
-

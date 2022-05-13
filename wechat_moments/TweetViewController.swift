@@ -15,7 +15,6 @@ class TweetViewController: UIViewController {
     let headerView = HeaderView()
     @IBOutlet var tableView: UITableView!
     var allTweet: [Tweet]?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         allTweet = viewModel.getAllTweet()
@@ -24,13 +23,12 @@ class TweetViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 500
         tableView.separatorInset = UIEdgeInsets.zero
-        //保存一个应该就够了
-        //估计高度，帮助提高性能
-        //表单的高度大多数是固定的
-        //表单高度有可能是不固定的（textview多行）（textfield单行）
+        //  保存一个应该就够了
+        //  估计高度，帮助提高性能
+        //  表单的高度大多数是固定的
+        //  表单高度有可能是不固定的（textview多行）（textfield单行）
         view.addSubview(headerView)
     }
-    
 }
 extension TweetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,9 +38,7 @@ extension TweetViewController: UITableViewDataSource {
         tweet.setTweet(tweet: allTweet?[indexPath.row])
         return tweet
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allTweet!.count
     }
 }
-

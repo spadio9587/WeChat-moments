@@ -81,6 +81,9 @@ class WechatView: UIView {
     func updateImages(_ images: [Image]?) {
         if let images = images {
             contentImage.removeAll()
+            for subview in self.imageArea.subviews {
+                subview.removeFromSuperview()
+            }
             for (index,_) in images.enumerated() {
                 let imageView = UIImageView()
                 loadImage(from: images[index].url) { image in
@@ -98,6 +101,9 @@ class WechatView: UIView {
     func updateComments(_ comments: [Comment]?) {
         if let comments = comments {
             commentsContent.removeAll()
+            for subView in commentsArea.subviews{
+                subView.removeFromSuperview()
+            }
             for (index,_) in comments.enumerated() {
                 let labelView = UILabel()
                 labelView.text = comments[index].sender.username + ":" + comments[index].content
@@ -165,9 +171,6 @@ class WechatView: UIView {
         //  content的高度并没有自适应 会重叠起来
     }
     func configureImageArea() {
-        for subview in self.imageArea.subviews {
-            subview.removeFromSuperview()
-        }
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         imageArea.topAnchor.constraint(equalTo: content.bottomAnchor, constant: margin).isActive = true
         imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
@@ -220,9 +223,6 @@ class WechatView: UIView {
         }
     }
     func configureCommentsArea() {
-        for subView in commentsArea.subviews{
-            subView.removeFromSuperview()
-        }
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
