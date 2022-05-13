@@ -172,10 +172,12 @@ class WechatView: UIView {
     }
     func configureImageArea() {
         imageArea.translatesAutoresizingMaskIntoConstraints = false
-        imageArea.topAnchor.constraint(equalTo: content.bottomAnchor, constant: margin).isActive = true
-        imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        if (contentImage.count != 0) {
+        NSLayoutConstraint.activate([
+            imageArea.topAnchor.constraint(equalTo: content.bottomAnchor, constant: margin),
+            imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        ])
+        if (contentImage.isEmpty == false) {
             for count in 0...(contentImage.count-1) {
                 let imageView = contentImage[count]
                 imageArea.addSubview(imageView)
@@ -227,7 +229,6 @@ class WechatView: UIView {
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor, constant: 5).isActive = true
-        print("dddddd\(commentsContent.count)")
         if (commentsContent.count) != 0 {
             for count in 0...(commentsContent.count - 1) {
                 let seperateComment = commentsContent[count]
