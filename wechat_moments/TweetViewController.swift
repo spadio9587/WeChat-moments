@@ -22,7 +22,8 @@ class TweetViewController: UIViewController {
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = 500
+        tableView.separatorInset = UIEdgeInsets.zero
         //保存一个应该就够了
         //估计高度，帮助提高性能
         //表单的高度大多数是固定的
