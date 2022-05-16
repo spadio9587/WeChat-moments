@@ -161,9 +161,7 @@ class WechatView: UIView {
         content.lineBreakMode = .byWordWrapping
         content.font = UIFont.systemFont(ofSize: 14)
         NSLayoutConstraint.activate([
-            content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            content.topAnchor.constraint(equalTo: containerView.topAnchor, constant: margin),
-            content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: margin)
+            content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
         ])
         if content.text == nil {
             content.isHidden = true
@@ -173,8 +171,6 @@ class WechatView: UIView {
     func configureImageArea() {
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageArea.topAnchor.constraint(equalTo: content.bottomAnchor, constant: margin),
-            imageArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if (contentImage.isEmpty == false) {
@@ -244,8 +240,8 @@ class WechatView: UIView {
                 top = CGFloat(count) * strSize.height + CGFloat(count) * 18
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
-                    seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor, constant: 8),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: 8)
+                    seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8)
                 ])
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
                 let number = seperateComment.text!.firstIndex(of: ":")
