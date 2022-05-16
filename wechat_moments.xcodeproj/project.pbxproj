@@ -21,6 +21,7 @@
 		AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */; };
 		AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60A0382823731C00BF2489 /* HeaderView.swift */; };
 		ACB3036F282A36CC0075662E /* WechatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB3036E282A36CC0075662E /* WechatView.swift */; };
+		ACB3037428321AAD0075662E /* Moments.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB3037328321AAC0075662E /* Moments.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		AC60A0382823731C00BF2489 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		ACB3036E282A36CC0075662E /* WechatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatView.swift; sourceTree = "<group>"; };
+		ACB3037328321AAC0075662E /* Moments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moments.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				AC2D7BCA280E531C0044AE25 /* AppDelegate.swift */,
 				AC2D7BFC280E53A00044AE25 /* Tweet.swift */,
+				ACB3037328321AAC0075662E /* Moments.swift */,
 				AC60A0382823731C00BF2489 /* HeaderView.swift */,
 				AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */,
 				ACB3036E282A36CC0075662E /* WechatView.swift */,
@@ -299,6 +302,7 @@
 				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
+				ACB3037428321AAD0075662E /* Moments.swift in Sources */,
 				ACB3036F282A36CC0075662E /* WechatView.swift in Sources */,
 				AC2D7BCD280E531C0044AE25 /* SceneDelegate.swift in Sources */,
 				AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */,

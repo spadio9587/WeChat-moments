@@ -28,7 +28,42 @@ struct Comment: Codable {
     let content: String
     let sender: Sender
 }
+func parse(jsonData: Data) {
+    do {
+        let decodeData = try JSONDecoder().decode(Tweet.self,from: jsonData)
+        print(decodeData.content!)
+        print(decodeData.sender?.avatar)
+        print("--------------------------------------")
+    } catch{
+        print("decode error")
+    }
+}
 
+func loadJson(fromURLString urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    if let url = URL(string: urlString) {
+        let urlSession = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                completion(.success(data))
+            }
+            if let error = error {
+                completion(.failure(error))
+            }
+        }
+        urlSession.resume()
+    }
+}
+
+func getResut() {
+    let urlString = "https://emagrorrim.github.io/mock-api/moments.json"
+    loadJson(fromURLString: urlString) {(result) in
+        switch result {
+        case .success(let data):
+            parse(jsonData: data)
+        case .failure(let error):
+            print(error)
+        }
+    }
+}
 let userInfo = """
 {
   "profile-image": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/profile-image.jpg",

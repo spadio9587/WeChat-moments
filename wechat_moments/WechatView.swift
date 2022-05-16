@@ -160,9 +160,6 @@ class WechatView: UIView {
         content.numberOfLines = 0
         content.lineBreakMode = .byWordWrapping
         content.font = UIFont.systemFont(ofSize: 14)
-        NSLayoutConstraint.activate([
-            content.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
-        ])
         if content.text == nil {
             content.isHidden = true
         }
