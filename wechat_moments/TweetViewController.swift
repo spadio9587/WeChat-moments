@@ -17,6 +17,7 @@ class TweetViewController: UIViewController {
     var allTweet: [Tweet]?
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.separatorStyle = .none
         allTweet = viewModel.getAllTweet()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
