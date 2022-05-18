@@ -25,8 +25,6 @@ class TweetViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets.zero
 //        allTweet = viewModel.getAllTweet()
         viewModel.getJson() {
-            tweet in
-            self.allTweet = tweet
             self.tableView.reloadData()
         }
         //  保存一个应该就够了
