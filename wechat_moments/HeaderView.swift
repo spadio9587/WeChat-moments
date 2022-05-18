@@ -23,13 +23,13 @@ class HeaderView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewModel.getUserInfo() {
+        viewModel.getUserInfo {
         }
         configureBackgroundView()
         configureUserAvatar()
         configureUserNameLabel()
     }
-    
+
     func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             if let imageUrl = imageUrl,
@@ -46,7 +46,7 @@ class HeaderView: UIView {
             }
         }
     }
-    
+
     func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.image = UIImage.init(named: "profile-image")

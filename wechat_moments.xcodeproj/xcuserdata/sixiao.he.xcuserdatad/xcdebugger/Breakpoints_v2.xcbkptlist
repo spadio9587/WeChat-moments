@@ -36,16 +36,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0CEC4731-178B-4D04-A017-313B0B91CB7A"
+            uuid = "18A3962D-0580-4724-A0D3-DFEFDC00D036"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wechat_moments/TweetViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "getUserInfo(callback:)"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "getJson(callback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

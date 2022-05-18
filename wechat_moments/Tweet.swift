@@ -34,7 +34,7 @@ struct UserInfo: Codable {
     let avatar: String
     let nick: String
     let userName: String
-    
+
     private enum CodingKeys: String, CodingKey {
         case profileImage = "profile-image"
         case avatar = "avatar"
@@ -42,8 +42,6 @@ struct UserInfo: Codable {
         case userName = "username"
     }
 }
-
-
 
 let userInfo = """
 {

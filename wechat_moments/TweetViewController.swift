@@ -22,11 +22,12 @@ class TweetViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 500
         tableView.separatorInset = UIEdgeInsets.zero
-        viewModel.getJson() {
-        }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        viewModel.getJson(callback:{
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+        
         view.addSubview(headerView)
     }
 }

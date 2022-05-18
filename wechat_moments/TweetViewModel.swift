@@ -19,18 +19,19 @@ class TweetViewModel {
             guard let data = data, error == nil else {
                 return
             }
+            // try报错是什么情况
             do {
-               var tweet = try JSONDecoder().decode([Tweet].self, from: data )
+                var tweet = try JSONDecoder().decode([Tweet].self, from: data )
                 tweet.removeAll(where: {$0.content == nil && $0.images == nil})
-                    self.tweet = tweet
-                    callback()
+                self.tweet = tweet
+                callback()
             } catch {
                 print(error)
             }
         }
         task.resume()
     }
-    
+
     func getUserInfo(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
@@ -39,7 +40,7 @@ class TweetViewModel {
             }
             do {
                 let userInfo = try JSONDecoder().decode(UserInfo.self, from: data)
-                    callback()
+                callback()
                 self.userInfo = userInfo
             } catch {
                 print(error)
