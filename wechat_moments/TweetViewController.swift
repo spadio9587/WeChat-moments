@@ -39,10 +39,10 @@ extension TweetViewController: UITableViewDataSource {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
             return UITableViewCell()
         }
-        tweet.setTweet(tweet: allTweet[indexPath.row])
+        tweet.setTweet(tweet: self.viewModel.tweet[indexPath.row])
         return tweet
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allTweet.count
+        return self.viewModel.tweet.count
     }
 }
