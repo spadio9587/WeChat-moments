@@ -12,9 +12,8 @@ import UIKit
 
 class TweetViewController: UIViewController {
     var viewModel = TweetViewModel()
-    let headerView = HeaderView()
+    var headerView = HeaderView()
     @IBOutlet var tableView: UITableView!
-    var allTweet: [Tweet] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
@@ -24,8 +23,6 @@ class TweetViewController: UIViewController {
         tableView.estimatedRowHeight = 500
         tableView.separatorInset = UIEdgeInsets.zero
         viewModel.getJson() {
-        }
-        viewModel.getUserInfo() {
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()

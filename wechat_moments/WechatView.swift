@@ -90,7 +90,6 @@ class WechatView: UIView {
                     imageView.image = image
                 }
                 contentImage.append(imageView)
-                print("The amount of image:\(contentImage.count)")
                 imageArea.isHidden = false
             }
         } else {
@@ -108,7 +107,6 @@ class WechatView: UIView {
                 let labelView = UILabel()
                 labelView.text = comments[index].sender.username + ":" + comments[index].content
                 commentsContent.append(labelView)
-                print("The amount of comments:\(commentsContent.count)")
                 commentsArea.isHidden = false
             }
         } else {
