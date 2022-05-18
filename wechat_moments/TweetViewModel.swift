@@ -29,4 +29,21 @@ class TweetViewModel {
         }
         task.resume()
     }
+    
+    func getUserInfo(callback: @escaping () -> Void) {
+        let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            do {
+                let userInfo = try JSONDecoder().decode(UserInfo.self, from: data)
+                print(userInfo)
+                    callback()
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
 }

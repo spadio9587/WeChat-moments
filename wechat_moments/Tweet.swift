@@ -31,8 +31,20 @@ struct Comment: Codable {
 
 struct UserInfo: Codable {
     let profileImage: String
-    let avatar: Stringß
+    let avatar: String
+    let nick: String
+    let userName: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case profileImage = "profile-image"
+        case avatar = "avatar"
+        case nick = "nick"
+        case userName = "username"
+    }
 }
+
+
+
 let userInfo = """
 {
   "profile-image": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/profile-image.jpg",
