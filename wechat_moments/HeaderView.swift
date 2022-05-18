@@ -9,12 +9,12 @@ import UIKit
 
 class HeaderView: UIView {
     let backgroundView = UIImageView()
-    let userAvater = UIImageView()
+    let userAvatar = UIImageView()
     let userNameLabel = UILabel()
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(backgroundView)
-        self.addSubview(userAvater)
+        self.addSubview(userAvatar)
         self.addSubview(userNameLabel)
     }
     required init?(coder: NSCoder) {
@@ -23,7 +23,7 @@ class HeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         configureBackgroundView()
-        configureUserAvater()
+        configureUserAvatar()
         configureUserNameLabel()
     }
     func configureBackgroundView() {
@@ -31,10 +31,10 @@ class HeaderView: UIView {
         backgroundView.image = UIImage.init(named: "profile-image")
         backgroundView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
     }
-    func configureUserAvater() {
-        userAvater.contentMode = .scaleAspectFill
-        userAvater.image = UIImage.init(named: "avatar")
-        userAvater.frame = CGRect(x: 321, y: 306, width: 70, height: 70)
+    func configureUserAvatar() {
+        userAvatar.contentMode = .scaleAspectFill
+        userAvatar.image = UIImage.init(named: "avatar")
+        userAvatar.frame = CGRect(x: 321, y: 306, width: 70, height: 70)
     }
     func configureUserNameLabel() {
         userNameLabel.text = "Shawn"

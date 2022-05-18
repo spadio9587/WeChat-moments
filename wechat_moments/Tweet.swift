@@ -28,6 +28,11 @@ struct Comment: Codable {
     let content: String
     let sender: Sender
 }
+
+struct UserInfo: Codable {
+    let profileImage: String
+    let avatar: Stringß
+}
 let userInfo = """
 {
   "profile-image": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/profile-image.jpg",

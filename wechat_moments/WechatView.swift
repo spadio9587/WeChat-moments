@@ -13,7 +13,7 @@ import UIKit
 class WechatView: UIView {
     var tweet: Tweet?
     var margin: CGFloat = 8
-    var avaterSender = UIImageView()
+    var avatarSender = UIImageView()
     var sender = UILabel()
     var containerView = UIStackView()
     var content = UILabel()
@@ -24,10 +24,10 @@ class WechatView: UIView {
     //  初始化
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(avaterSender)
+        self.addSubview(avatarSender)
         self.addSubview(sender)
         self.addSubview(containerView)
-        configureAvaterSender()
+        configureAvatarSender()
         configureSender()
         configureContainerView()
 
@@ -63,7 +63,7 @@ class WechatView: UIView {
         sender.text = tweet.sender?.username
         //  尾随闭包
         loadImage(from: tweet.sender?.avatar) { image in
-            self.avaterSender.image = image
+            self.avatarSender.image = image
         }
         updateContent(tweet.content)
         updateImages(tweet.images)
@@ -116,14 +116,14 @@ class WechatView: UIView {
         }
     }
     //  设定头像的上边距，左边距以及宽和高
-    func configureAvaterSender() {
-        avaterSender.contentMode = .scaleAspectFill
-        avaterSender.translatesAutoresizingMaskIntoConstraints = false
+    func configureAvatarSender() {
+        avatarSender.contentMode = .scaleAspectFill
+        avatarSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            avaterSender.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: margin),
-            avaterSender.widthAnchor.constraint(equalToConstant: 50),
-            avaterSender.heightAnchor.constraint(equalToConstant: 50),
-            avaterSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: margin)
+            avatarSender.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: margin),
+            avatarSender.widthAnchor.constraint(equalToConstant: 50),
+            avatarSender.heightAnchor.constraint(equalToConstant: 50),
+            avatarSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: margin)
         ])
     }
     //  设定名字的上左右边距
@@ -133,8 +133,8 @@ class WechatView: UIView {
         sender.font = UIFont.systemFont(ofSize: 17)
         sender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sender.topAnchor.constraint(equalTo: avaterSender.topAnchor),
-            sender.leadingAnchor.constraint(equalTo: avaterSender.trailingAnchor, constant: 10),
+            sender.topAnchor.constraint(equalTo: avatarSender.topAnchor),
+            sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: 10),
             sender.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
