@@ -23,7 +23,6 @@ class TweetViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 500
         tableView.separatorInset = UIEdgeInsets.zero
-//        allTweet = viewModel.getAllTweet()
         viewModel.getJson(){
         }
         DispatchQueue.main.async {

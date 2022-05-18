@@ -29,13 +29,4 @@ class TweetViewModel {
         }
         task.resume()
     }
-
-    func getAllTweet() -> [Tweet]? {
-        guard let data = momentAll.data(using: .utf8) else {
-            return nil
-        }
-        var tweet = try? JSONDecoder().decode([Tweet].self, from: data)
-        tweet?.removeAll(where: {$0.content == nil && $0.images == nil})
-        return tweet
-    }
 }
