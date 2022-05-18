@@ -41,3 +41,7 @@ task8
 猜想到可以通过removeFromSubview的方法对其进行清空，但是位置刚开始出错
 最后在加载comments 和 image的configure的地方进行清空，使得显示的时候没有重叠的部分！
 
+task9
+1. 通过网络请求获取Json数据，使用URLSession异步进行
+2. 主线程运行较快，先加载UI布局，数据加载较慢，会导致数据没有及时更新导入到主线程
+3. 解决方法：在数据导入到主线程之后，tableView需要reloadData，对数据进行更新，数据为json获取到的数据并显示在tableviewcell上面
