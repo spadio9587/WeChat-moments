@@ -24,13 +24,11 @@ class TweetViewController: UIViewController {
         tableView.estimatedRowHeight = 500
         tableView.separatorInset = UIEdgeInsets.zero
 //        allTweet = viewModel.getAllTweet()
-        viewModel.getJson() {
+        viewModel.getJson(){
+        }
+        DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        //  保存一个应该就够了
-        //  估计高度，帮助提高性能
-        //  表单的高度大多数是固定的
-        //  表单高度有可能是不固定的（textview多行）（textfield单行）
         view.addSubview(headerView)
     }
 }
