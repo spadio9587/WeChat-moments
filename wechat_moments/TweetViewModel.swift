@@ -12,7 +12,7 @@ import UIKit
 // task2:筛选删除无效数据（error，unknown error, which does not contain a content and images）
 class TweetViewModel {
     var tweet : [Tweet] = []
-    func getJson(callback: @escaping ([Tweet]) -> Void) {
+    func getJson(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
@@ -21,10 +21,8 @@ class TweetViewModel {
             do {
                var tweet = try JSONDecoder().decode([Tweet].self, from: data )
                 tweet.removeAll(where: {$0.content == nil && $0.images == nil})
-                DispatchQueue.main.async {
                     self.tweet = tweet
-                    callback(self.tweet)
-                }
+                    callback()
             } catch {
                 print(error)
             }
