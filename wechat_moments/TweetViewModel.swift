@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-// task1:读取全部的数据，数据格式为数组
-// task2:筛选删除无效数据（error，unknown error, which does not contain a content and images）
 class TweetViewModel {
     var tweet : [Tweet] = []
     var userInfo : UserInfo?
@@ -19,17 +17,6 @@ class TweetViewModel {
             guard let data = data, error == nil else {
                 return
             }
-            // try报错是什么情况（如下情况）
-            //try！版本 强制解包
-            // var tweet = try JSONDecoder().decode([Tweet].self, from: data )
-            // tweet.removeAll(where: {$0.content == nil && $0.images == nil})
-            // self.tweet = tweet
-            // callback()
-            //try? 版本，出错为空
-            // var tweet = try？ JSONDecoder().decode([Tweet].self, from: data )
-            // tweet！.removeAll(where: {$0.content == nil && $0.images == nil})
-            // self.tweet = tweet！
-            // callback()
             do {
                 var tweet = try JSONDecoder().decode([Tweet].self, from: data )
                 tweet.removeAll(where: {$0.content == nil && $0.images == nil})

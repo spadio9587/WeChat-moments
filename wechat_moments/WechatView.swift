@@ -21,7 +21,6 @@ class WechatView: UIView {
     var contentImage = [UIImageView]()
     var commentsArea = UIView()
     var commentsContent = [UILabel]()
-    //  初始化
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(avatarSender)
@@ -35,7 +34,6 @@ class WechatView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    //  清空数组和removesubview应该是一起完成的
     override func layoutSubviews() {
         super.layoutSubviews()
         configureContent()
@@ -61,7 +59,6 @@ class WechatView: UIView {
     func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
-        //  尾随闭包
         loadImage(from: tweet.sender?.avatar) { image in
             self.avatarSender.image = image
         }
@@ -69,7 +66,6 @@ class WechatView: UIView {
         updateImages(tweet.images)
         updateComments(tweet.comments)
     }
-    //  依旧是解包，当content内容不为空的时候，不隐藏content的内容
     func updateContent(_ content: String?) {
         if let content = content {
             self.content.text = content
@@ -96,7 +92,6 @@ class WechatView: UIView {
             imageArea.isHidden = true
         }
     }
-    //  removesubviews为什么不能和清空数组放到一起？？
     func updateComments(_ comments: [Comment]?) {
         if let comments = comments {
             commentsContent.removeAll()
@@ -113,7 +108,6 @@ class WechatView: UIView {
             commentsArea.isHidden = true
         }
     }
-    //  设定头像的上边距，左边距以及宽和高
     func configureAvatarSender() {
         avatarSender.contentMode = .scaleAspectFill
         avatarSender.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +118,6 @@ class WechatView: UIView {
             avatarSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: margin)
         ])
     }
-    //  设定名字的上左右边距
     func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
@@ -136,7 +129,6 @@ class WechatView: UIView {
             sender.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
-    //  在stackview里面添加相对应的内容以及图像，评论区域！
     func configureContainerView() {
         containerView.axis = .vertical
         containerView.alignment = .leading
@@ -161,7 +153,6 @@ class WechatView: UIView {
         if content.text == nil {
             content.isHidden = true
         }
-        //  content的高度并没有自适应 会重叠起来
     }
     func configureImageArea() {
         imageArea.translatesAutoresizingMaskIntoConstraints = false
@@ -173,7 +164,6 @@ class WechatView: UIView {
                 let imageView = contentImage[count]
                 imageArea.addSubview(imageView)
                 imageView.translatesAutoresizingMaskIntoConstraints = false
-                //  代码重复整理（方法）
                 switch contentImage.count {
                 case 1 :
                     let width = (containerView.bounds.size.width - 2 * margin)
@@ -226,7 +216,6 @@ class WechatView: UIView {
                 commentsArea.addSubview(seperateComment)
                 seperateComment.translatesAutoresizingMaskIntoConstraints = false
                 seperateComment.numberOfLines = 0
-                //  计算UIlabel的动态高度
                 var top: CGFloat = 0.0
                 let width = UIScreen.main.bounds.size.width
                 let height = UIScreen.main.bounds.size.height

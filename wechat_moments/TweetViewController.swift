@@ -6,10 +6,6 @@
 //
 
 import UIKit
-
-// Task1：在viewModel里面解析json数据
-// Task2: viewController获取解析后的数据
-
 class TweetViewController: UIViewController {
     var viewModel = TweetViewModel()
     var headerView = HeaderView()
