@@ -19,7 +19,17 @@ class TweetViewModel {
             guard let data = data, error == nil else {
                 return
             }
-            // try报错是什么情况
+            // try报错是什么情况（如下情况）
+            //try！版本 强制解包
+            // var tweet = try JSONDecoder().decode([Tweet].self, from: data )
+            // tweet.removeAll(where: {$0.content == nil && $0.images == nil})
+            // self.tweet = tweet
+            // callback()
+            //try? 版本，出错为空
+            // var tweet = try？ JSONDecoder().decode([Tweet].self, from: data )
+            // tweet！.removeAll(where: {$0.content == nil && $0.images == nil})
+            // self.tweet = tweet！
+            // callback()
             do {
                 var tweet = try JSONDecoder().decode([Tweet].self, from: data )
                 tweet.removeAll(where: {$0.content == nil && $0.images == nil})
