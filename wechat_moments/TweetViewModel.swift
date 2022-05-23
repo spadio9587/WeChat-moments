@@ -28,6 +28,19 @@ class TweetViewModel {
         }
         task.resume()
     }
+    //refactor process
+    /*
+     func decode(data) -> []? {
+     
+     }
+     */
+    /*
+     \
+     func filter([]) -> [] {
+        filter logic
+     }
+     
+     */
 
     func getUserInfo(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!
