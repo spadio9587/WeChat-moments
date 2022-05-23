@@ -9,28 +9,42 @@ import XCTest
 @testable import wechat_moments
 
 class WechatMomentsTests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testBuildRequest() {
+        // given
+        let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")
+        // when
+        let task = URLSession.shared.dataTask(with: url!)
+        // then
+        XCTAssertNotNil(task)
+        // 此时datatask解析一定有数值，所以此测试无意义
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testWechatView() {
+        // given
+        // when
+        let wechatView = WechatView()
+        let text = wechatView.sender
+        let avatarSender = wechatView.avatarSender
+        let containerView = wechatView.containerView
+        let content = wechatView.content
+        let imageArea = wechatView.imageArea
+        // then
+        XCTAssertNotNil(text)
+        XCTAssertNotNil(avatarSender)
+        XCTAssertNotNil(containerView)
+        XCTAssertNotNil(content)
+        XCTAssertNotNil(imageArea)
     }
 
+    func testTweet() {
+        let tweet = Tweet(content: "what happened", images: nil, sender: nil, comments: nil)
+        XCTAssertTrue(((tweet.content?.isEmpty) != nil))
+    }
 }

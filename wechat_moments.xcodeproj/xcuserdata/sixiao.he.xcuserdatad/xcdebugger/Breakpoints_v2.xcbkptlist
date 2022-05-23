@@ -36,16 +36,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC134C67-CAE6-47CB-98E6-56D5B794A21B"
-            shouldBeEnabled = "Yes"
+            uuid = "88648AD3-5BE9-46A5-A24F-23D040A6E8EF"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wechat_moments/TweetViewController.swift"
+            filePath = "wechat_momentsTests/wechat_momentsTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "testTweet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
