@@ -10,22 +10,57 @@ import XCTest
 
 class WechatMomentsTests: XCTestCase {
     override func setUpWithError() throws {
-
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    func testBuildRequest() {
+    func testDecodeURL() {
         // given
-        let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")
+        let viewModel = TweetViewModel()
+        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
+        let userUrl = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")
         // when
-        let task = URLSession.shared.dataTask(with: url!)
+        let task = URLSession.shared.dataTask(with: url!) {
+            data, _, _ in
+            guard let data = data else {
+                return
+            }
+            let tweet = viewModel.decodeData(data: data)
         // then
-        XCTAssertNotNil(task)
-        // 此时datatask解析一定有数值，所以此测试无意义
+            XCTAssertNotNil(tweet)
+        }
+        task.resume()
+        let userTask = URLSession.shared.dataTask(with: userUrl!) {
+            data, _, _ in
+            guard let data = data else {
+                return
+            }
+            let userInfo = viewModel.decodeData(data: data)
+        // then
+            XCTAssertNil(userInfo)
+        }
+        userTask.resume()
     }
-
+    // 使用框架，nimble
+    func testFilterData() {
+        // given
+        let viewModel = TweetViewModel()
+        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
+        // when
+        let task = URLSession.shared.dataTask(with: url!) {
+            data, _, _ in
+            guard let data = data else {
+                return
+            }
+        // then
+            let tweet = viewModel.decodeData(data: data)
+            XCTAssertEqual(tweet?.count, 22)
+            let filterData = viewModel.filterData(tweet: tweet!)
+            XCTAssertEqual(filterData.count, 15)
+        }
+        task.resume()
+    }
     func testWechatView() {
         // given
         // when
@@ -41,10 +76,5 @@ class WechatMomentsTests: XCTestCase {
         XCTAssertNotNil(containerView)
         XCTAssertNotNil(content)
         XCTAssertNotNil(imageArea)
-    }
-
-    func testTweet() {
-        let tweet = Tweet(content: "what happened", images: nil, sender: nil, comments: nil)
-        XCTAssertTrue(((tweet.content?.isEmpty) != nil))
     }
 }
