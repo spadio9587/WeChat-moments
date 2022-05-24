@@ -20,8 +20,7 @@ class TweetViewModel {
             }
             do {
                 let tweet = self.decodeData(data: data)
-                let newTweet = self.filterData(tweet: tweet!)
-                self.tweet = newTweet
+                self.tweet = filterData(tweet: tweet!)
                 callback()
             }
         }
