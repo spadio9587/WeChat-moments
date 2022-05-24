@@ -63,8 +63,8 @@ class TweetViewModel {
             }
             do {
                 let userInfo = try JSONDecoder().decode(UserInfo.self, from: data)
-                callback()
                 self.userInfo = userInfo
+                callback()
             } catch {
                 print(error)
             }

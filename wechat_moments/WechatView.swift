@@ -160,12 +160,13 @@ class WechatView: UIView {
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if (contentImage.isEmpty == false) {
-            for count in 0...(contentImage.count-1) {
-                let imageView = contentImage[count]
-                imageArea.addSubview(imageView)
-                imageView.translatesAutoresizingMaskIntoConstraints = false
                 switch contentImage.count {
                 case 1 :
+                    for count in 0...(contentImage.count-1){
+                    let imageView = contentImage[count]
+                    imageArea.addSubview(imageView)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                        print("\(containerView.bounds.size.width)")
                     let width = (containerView.bounds.size.width - 2 * margin)
                     let height = width * 3/4
                     NSLayoutConstraint.activate([
@@ -174,7 +175,12 @@ class WechatView: UIView {
                         imageView.widthAnchor.constraint(equalToConstant: width),
                         imageView.heightAnchor.constraint(equalToConstant: height)
                     ])
+                    }
                 case 2, 4 :
+                    for count in 0...(contentImage.count-1){
+                    let imageView = contentImage[count]
+                    imageArea.addSubview(imageView)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
                     let width = (containerView.bounds.size.width - 3 * margin) / 2
                     let height = width
                     let left = CGFloat((count % 2 + 1)) * margin + CGFloat(count % 2) * width
@@ -185,7 +191,12 @@ class WechatView: UIView {
                         imageView.widthAnchor.constraint(equalToConstant: width),
                         imageView.heightAnchor.constraint(equalToConstant: height)
                     ])
+                    }
                 default :
+                    for count in 0...(contentImage.count-1) {
+                    let imageView = contentImage[count]
+                    imageArea.addSubview(imageView)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
                     let width = (containerView.bounds.size.width - 4 * margin) / 3
                     let height = (containerView.bounds.size.width - 4 * margin) / 3
                     let left = CGFloat((count % 3 + 1)) * margin + CGFloat(count % 3) * width
@@ -197,7 +208,7 @@ class WechatView: UIView {
                         imageView.heightAnchor.constraint(equalToConstant: height)
                     ])
                 }
-            }
+                }
             if let view = imageArea.subviews.last {
                 imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
             }

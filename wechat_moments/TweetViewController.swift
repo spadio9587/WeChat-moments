@@ -23,7 +23,7 @@ class TweetViewController: UIViewController {
                 self.tableView.reloadData()
             }
         })
-        view.addSubview(headerView)
+        self.view.addSubview(headerView)
     }
 }
 extension TweetViewController: UITableViewDataSource {

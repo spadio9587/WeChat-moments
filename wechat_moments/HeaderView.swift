@@ -23,8 +23,6 @@ class HeaderView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        viewModel.getUserInfo {
-        }
         configureBackgroundView()
         configureUserAvatar()
         configureUserNameLabel()
