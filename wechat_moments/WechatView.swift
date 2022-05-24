@@ -166,7 +166,6 @@ class WechatView: UIView {
                     let imageView = contentImage[count]
                     imageArea.addSubview(imageView)
                     imageView.translatesAutoresizingMaskIntoConstraints = false
-                        print("\(containerView.bounds.size.width)")
                     let width = (containerView.bounds.size.width - 2 * margin)
                     let height = width * 3/4
                     NSLayoutConstraint.activate([
@@ -230,7 +229,7 @@ class WechatView: UIView {
                 var top: CGFloat = 0.0
                 let width = UIScreen.main.bounds.size.width
                 let height = UIScreen.main.bounds.size.height
-                let strSize: CGSize = (seperateComment.sizeThatFits(CGSize.init(width: width-60-25, height: height)))
+                let strSize: CGSize = (seperateComment.sizeThatFits(CGSize.init(width: width-100, height: height)))
                 seperateComment.frame = CGRect(x: 5.0, y: 3.0, width: strSize.width, height: strSize.height)
                 top = CGFloat(count) * strSize.height + CGFloat(count) * 18
                 NSLayoutConstraint.activate([

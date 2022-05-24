@@ -20,26 +20,9 @@ class TweetViewModel {
             }
             do {
                 let tweet = self.decodeData(data: data)
-                self.tweet = filterData(tweet: tweet!)
+                let fixTweet = self.filterData(with: tweet!)
+                self.tweet = fixTweet
                 callback()
-            }
-        }
-        task.resume()
-
-    }
-    func getJson(callback: @escaping () -> Void) {
-        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")!
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                var tweet = try JSONDecoder().decode([Tweet].self, from: data )
-                tweet.removeAll(where: {$0.content == nil && $0.images == nil})
-                self.tweet = tweet
-                callback()
-            } catch {
-                print(error)
             }
         }
         task.resume()
@@ -50,8 +33,8 @@ class TweetViewModel {
         return tweet
     }
 
-    func filterData(tweet:[Tweet]) -> [Tweet] {
-        self.tweet.removeAll(where: {$0.content == nil && $0.images == nil})
+    func filterData(with newTweet:[Tweet]) -> [Tweet] {
+        let tweet = newTweet.filter{$0.content != nil || $0.images != nil}
         return tweet
     }
 
