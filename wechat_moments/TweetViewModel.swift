@@ -11,6 +11,23 @@ import UIKit
 class TweetViewModel {
     var tweet : [Tweet] = []
     var userInfo : UserInfo?
+    func getDataFromUrl(callback: @escaping () -> Void) {
+        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
+        let task = URLSession.shared.dataTask(with: url!) { [self]
+            data, _, _ in
+            guard let data = data  else {
+                return
+            }
+            do {
+                let tweet = self.decodeData(data: data)
+                let newTweet = self.filterData(tweet: tweet!)
+                self.tweet = newTweet
+                callback()
+            }
+        }
+        task.resume()
+
+    }
     func getJson(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
@@ -28,19 +45,16 @@ class TweetViewModel {
         }
         task.resume()
     }
-    //refactor process
-    /*
-     func decode(data) -> []? {
-     
-     }
-     */
-    /*
-     \
-     func filter([]) -> [] {
-        filter logic
-     }
-     
-     */
+
+    func decodeData(data:Data) -> [Tweet]? {
+        let tweet = try? JSONDecoder().decode([Tweet].self, from: data)
+        return tweet
+    }
+
+    func filterData(tweet:[Tweet]) -> [Tweet] {
+        self.tweet.removeAll(where: {$0.content == nil && $0.images == nil})
+        return tweet
+    }
 
     func getUserInfo(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!
