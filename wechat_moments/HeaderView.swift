@@ -8,7 +8,7 @@
 import UIKit
 
 class HeaderView: UIView {
-    let viewModel = TweetViewModel()
+    var userInfo: UserInfo?
     let backgroundView = UIImageView()
     let userAvatar = UIImageView()
     let userNameLabel = UILabel()
@@ -44,26 +44,28 @@ class HeaderView: UIView {
             }
         }
     }
+    func setUserInfo(userInfo: UserInfo?) {
+        self.userInfo = userInfo
+        loadImage(from: userInfo?.profileImage) {
+            image in
+            self.backgroundView.image = image
+        }
+        loadImage(from: userInfo?.avatar) {
+            image in
+            self.userAvatar.image = image
+        }
+        userNameLabel.text = userInfo?.userName
+    }
 
     func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
-//        backgroundView.image = UIImage.init(named: "profile-image")
-        loadImage(from: viewModel.userInfo?.profileImage) { image in
-            self.backgroundView.image = image
-        }
         backgroundView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
     }
     func configureUserAvatar() {
         userAvatar.contentMode = .scaleAspectFill
-//        userAvatar.image = UIImage.init(named: "avatar")
-        loadImage(from: viewModel.userInfo?.avatar) {image in
-            self.userAvatar.image = image
-        }
         userAvatar.frame = CGRect(x: 321, y: 306, width: 70, height: 70)
     }
     func configureUserNameLabel() {
-//        userNameLabel.text = "shawn"
-        userNameLabel.text = viewModel.userInfo?.nick
-        userNameLabel.frame = CGRect(x: 260, y: 322, width: 120, height: 52)
+        userNameLabel.frame = CGRect(x: 240, y: 318, width: 120, height: 52)
     }
 }
