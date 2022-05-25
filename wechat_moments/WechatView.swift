@@ -258,7 +258,7 @@ class WechatView: UIView {
                     setSpecialColorText(seperateComment: nextSeperateComment)
                     }
             if let comment = commentsArea.subviews.last {
-                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: 3).isActive = true
+                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: labelSpace).isActive = true
             }
         } else {
             commentsArea.isHidden = true

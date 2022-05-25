@@ -56,7 +56,7 @@ class WechatMomentsTests: XCTestCase {
         // then
             let tweet = viewModel.decodeData(data: data)
             XCTAssertEqual(tweet?.count, 22)
-            let filterData = viewModel.filterData(tweet: tweet!)
+            let filterData = viewModel.filterData(with: tweet!)
             XCTAssertEqual(filterData.count, 15)
         }
         task.resume()
