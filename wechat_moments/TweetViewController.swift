@@ -23,7 +23,12 @@ class TweetViewController: UIViewController {
                 self.tableView.reloadData()
             }
         })
-        self.view.addSubview(headerView)
+        viewModel.getUserInfo(callback: {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+        self.tableView.addSubview(headerView)
     }
 }
 extension TweetViewController: UITableViewDataSource {

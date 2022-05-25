@@ -8,7 +8,7 @@
 import UIKit
 
 class HeaderView: UIView {
-    var viewModel = TweetViewModel()
+    let viewModel = TweetViewModel()
     let backgroundView = UIImageView()
     let userAvatar = UIImageView()
     let userNameLabel = UILabel()
@@ -47,23 +47,23 @@ class HeaderView: UIView {
 
     func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
-        backgroundView.image = UIImage.init(named: "profile-image")
-//        loadImage(from: viewModel.userInfo?.profileImage) { image in
-//            self.backgroundView.image = image
-//        }
+//        backgroundView.image = UIImage.init(named: "profile-image")
+        loadImage(from: viewModel.getUserInfo(callback: {})) { image in
+            self.backgroundView.image = image
+        }
         backgroundView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
     }
     func configureUserAvatar() {
         userAvatar.contentMode = .scaleAspectFill
-        userAvatar.image = UIImage.init(named: "avatar")
-//        loadImage(from: viewModel.userInfo?.avatar) {image in
-//            self.userAvatar.image = image
-//        }
+//        userAvatar.image = UIImage.init(named: "avatar")
+        loadImage(from: viewModel.userInfo?.avatar) {image in
+            self.userAvatar.image = image
+        }
         userAvatar.frame = CGRect(x: 321, y: 306, width: 70, height: 70)
     }
     func configureUserNameLabel() {
-        userNameLabel.text = "shawn"
-//        userNameLabel.text = viewModel.userInfo?.nick
+//        userNameLabel.text = "shawn"
+        userNameLabel.text = viewModel.userInfo?.nick
         userNameLabel.frame = CGRect(x: 260, y: 322, width: 120, height: 52)
     }
 }

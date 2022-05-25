@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0C16D738-2157-4C77-A216-FE18D1E47A5C"
+            uuid = "6ED19494-C719-4423-A89D-54A8240FFF58"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wechat_moments/WechatView.swift"
+            filePath = "wechat_moments/HeaderView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "configureImageArea()"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "configureBackgroundView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
