@@ -35,7 +35,7 @@ public func MACH_MSGH_BITS(_ remote: UInt32, _ local: UInt32) -> UInt32 { return
 // From /usr/include/mach/exception_types.h
 // #define EXC_BAD_INSTRUCTION	2	/* Instruction failed */
 // #define EXC_MASK_BAD_INSTRUCTION	(1 << EXC_BAD_INSTRUCTION)
-//public let EXC_MASK_BAD_INSTRUCTION: UInt32 = 1 << EXC_BAD_INSTRUCTION
+// public let EXC_MASK_BAD_INSTRUCTION: UInt32 = 1 << EXC_BAD_INSTRUCTION
 
 #if arch(x86_64)
 // From /usr/include/mach/i386/thread_status.h
@@ -60,5 +60,5 @@ public struct execTypesCountTuple<T: ExpressibleByIntegerLiteral> {
 	public init() {
 	}
 }
-	
+
 #endif

@@ -160,52 +160,42 @@ class WechatView: UIView {
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if (contentImage.isEmpty == false) {
+            func setConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
+                    let imageView = contentImage[count]
+                    imageArea.addSubview(imageView)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: CGFloat(leftEdge)),
+                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: CGFloat(topEdge)),
+                        imageView.widthAnchor.constraint(equalToConstant: CGFloat(imageWidth)),
+                        imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight))
+                    ])
+            }
                 switch contentImage.count {
                 case 1 :
-                    for count in 0...(contentImage.count-1){
-                    let imageView = contentImage[count]
-                    imageArea.addSubview(imageView)
-                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    for count in 0...(contentImage.count-1) {
+                    let left = margin
+                    let top = margin
                     let width = (containerView.bounds.size.width - 2 * margin)
                     let height = width * 3/4
-                    NSLayoutConstraint.activate([
-                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: margin),
-                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: margin),
-                        imageView.widthAnchor.constraint(equalToConstant: width),
-                        imageView.heightAnchor.constraint(equalToConstant: height)
-                    ])
+                        setConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                     }
                 case 2, 4 :
-                    for count in 0...(contentImage.count-1){
-                    let imageView = contentImage[count]
-                    imageArea.addSubview(imageView)
-                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    for count in 0...(contentImage.count-1) {
                     let width = (containerView.bounds.size.width - 3 * margin) / 2
                     let height = width
                     let left = CGFloat((count % 2 + 1)) * margin + CGFloat(count % 2) * width
                     let top = CGFloat((count / 2 + 1)) * margin + CGFloat(count / 2) * height
-                    NSLayoutConstraint.activate([
-                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
-                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
-                        imageView.widthAnchor.constraint(equalToConstant: width),
-                        imageView.heightAnchor.constraint(equalToConstant: height)
-                    ])
+                    setConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                     }
+                    
                 default :
                     for count in 0...(contentImage.count-1) {
-                    let imageView = contentImage[count]
-                    imageArea.addSubview(imageView)
-                    imageView.translatesAutoresizingMaskIntoConstraints = false
                     let width = (containerView.bounds.size.width - 4 * margin) / 3
                     let height = (containerView.bounds.size.width - 4 * margin) / 3
                     let left = CGFloat((count % 3 + 1)) * margin + CGFloat(count % 3) * width
                     let top = CGFloat((count / 3 + 1)) * margin + CGFloat(count / 3) * height
-                    NSLayoutConstraint.activate([
-                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: left),
-                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: top),
-                        imageView.widthAnchor.constraint(equalToConstant: width),
-                        imageView.heightAnchor.constraint(equalToConstant: height)
-                    ])
+                    setConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
                 }
             if let view = imageArea.subviews.last {
