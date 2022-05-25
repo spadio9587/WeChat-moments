@@ -101,7 +101,7 @@ class WechatView: UIView {
             }
             for index in comments.indices {
                 let labelView = UILabel()
-                labelView.text = comments[index].sender.username + ":" + comments[index].content
+                labelView.text = comments[index].sender.username + ":" + " " + comments[index].content
                 commentsContent.append(labelView)
                 commentsArea.isHidden = false
             }
