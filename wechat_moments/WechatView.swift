@@ -13,6 +13,7 @@ import UIKit
 class WechatView: UIView {
     var tweet: Tweet?
     var margin: CGFloat = 8
+    var labelSpace: CGFloat = 2
     var avatarSender = UIImageView()
     var sender = UILabel()
     var containerView = UIStackView()
@@ -142,7 +143,7 @@ class WechatView: UIView {
             containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
             containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: margin),
-            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin)
+            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
     func configureContent() {
@@ -209,24 +210,9 @@ class WechatView: UIView {
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor, constant: 5).isActive = true
+        commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor).isActive = true
         if (commentsContent.count) != 0 {
-            for count in 0...(commentsContent.count - 1) {
-                let seperateComment = commentsContent[count]
-                commentsArea.addSubview(seperateComment)
-                seperateComment.translatesAutoresizingMaskIntoConstraints = false
-                seperateComment.numberOfLines = 0
-                var top: CGFloat = 0.0
-                let width = UIScreen.main.bounds.size.width
-                let height = UIScreen.main.bounds.size.height
-                let strSize: CGSize = (seperateComment.sizeThatFits(CGSize.init(width: width-100, height: height)))
-                seperateComment.frame = CGRect(x: 5.0, y: 3.0, width: strSize.width, height: strSize.height)
-                top = CGFloat(count) * strSize.height + CGFloat(count) * 18
-                NSLayoutConstraint.activate([
-                    seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: top),
-                    seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8)
-                ])
+            func setSpecialColorText(seperateComment:UILabel) {
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
                 let number = seperateComment.text!.firstIndex(of: ":")
                 mutableAttribString.addAttributes(
@@ -235,8 +221,42 @@ class WechatView: UIView {
                 )
                 seperateComment.attributedText = mutableAttribString
             }
+                switch commentsContent.count {
+                case 1 :
+                    let seperateComment = commentsContent[0]
+                    commentsArea.addSubview(seperateComment)
+                    seperateComment.translatesAutoresizingMaskIntoConstraints = false
+                    seperateComment.numberOfLines = 0
+                    NSLayoutConstraint.activate([
+                        seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: labelSpace),
+                        seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
+                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8)
+                    ])
+                    setSpecialColorText(seperateComment: seperateComment)
+
+                default:
+                    let count = commentsContent.count
+                    let seperateComment = commentsContent[count - 2]
+                    let nextSeperateComment = commentsContent[count - 1]
+                    commentsArea.addSubview(seperateComment)
+                    commentsArea.addSubview(nextSeperateComment)
+                    seperateComment.translatesAutoresizingMaskIntoConstraints = false
+                    seperateComment.numberOfLines = 0
+                    nextSeperateComment.translatesAutoresizingMaskIntoConstraints = false
+                    nextSeperateComment.numberOfLines = 0
+                    NSLayoutConstraint.activate([
+                        seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant:labelSpace),
+                        seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
+                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8),
+                        nextSeperateComment.topAnchor.constraint(equalTo: seperateComment.bottomAnchor, constant: labelSpace),
+                        seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
+                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8)
+                    ])
+                    setSpecialColorText(seperateComment: seperateComment)
+                    setSpecialColorText(seperateComment: nextSeperateComment)
+                    }
             if let comment = commentsArea.subviews.last {
-                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: margin).isActive = true
+                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: 3).isActive = true
             }
         } else {
             commentsArea.isHidden = true

@@ -48,7 +48,7 @@ class HeaderView: UIView {
     func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
 //        backgroundView.image = UIImage.init(named: "profile-image")
-        loadImage(from: viewModel.getUserInfo(callback: {})) { image in
+        loadImage(from: viewModel.userInfo?.profileImage) { image in
             self.backgroundView.image = image
         }
         backgroundView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
