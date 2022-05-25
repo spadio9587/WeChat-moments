@@ -26,6 +26,7 @@ class WechatMomentsTests: XCTestCase {
             guard let data = data else {
                 return
             }
+            // 优化data，moment直接给出数据
             let tweet = viewModel.decodeData(data: data)
         // then
             XCTAssertNotNil(tweet)
@@ -47,6 +48,8 @@ class WechatMomentsTests: XCTestCase {
         // given
         let viewModel = TweetViewModel()
         let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
+        // 元素是够相同
+        // 有效元素是否是有效的。
         // when
         let task = URLSession.shared.dataTask(with: url!) {
             data, _, _ in

@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CB2943E2-F0DD-42E7-B42F-6DEDBF50288A"
+            uuid = "646637F0-170B-402D-A6F3-92EE0AAF8A82"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wechat_moments/TweetViewModel.swift"
+            filePath = "wechat_momentsTests/wechat_momentsTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "getUserInfo(callback:)"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "testFilterData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9D54D7C-CF6F-4ED3-8A96-F0E8DE1352AA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wechat_moments/HeaderView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "setUserInfo(userInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

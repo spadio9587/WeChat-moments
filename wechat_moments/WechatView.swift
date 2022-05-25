@@ -162,6 +162,7 @@ class WechatView: UIView {
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if (contentImage.isEmpty == false) {
+            // 方法提取出来，不会func里面叠加func
             func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
                     let imageView = contentImage[count]
                     imageArea.addSubview(imageView)

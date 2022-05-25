@@ -45,7 +45,6 @@ class HeaderView: UIView {
         }
     }
     func setUserInfo(userInfo: UserInfo?) {
-        self.userInfo = userInfo
         loadImage(from: userInfo?.profileImage) {
             image in
             self.backgroundView.image = image

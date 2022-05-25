@@ -15,6 +15,8 @@ class TweetViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
+        // 自动计算的高度
+        // 布局更新的问题（layoutsubviews）
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 500
         tableView.separatorInset = UIEdgeInsets.zero
