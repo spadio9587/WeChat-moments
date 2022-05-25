@@ -151,6 +151,7 @@ class WechatView: UIView {
         content.numberOfLines = 0
         content.lineBreakMode = .byWordWrapping
         content.font = UIFont.systemFont(ofSize: 14)
+        content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2*margin).isActive = true
         if content.text == nil {
             content.isHidden = true
         }
@@ -177,15 +178,15 @@ class WechatView: UIView {
                 for count in 0...(contentImage.count-1) {
                     let width = (containerView.bounds.size.width - 2 * margin)
                     let height = width * 3/4
-                    let left = margin
-                    let top = margin
+                    let left = 0
+                    let top = 0
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                     }
             case 2, 4 :
                 for count in 0...(contentImage.count-1) {
                     let width = (containerView.bounds.size.width - 3 * margin) / 2
                     let height = width
-                    let left = CGFloat((count % 2 + 1)) * margin + CGFloat(count % 2) * width
+                    let left = CGFloat((count % 2)) * margin + CGFloat(count % 2) * width
                     let top = CGFloat((count / 2 + 1)) * margin + CGFloat(count / 2) * height
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
@@ -194,7 +195,7 @@ class WechatView: UIView {
                 for count in 0...(contentImage.count-1) {
                     let width = (containerView.bounds.size.width - 4 * margin) / 3
                     let height = width
-                    let left = CGFloat((count % 3 + 1)) * margin + CGFloat(count % 3) * width
+                    let left = CGFloat((count % 3)) * margin + CGFloat(count % 3) * width
                     let top = CGFloat((count / 3 + 1)) * margin + CGFloat(count / 3) * height
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
@@ -209,8 +210,9 @@ class WechatView: UIView {
     func configureCommentsArea() {
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -2*margin).isActive = true
         commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor).isActive = true
+        commentsArea.backgroundColor = .systemGray6
         if (commentsContent.count) != 0 {
             func setSpecialColorText(seperateComment:UILabel) {
                 let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
