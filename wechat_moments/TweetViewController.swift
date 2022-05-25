@@ -25,10 +25,10 @@ class TweetViewController: UIViewController {
         })
         viewModel.getUserInfo(callback: {
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.headerView.setUserInfo(userInfo: self.viewModel.userInfo)
             }
         })
-        self.tableView.addSubview(headerView)
+        tableView.addSubview(headerView)
     }
 }
 extension TweetViewController: UITableViewDataSource {
