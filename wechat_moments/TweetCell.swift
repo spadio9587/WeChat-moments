@@ -30,5 +30,6 @@ class TweetCell: UITableViewCell {
     func setTweet(tweet: Tweet?) {
         guard let tweet = tweet else {return}
         wechatView.setTweet(tweet: tweet)
+        layoutIfNeeded()
     }
 }

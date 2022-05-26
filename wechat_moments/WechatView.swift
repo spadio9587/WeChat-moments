@@ -13,7 +13,7 @@ import UIKit
 class WechatView: UIView {
     var tweet: Tweet?
     var margin: CGFloat = 8
-    var labelSpace: CGFloat = 2
+    var labelSpace: CGFloat = 5
     var avatarSender = UIImageView()
     var sender = UILabel()
     var containerView = UIStackView()
