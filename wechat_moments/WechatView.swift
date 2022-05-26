@@ -163,17 +163,6 @@ class WechatView: UIView {
         ])
         if (contentImage.isEmpty == false) {
             // 方法提取出来，不会func里面叠加func
-            func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
-                    let imageView = contentImage[count]
-                    imageArea.addSubview(imageView)
-                    imageView.translatesAutoresizingMaskIntoConstraints = false
-                    NSLayoutConstraint.activate([
-                        imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: CGFloat(leftEdge)),
-                        imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: CGFloat(topEdge)),
-                        imageView.widthAnchor.constraint(equalToConstant: CGFloat(imageWidth)),
-                        imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight))
-                    ])
-            }
             switch contentImage.count {
             case 1 :
                 for count in 0...(contentImage.count-1) {
@@ -264,5 +253,17 @@ class WechatView: UIView {
         } else {
             commentsArea.isHidden = true
         }
+    }
+
+    func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
+            let imageView = contentImage[count]
+            imageArea.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: CGFloat(leftEdge)),
+                imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: CGFloat(topEdge)),
+                imageView.widthAnchor.constraint(equalToConstant: CGFloat(imageWidth)),
+                imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight))
+            ])
     }
 }

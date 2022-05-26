@@ -17,52 +17,110 @@ class WechatMomentsTests: XCTestCase {
     }
     func testDecodeURL() {
         // given
-        let viewModel = TweetViewModel()
-        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
-        let userUrl = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")
-        // when
-        let task = URLSession.shared.dataTask(with: url!) {
-            data, _, _ in
-            guard let data = data else {
-                return
-            }
+       let data =
+        """
+        [
+          {
+            "content": "沙发！",
+            "images": [
+              {
+                "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/001.jpeg"
+              },
+              {
+                "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/002.jpeg"
+              },
+              {
+                "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/003.jpeg"
+              }
+            ],
+            "sender": {
+              "username": "cyao",
+              "nick": "Cheng Yao",
+              "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
+            },
+            "comments": [
+              {
+                "content": "Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.⏰",
+                "sender": {
+                  "username": "leihuang",
+                  "nick": "Lei Huang",
+                  "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/002.jpeg"
+                }
+              },
+              {
+                "content": "Like it too",
+                "sender": {
+                  "username": "weidong",
+                  "nick": "WeiDong Gu",
+                  "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/003.jpeg"
+                }
+              }
+            ]
+          }]
+        """
             // 优化data，moment直接给出数据
-            let tweet = viewModel.decodeData(data: data)
-        // then
-            XCTAssertNotNil(tweet)
+        let testData = data.data(using: .utf8)
+        let viewModel = TweetViewModel()
+        guard let tweet = viewModel.decodeData(data: testData!) else {
+            return
         }
-        task.resume()
-        let userTask = URLSession.shared.dataTask(with: userUrl!) {
-            data, _, _ in
-            guard let data = data else {
-                return
-            }
-            let userInfo = viewModel.decodeData(data: data)
         // then
-            XCTAssertNil(userInfo)
+        for tweet in tweet {
+            XCTAssertEqual(tweet.sender?.username, "cyao")
+            XCTAssertEqual(tweet.content, "沙发！")
+            XCTAssertEqual(tweet.comments?.count, 2)
         }
-        userTask.resume()
+        XCTAssertNotNil(tweet)
+
     }
     // 使用框架，nimble
     func testFilterData() {
         // given
         let viewModel = TweetViewModel()
-        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
+        let data =
+        """
+        [
+            {
+              "content": "第12条",
+              "sender": {
+                "username": "xinguo",
+                "nick": "Xin Guo",
+                "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
+              }
+            },
+          {
+            "sender": {
+              "username": "xinge",
+              "nick": "Xin Ge",
+              "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/000.jpeg"
+            }
+          },
+          {
+            "error": "illegal"
+          },
+          {
+            "error": "WTF"
+          },
+          {
+            "error": "WOW"
+          }]
+        """
         // 元素是够相同
         // 有效元素是否是有效的。
         // when
-        let task = URLSession.shared.dataTask(with: url!) {
-            data, _, _ in
-            guard let data = data else {
-                return
-            }
         // then
-            let tweet = viewModel.decodeData(data: data)
-            XCTAssertEqual(tweet?.count, 22)
-            let filterData = viewModel.filterData(with: tweet!)
-            XCTAssertEqual(filterData.count, 15)
+        let testData = data.data(using: .utf8)
+        guard let tweet = viewModel.decodeData(data: testData!) else {
+            return
         }
-        task.resume()
+        XCTAssertEqual(tweet.count, 5)
+        let filterData = viewModel.filterData(with: tweet)
+        XCTAssertEqual(filterData.count, 1)
+        for tweet in filterData {
+            XCTAssertEqual(tweet.content, "第12条")
+            XCTAssertEqual(tweet.sender?.username, "xinguo")
+            XCTAssertEqual(tweet.sender?.avatar, "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg")
+        }
     }
     func testWechatView() {
         // given
