@@ -166,7 +166,7 @@ class WechatView: UIView {
             switch contentImage.count {
             case 1 :
                 for count in 0...(contentImage.count-1) {
-                    let width = (containerView.bounds.size.width - 2 * margin)
+                    let width = (UIScreen.main.bounds.width - 74 - 2 * margin)
                     let height = width * 3/4
                     let left = 0
                     let top = 0
@@ -174,7 +174,7 @@ class WechatView: UIView {
                     }
             case 2, 4 :
                 for count in 0...(contentImage.count-1) {
-                    let width = (containerView.bounds.size.width - 3 * margin) / 2
+                    let width = (UIScreen.main.bounds.width - 74 - 3 * margin) / 2
                     let height = width
                     let left = CGFloat((count % 2)) * margin + CGFloat(count % 2) * width
                     let top = CGFloat((count / 2 + 1)) * margin + CGFloat(count / 2) * height
@@ -183,7 +183,7 @@ class WechatView: UIView {
 
             default :
                 for count in 0...(contentImage.count-1) {
-                    let width = (containerView.bounds.size.width - 4 * margin) / 3
+                    let width = (UIScreen.main.bounds.width - 74 - 4 * margin) / 3
                     let height = width
                     let left = CGFloat((count % 3)) * margin + CGFloat(count % 3) * width
                     let top = CGFloat((count / 3 + 1)) * margin + CGFloat(count / 3) * height
