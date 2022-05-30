@@ -12,11 +12,16 @@ class HeaderView: UIView {
     let backgroundView = UIImageView()
     let userAvatar = UIImageView()
     let userNameLabel = UILabel()
+    let backgroundFrame: CGFloat = 360
+    let userAvaterLocation: CGFloat = 310
+    let userAvaterFrame: CGFloat = 70
+    let gap: CGFloat = 5
+    let nameLabelLocation: CGFloat = 335
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(backgroundView)
-        self.addSubview(userAvatar)
-        self.addSubview(userNameLabel)
+        addSubview(backgroundView)
+        addSubview(userAvatar)
+        addSubview(userNameLabel)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -44,6 +49,7 @@ class HeaderView: UIView {
             }
         }
     }
+    
     func setUserInfo(userInfo: UserInfo?) {
         loadImage(from: userInfo?.profileImage) {
             image in
@@ -58,13 +64,32 @@ class HeaderView: UIView {
 
     func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
-        backgroundView.frame = CGRect(x: 0, y: -44, width: 414, height: 403)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor),
+            backgroundView.topAnchor.constraint(equalTo: self.topAnchor),
+            backgroundView.widthAnchor.constraint(equalToConstant: backgroundFrame),
+            backgroundView.heightAnchor.constraint(equalToConstant: backgroundFrame)
+        ])
     }
+    
     func configureUserAvatar() {
         userAvatar.contentMode = .scaleAspectFill
-        userAvatar.frame = CGRect(x: 321, y: 306, width: 70, height: 70)
+        userAvatar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            userAvatar.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: userAvaterLocation),
+            userAvatar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: userAvaterLocation),
+            userAvatar.widthAnchor.constraint(equalToConstant: userAvaterFrame),
+            userAvatar.heightAnchor.constraint(equalToConstant: userAvaterFrame)
+        ])
     }
+    
     func configureUserNameLabel() {
-        userNameLabel.frame = CGRect(x: 240, y: 318, width: 120, height: 52)
+        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        userNameLabel.numberOfLines = 1
+        NSLayoutConstraint.activate([
+            userNameLabel.rightAnchor.constraint(equalTo: userAvatar.leftAnchor, constant: gap),
+            userNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: nameLabelLocation)
+        ])
     }
 }

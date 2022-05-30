@@ -162,7 +162,6 @@ class WechatView: UIView {
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if (contentImage.isEmpty == false) {
-            // 方法提取出来，不会func里面叠加func
             switch contentImage.count {
             case 1 :
                 for count in 0...(contentImage.count-1) {

@@ -58,7 +58,6 @@ class WechatMomentsTests: XCTestCase {
             ]
           }]
         """
-            // 优化data，moment直接给出数据
         let testData = data.data(using: .utf8)
         let viewModel = TweetViewModel()
         guard let tweet = viewModel.decodeData(data: testData!) else {
@@ -73,7 +72,6 @@ class WechatMomentsTests: XCTestCase {
         XCTAssertNotNil(tweet)
 
     }
-    // 使用框架，nimble
     func testFilterData() {
         // given
         let viewModel = TweetViewModel()
@@ -105,10 +103,6 @@ class WechatMomentsTests: XCTestCase {
             "error": "WOW"
           }]
         """
-        // 元素是够相同
-        // 有效元素是否是有效的。
-        // when
-        // then
         let testData = data.data(using: .utf8)
         guard let tweet = viewModel.decodeData(data: testData!) else {
             return
