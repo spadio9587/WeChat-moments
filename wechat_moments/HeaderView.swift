@@ -22,15 +22,12 @@ class HeaderView: UIView {
         addSubview(backgroundView)
         addSubview(userAvatar)
         addSubview(userNameLabel)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
         configureBackgroundView()
         configureUserAvatar()
         configureUserNameLabel()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
@@ -67,7 +64,7 @@ class HeaderView: UIView {
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor),
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor),
+            backgroundView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             backgroundView.widthAnchor.constraint(equalToConstant: backgroundFrame),
             backgroundView.heightAnchor.constraint(equalToConstant: backgroundFrame)
         ])
