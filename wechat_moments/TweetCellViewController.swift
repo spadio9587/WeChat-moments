@@ -23,6 +23,7 @@ class TweetCellViewController: UIViewController {
         tableView.addSubview(contentview)
     }
 }
+
 extension TweetCellViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
@@ -32,7 +33,7 @@ extension TweetCellViewController: UITableViewDataSource {
         return tweet
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return allTweet!.count
     }
 }

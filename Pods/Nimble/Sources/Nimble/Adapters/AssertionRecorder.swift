@@ -31,12 +31,13 @@ public class AssertionRecorder: AssertionHandler {
             AssertionRecord(
                 success: assertion,
                 message: message,
-                location: location))
+                location: location
+            ))
     }
 }
 
 extension NMBExceptionCapture {
-    internal func tryBlockThrows(_ unsafeBlock: () throws -> Void) throws {
+    func tryBlockThrows(_ unsafeBlock: () throws -> Void) throws {
         var catchedError: Error?
         tryBlock {
             do {
@@ -76,7 +77,7 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
         let failureMessage = FailureMessage()
         failureMessage.stringValue = "unexpected error thrown: <\(error)>"
         let location = SourceLocation(file: file, line: line)
-        tempAssertionHandler.assert(false, message: failureMessage, location: location)
+        tempAssertionHandler.assertionFailure(message: failureMessage, location: location)
     }
 }
 
@@ -86,7 +87,7 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
 /// This can be useful if you want to gather information about expectations
 /// that occur within a closure.
 ///
-/// @param silently expectations are no longer send to the default Nimble 
+/// @param silently expectations are no longer send to the default Nimble
 ///                 assertion handler when this is true. Defaults to false.
 ///
 /// @see gatherFailingExpectations

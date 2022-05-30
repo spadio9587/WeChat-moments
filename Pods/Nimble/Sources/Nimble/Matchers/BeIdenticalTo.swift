@@ -15,12 +15,12 @@ public func beIdenticalTo(_ expected: AnyObject?) -> Predicate<AnyObject> {
     }
 }
 
-extension Expectation where T == AnyObject {
-    public static func === (lhs: Expectation, rhs: AnyObject?) {
+public extension Expectation where T == AnyObject {
+    static func === (lhs: Expectation, rhs: AnyObject?) {
         lhs.to(beIdenticalTo(rhs))
     }
 
-    public static func !== (lhs: Expectation, rhs: AnyObject?) {
+    static func !== (lhs: Expectation, rhs: AnyObject?) {
         lhs.toNot(beIdenticalTo(rhs))
     }
 }
@@ -34,14 +34,14 @@ public func be(_ expected: AnyObject?) -> Predicate<AnyObject> {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+    import class Foundation.NSObject
 
-extension NMBPredicate {
-    @objc public class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBPredicate {
-        return NMBPredicate { actualExpression in
-            let aExpr = actualExpression.cast { $0 as AnyObject? }
-            return try beIdenticalTo(expected).satisfies(aExpr).toObjectiveC()
+    public extension NMBPredicate {
+        @objc class func beIdenticalToMatcher(_ expected: NSObject?) -> NMBPredicate {
+            return NMBPredicate { actualExpression in
+                let aExpr = actualExpression.cast { $0 as AnyObject? }
+                return try beIdenticalTo(expected).satisfies(aExpr).toObjectiveC()
+            }
         }
     }
-}
 #endif

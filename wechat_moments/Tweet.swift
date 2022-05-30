@@ -37,8 +37,8 @@ struct UserInfo: Codable {
 
     private enum CodingKeys: String, CodingKey {
         case profileImage = "profile-image"
-        case avatar = "avatar"
-        case nick = "nick"
+        case avatar
+        case nick
         case userName = "username"
     }
 }

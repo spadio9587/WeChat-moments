@@ -10,7 +10,7 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
                 msg.actualValue = "<\(stringify(try expression.evaluate()))>"
             }
             return (result.toBoolean(expectation: style), msg)
-        } catch let error {
+        } catch {
             msg.stringValue = "unexpected error thrown: <\(error)>"
             return (false, msg)
         }
@@ -18,7 +18,7 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
 
     var result: (Bool, FailureMessage) = (false, FailureMessage())
     if captureExceptions {
-        let capture = NMBExceptionCapture(handler: ({ exception -> Void in
+        let capture = NMBExceptionCapture(handler: ({ exception in
             let msg = FailureMessage()
             msg.stringValue = "unexpected exception raised: \(exception)"
             result = (false, msg)
@@ -34,7 +34,6 @@ internal func execute<T>(_ expression: Expression<T>, _ style: ExpectationStyle,
 }
 
 public struct Expectation<T> {
-
     public let expression: Expression<T>
 
     public init(expression: Expression<T>) {

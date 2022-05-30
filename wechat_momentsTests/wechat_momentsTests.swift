@@ -5,59 +5,59 @@
 //  Created by Sixiao He on 2022/4/19.
 //
 
-import XCTest
 @testable import wechat_moments
+import XCTest
 
 class WechatMomentsTests: XCTestCase {
-    override func setUpWithError() throws {
-    }
+    override func setUpWithError() throws {}
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+
     func testDecodeURL() {
         // given
-       let data =
-        """
-        [
-          {
-            "content": "沙发！",
-            "images": [
+        let data =
+            """
+            [
               {
-                "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/001.jpeg"
-              },
-              {
-                "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/002.jpeg"
-              },
-              {
-                "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/003.jpeg"
-              }
-            ],
-            "sender": {
-              "username": "cyao",
-              "nick": "Cheng Yao",
-              "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
-            },
-            "comments": [
-              {
-                "content": "Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.⏰",
+                "content": "沙发！",
+                "images": [
+                  {
+                    "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/001.jpeg"
+                  },
+                  {
+                    "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/002.jpeg"
+                  },
+                  {
+                    "url": "https://thoughtworks-mobile-2018.herokuapp.com/images/tweets/003.jpeg"
+                  }
+                ],
                 "sender": {
-                  "username": "leihuang",
-                  "nick": "Lei Huang",
-                  "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/002.jpeg"
-                }
-              },
-              {
-                "content": "Like it too",
-                "sender": {
-                  "username": "weidong",
-                  "nick": "WeiDong Gu",
-                  "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/003.jpeg"
-                }
-              }
-            ]
-          }]
-        """
+                  "username": "cyao",
+                  "nick": "Cheng Yao",
+                  "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
+                },
+                "comments": [
+                  {
+                    "content": "Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.Good.⏰",
+                    "sender": {
+                      "username": "leihuang",
+                      "nick": "Lei Huang",
+                      "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/002.jpeg"
+                    }
+                  },
+                  {
+                    "content": "Like it too",
+                    "sender": {
+                      "username": "weidong",
+                      "nick": "WeiDong Gu",
+                      "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/003.jpeg"
+                    }
+                  }
+                ]
+              }]
+            """
         let testData = data.data(using: .utf8)
         let viewModel = TweetViewModel()
         guard let tweet = viewModel.decodeData(data: testData!) else {
@@ -70,39 +70,39 @@ class WechatMomentsTests: XCTestCase {
             XCTAssertEqual(tweet.comments?.count, 2)
         }
         XCTAssertNotNil(tweet)
-
     }
+
     func testFilterData() {
         // given
         let viewModel = TweetViewModel()
         let data =
-        """
-        [
-            {
-              "content": "第12条",
-              "sender": {
-                "username": "xinguo",
-                "nick": "Xin Guo",
-                "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
-              }
-            },
-          {
-            "sender": {
-              "username": "xinge",
-              "nick": "Xin Ge",
-              "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/000.jpeg"
-            }
-          },
-          {
-            "error": "illegal"
-          },
-          {
-            "error": "WTF"
-          },
-          {
-            "error": "WOW"
-          }]
-        """
+            """
+            [
+                {
+                  "content": "第12条",
+                  "sender": {
+                    "username": "xinguo",
+                    "nick": "Xin Guo",
+                    "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg"
+                  }
+                },
+              {
+                "sender": {
+                  "username": "xinge",
+                  "nick": "Xin Ge",
+                  "avatar": "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/000.jpeg"
+                }
+              },
+              {
+                "error": "illegal"
+              },
+              {
+                "error": "WTF"
+              },
+              {
+                "error": "WOW"
+              }]
+            """
         let testData = data.data(using: .utf8)
         guard let tweet = viewModel.decodeData(data: testData!) else {
             return
@@ -116,6 +116,7 @@ class WechatMomentsTests: XCTestCase {
             XCTAssertEqual(tweet.sender?.avatar, "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg")
         }
     }
+
     func testWechatView() {
         // given
         // when

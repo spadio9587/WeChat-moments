@@ -1,6 +1,6 @@
 #if !os(WASI)
-import Dispatch
-import class Foundation.Thread
+    import Dispatch
+    import class Foundation.Thread
 #endif
 import class Foundation.NSObject
 
@@ -8,23 +8,23 @@ import class Foundation.NSObject
 /// class' existence
 internal class NimbleEnvironment: NSObject {
     #if os(WASI)
-    static var activeInstance: NimbleEnvironment = NimbleEnvironment()
+        static var activeInstance: NimbleEnvironment = .init()
     #else
-    static var activeInstance: NimbleEnvironment {
-        get {
-            let env = Thread.current.threadDictionary["NimbleEnvironment"]
-            if let env = env as? NimbleEnvironment {
-                return env
-            } else {
-                let newEnv = NimbleEnvironment()
-                self.activeInstance = newEnv
-                return newEnv
+        static var activeInstance: NimbleEnvironment {
+            get {
+                let env = Thread.current.threadDictionary["NimbleEnvironment"]
+                if let env = env as? NimbleEnvironment {
+                    return env
+                } else {
+                    let newEnv = NimbleEnvironment()
+                    self.activeInstance = newEnv
+                    return newEnv
+                }
+            }
+            set {
+                Thread.current.threadDictionary["NimbleEnvironment"] = newValue
             }
         }
-        set {
-            Thread.current.threadDictionary["NimbleEnvironment"] = newValue
-        }
-    }
     #endif
 
     // swiftlint:disable:next todo
@@ -36,17 +36,17 @@ internal class NimbleEnvironment: NSObject {
 
     var suppressTVOSAssertionWarning: Bool = false
     #if !os(WASI)
-    var awaiter: Awaiter
+        var awaiter: Awaiter
     #endif
 
     override init() {
         #if !os(WASI)
-        let timeoutQueue = DispatchQueue.global(qos: .userInitiated)
-        awaiter = Awaiter(
-            waitLock: AssertionWaitLock(),
-            asyncQueue: .main,
-            timeoutQueue: timeoutQueue
-        )
+            let timeoutQueue = DispatchQueue.global(qos: .userInitiated)
+            awaiter = Awaiter(
+                waitLock: AssertionWaitLock(),
+                asyncQueue: .main,
+                timeoutQueue: timeoutQueue
+            )
         #endif
 
         super.init()

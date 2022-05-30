@@ -8,7 +8,6 @@
 import XCTest
 
 class WechatMomentsUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

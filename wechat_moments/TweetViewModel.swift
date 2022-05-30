@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 class TweetViewModel {
-    var tweet : [Tweet] = []
-    var userInfo : UserInfo?
+    var tweet: [Tweet] = []
+    var userInfo: UserInfo?
     func getDataFromUrl(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
         let task = URLSession.shared.dataTask(with: url!) { [self]
             data, _, _ in
-            guard let data = data  else {
+            guard let data = data else {
                 return
             }
             do {
@@ -28,13 +28,13 @@ class TweetViewModel {
         task.resume()
     }
 
-    func decodeData(data:Data) -> [Tweet]? {
+    func decodeData(data: Data) -> [Tweet]? {
         let tweet = try? JSONDecoder().decode([Tweet].self, from: data)
         return tweet
     }
 
-    func filterData(with newTweet:[Tweet]) -> [Tweet] {
-        let tweet = newTweet.filter {$0.content != nil || $0.images != nil}
+    func filterData(with newTweet: [Tweet]) -> [Tweet] {
+        let tweet = newTweet.filter { $0.content != nil || $0.images != nil }
         return tweet
     }
 

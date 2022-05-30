@@ -18,29 +18,29 @@ public func beNil<T>() -> Predicate<T> {
     }
 }
 
-extension Expectation {
+public extension Expectation {
     /// Represents `nil` value to be used with the operator overloads for `beNil`.
-    public struct Nil: ExpressibleByNilLiteral {
-        public init(nilLiteral: ()) {}
+    struct Nil: ExpressibleByNilLiteral {
+        public init(nilLiteral _: ()) {}
     }
 
-    public static func == (lhs: Expectation, rhs: Expectation.Nil) {
+    static func == (lhs: Expectation, _: Expectation.Nil) {
         lhs.to(beNil())
     }
 
-    public static func != (lhs: Expectation, rhs: Expectation.Nil) {
+    static func != (lhs: Expectation, _: Expectation.Nil) {
         lhs.toNot(beNil())
     }
 }
 
 #if canImport(Darwin)
-import Foundation
+    import Foundation
 
-extension NMBPredicate {
-    @objc public class func beNilMatcher() -> NMBPredicate {
-        return NMBPredicate { actualExpression in
-            return try beNil().satisfies(actualExpression).toObjectiveC()
+    public extension NMBPredicate {
+        @objc class func beNilMatcher() -> NMBPredicate {
+            return NMBPredicate { actualExpression in
+                try beNil().satisfies(actualExpression).toObjectiveC()
+            }
         }
     }
-}
 #endif

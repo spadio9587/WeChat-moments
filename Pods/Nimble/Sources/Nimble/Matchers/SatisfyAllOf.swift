@@ -41,31 +41,31 @@ public func && <T>(left: Predicate<T>, right: Predicate<T>) -> Predicate<T> {
 }
 
 #if canImport(Darwin)
-import class Foundation.NSObject
+    import class Foundation.NSObject
 
-extension NMBPredicate {
-    @objc public class func satisfyAllOfMatcher(_ predicates: [NMBPredicate]) -> NMBPredicate {
-        return NMBPredicate { actualExpression in
-            if predicates.isEmpty {
-                return NMBPredicateResult(
-                    status: NMBPredicateStatus.fail,
-                    message: NMBExpectationMessage(
-                        fail: "satisfyAllOf must be called with at least one matcher"
+    public extension NMBPredicate {
+        @objc class func satisfyAllOfMatcher(_ predicates: [NMBPredicate]) -> NMBPredicate {
+            return NMBPredicate { actualExpression in
+                if predicates.isEmpty {
+                    return NMBPredicateResult(
+                        status: NMBPredicateStatus.fail,
+                        message: NMBExpectationMessage(
+                            fail: "satisfyAllOf must be called with at least one matcher"
+                        )
                     )
-                )
-            }
-
-            var elementEvaluators = [Predicate<NSObject>]()
-            for predicate in predicates {
-                let elementEvaluator = Predicate<NSObject> { expression in
-                    return predicate.satisfies({ try expression.evaluate() }, location: actualExpression.location).toSwift()
                 }
 
-                elementEvaluators.append(elementEvaluator)
-            }
+                var elementEvaluators = [Predicate<NSObject>]()
+                for predicate in predicates {
+                    let elementEvaluator = Predicate<NSObject> { expression in
+                        predicate.satisfies({ try expression.evaluate() }, location: actualExpression.location).toSwift()
+                    }
 
-            return try satisfyAllOf(elementEvaluators).satisfies(actualExpression).toObjectiveC()
+                    elementEvaluators.append(elementEvaluator)
+                }
+
+                return try satisfyAllOf(elementEvaluators).satisfies(actualExpression).toObjectiveC()
+            }
         }
     }
-}
 #endif
