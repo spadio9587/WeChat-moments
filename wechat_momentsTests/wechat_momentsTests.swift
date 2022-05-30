@@ -10,11 +10,11 @@ import XCTest
 
 class WechatMomentsTests: XCTestCase {
     override func setUpWithError() throws {}
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testDecodeURL() {
         // given
         let data =
@@ -71,7 +71,7 @@ class WechatMomentsTests: XCTestCase {
         }
         XCTAssertNotNil(tweet)
     }
-
+    
     func testFilterData() {
         // given
         let viewModel = TweetViewModel()
@@ -116,7 +116,7 @@ class WechatMomentsTests: XCTestCase {
             XCTAssertEqual(tweet.sender?.avatar, "https://thoughtworks-mobile-2018.herokuapp.com/images/user/avatar/001.jpeg")
         }
     }
-
+    
     func testWechatView() {
         // given
         // when

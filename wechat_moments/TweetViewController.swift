@@ -40,7 +40,7 @@ extension TweetViewController: UITableViewDataSource {
         tweet.setTweet(tweet: viewModel.tweet[indexPath.row])
         return tweet
     }
-
+    
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.tweet.count
     }

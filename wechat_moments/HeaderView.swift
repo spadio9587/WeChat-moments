@@ -26,12 +26,12 @@ class HeaderView: UIView {
         configureUserAvatar()
         configureUserNameLabel()
     }
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             if let imageUrl = imageUrl,
@@ -48,7 +48,7 @@ class HeaderView: UIView {
             }
         }
     }
-
+    
     func setUserInfo(userInfo: UserInfo?) {
         loadImage(from: userInfo?.profileImage) {
             image in
@@ -60,7 +60,7 @@ class HeaderView: UIView {
         }
         userNameLabel.text = userInfo?.userName
     }
-
+    
     func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +71,7 @@ class HeaderView: UIView {
             backgroundView.heightAnchor.constraint(equalToConstant: backgroundFrame)
         ])
     }
-
+    
     func configureUserAvatar() {
         userAvatar.contentMode = .scaleAspectFill
         userAvatar.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +82,7 @@ class HeaderView: UIView {
             userAvatar.heightAnchor.constraint(equalToConstant: userAvaterFrame)
         ])
     }
-
+    
     func configureUserNameLabel() {
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.numberOfLines = 1

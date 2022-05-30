@@ -15,12 +15,12 @@ class TweetCell: UITableViewCell {
         contentView.addSubview(wechatView)
         configureWechatView()
     }
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     func configureWechatView() {
         wechatView.translatesAutoresizingMaskIntoConstraints = false
         wechatView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -28,7 +28,7 @@ class TweetCell: UITableViewCell {
         wechatView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         wechatView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
-
+    
     func setTweet(tweet: Tweet?) {
         guard let tweet = tweet else { return }
         wechatView.setTweet(tweet: tweet)
