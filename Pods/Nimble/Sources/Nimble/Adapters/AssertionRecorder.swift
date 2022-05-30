@@ -77,7 +77,7 @@ public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
         let failureMessage = FailureMessage()
         failureMessage.stringValue = "unexpected error thrown: <\(error)>"
         let location = SourceLocation(file: file, line: line)
-        tempAssertionHandler.assertionFailure(message: failureMessage, location: location)
+        tempAssertionHandler.assert(true, message: failureMessage, location: location)
     }
 }
 

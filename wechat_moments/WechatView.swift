@@ -76,12 +76,9 @@ class WechatView: UIView {
     }
     
     func updateContent(_ content: String?) {
-        if let content = content {
-            self.content.text = content
-            self.content.isHidden = false
-        } else {
-            self.content.isHidden = true
-        }
+        guard let content = content else { return }
+        self.content.text = content
+        self.content.isHidden = false
     }
     
     func updateImageArea(images: [Image]?) {
@@ -219,11 +216,10 @@ class WechatView: UIView {
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
             }
-            if let view = imageArea.subviews.last {
-                imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
+            guard let view = imageArea.subviews.last else {
+                return
             }
-        } else {
-            imageArea.isHidden = true
+            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
         }
     }
     
@@ -277,13 +273,11 @@ class WechatView: UIView {
                 setSpecialColorText(seperateComment: seperateComment)
                 setSpecialColorText(seperateComment: nextSeperateComment)
             }
-            if let comment = commentsArea.subviews.last {
-                commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: labelSpace).isActive = true
-            }
-        } else {
-            commentsArea.isHidden = true
+            guard let comment = commentsArea.subviews.last else { return }
+            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: labelSpace).isActive = true
         }
     }
+
     
     func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
         let imageView = contentImage[count]
