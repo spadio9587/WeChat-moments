@@ -14,6 +14,9 @@ class WechatView: UIView {
     var tweet: Tweet?
     var margin: CGFloat = 8
     var labelSpace: CGFloat = 5
+    let avatarFrame: CGFloat = 50
+    let fontSize: CGFloat = 17
+    let attCoefficient:CGFloat = -0.5
     var avatarSender = UIImageView()
     var sender = UILabel()
     var containerView = UIStackView()
@@ -24,9 +27,9 @@ class WechatView: UIView {
     var commentsContent = [UILabel]()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(avatarSender)
-        self.addSubview(sender)
-        self.addSubview(containerView)
+        addSubview(avatarSender)
+        addSubview(sender)
+        addSubview(containerView)
         configureAvatarSender()
         configureSender()
         configureContainerView()
@@ -78,7 +81,7 @@ class WechatView: UIView {
     func updateImages(_ images: [Image]?) {
         if let images = images {
             contentImage.removeAll()
-            for subview in self.imageArea.subviews {
+            for subview in imageArea.subviews {
                 subview.removeFromSuperview()
             }
             for index in images.indices {
@@ -113,21 +116,21 @@ class WechatView: UIView {
         avatarSender.contentMode = .scaleAspectFill
         avatarSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            avatarSender.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: margin),
-            avatarSender.widthAnchor.constraint(equalToConstant: 50),
-            avatarSender.heightAnchor.constraint(equalToConstant: 50),
-            avatarSender.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: margin)
+            avatarSender.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: margin),
+            avatarSender.widthAnchor.constraint(equalToConstant: avatarFrame),
+            avatarSender.heightAnchor.constraint(equalToConstant: avatarFrame),
+            avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: margin)
         ])
     }
     func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
-        sender.font = UIFont.systemFont(ofSize: 17)
+        sender.font = UIFont.systemFont(ofSize: fontSize)
         sender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             sender.topAnchor.constraint(equalTo: avatarSender.topAnchor),
             sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: margin),
-            sender.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin)
+            sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin)
         ])
     }
     func configureContainerView() {
@@ -141,16 +144,16 @@ class WechatView: UIView {
         containerView.addArrangedSubview(commentsArea)
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
             containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: margin),
-            containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     func configureContent() {
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
         content.lineBreakMode = .byWordWrapping
-        content.font = UIFont.systemFont(ofSize: 14)
+        content.font = UIFont.systemFont(ofSize: fontSize)
         content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2*margin).isActive = true
         if content.text == nil {
             content.isHidden = true
@@ -173,7 +176,7 @@ class WechatView: UIView {
                     }
             case 2, 4 :
                 for count in 0...(contentImage.count-1) {
-                    let width = (UIScreen.main.bounds.width - 74 - 3 * margin) / 2
+                    let width = (UIScreen.main.bounds.width - avatarFrame - 3 * margin - 3 * margin) / 2
                     let height = width
                     let left = CGFloat((count % 2)) * margin + CGFloat(count % 2) * width
                     let top = CGFloat((count / 2 + 1)) * margin + CGFloat(count / 2) * height
@@ -182,7 +185,7 @@ class WechatView: UIView {
 
             default :
                 for count in 0...(contentImage.count-1) {
-                    let width = (UIScreen.main.bounds.width - 74 - 4 * margin) / 3
+                    let width = (UIScreen.main.bounds.width - avatarFrame - 3 * margin - 4 * margin) / 3
                     let height = width
                     let left = CGFloat((count % 3)) * margin + CGFloat(count % 3) * width
                     let top = CGFloat((count / 3 + 1)) * margin + CGFloat(count / 3) * height
@@ -204,7 +207,7 @@ class WechatView: UIView {
         commentsArea.backgroundColor = .systemGray6
         if (commentsContent.count) != 0 {
             func setSpecialColorText(seperateComment:UILabel) {
-                let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: -0.5]))
+                let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: attCoefficient]))
                 let number = seperateComment.text!.firstIndex(of: ":")
                 mutableAttribString.addAttributes(
                     [.foregroundColor: UIColor.blue],
@@ -221,7 +224,7 @@ class WechatView: UIView {
                     NSLayoutConstraint.activate([
                         seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: labelSpace),
                         seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8)
+                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin)
                     ])
                     setSpecialColorText(seperateComment: seperateComment)
 
@@ -238,10 +241,10 @@ class WechatView: UIView {
                     NSLayoutConstraint.activate([
                         seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant:labelSpace),
                         seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8),
+                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
                         nextSeperateComment.topAnchor.constraint(equalTo: seperateComment.bottomAnchor, constant: labelSpace),
                         seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -8)
+                        seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin)
                     ])
                     setSpecialColorText(seperateComment: seperateComment)
                     setSpecialColorText(seperateComment: nextSeperateComment)

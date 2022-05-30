@@ -63,8 +63,8 @@ class HeaderView: UIView {
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backgroundView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor),
-            backgroundView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            backgroundView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
+            backgroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             backgroundView.widthAnchor.constraint(equalToConstant: backgroundFrame),
             backgroundView.heightAnchor.constraint(equalToConstant: backgroundFrame)
         ])
@@ -74,8 +74,8 @@ class HeaderView: UIView {
         userAvatar.contentMode = .scaleAspectFill
         userAvatar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            userAvatar.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: userAvaterLocation),
-            userAvatar.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: userAvaterLocation),
+            userAvatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: userAvaterLocation),
+            userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: userAvaterLocation),
             userAvatar.widthAnchor.constraint(equalToConstant: userAvaterFrame),
             userAvatar.heightAnchor.constraint(equalToConstant: userAvaterFrame)
         ])
@@ -86,7 +86,7 @@ class HeaderView: UIView {
         userNameLabel.numberOfLines = 1
         NSLayoutConstraint.activate([
             userNameLabel.rightAnchor.constraint(equalTo: userAvatar.leftAnchor, constant: gap),
-            userNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: nameLabelLocation)
+            userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: nameLabelLocation)
         ])
     }
 }

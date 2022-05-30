@@ -19,8 +19,8 @@ class TweetViewModel {
                 return
             }
             do {
-                let tweet = self.decodeData(data: data)
-                let fixTweet = self.filterData(with: tweet!)
+                let tweet = decodeData(data: data)
+                let fixTweet = filterData(with: tweet!)
                 self.tweet = fixTweet
                 callback()
             }

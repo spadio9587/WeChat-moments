@@ -12,7 +12,7 @@ class TweetCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         wechatView = WechatView()
-        self.contentView.addSubview(wechatView)
+        contentView.addSubview(wechatView)
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
