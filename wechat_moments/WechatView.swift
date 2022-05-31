@@ -47,19 +47,17 @@ class WechatView: UIView {
         configureCommentsArea()
     }
     
-    func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
+    func loadImage(from  imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
-            if let imageUrl = imageUrl,
-               let url = URL(string: imageUrl),
-               let data = try? Data(contentsOf: url),
-               let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    callback(image)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    callback(nil)
-                }
+            guard let imageUrl = imageUrl,
+                  let url = URL(string: imageUrl),
+                  let data = try? Data(contentsOf: url),
+                  let image = UIImage(data: data)
+            else {
+                return
+            }
+            DispatchQueue.main.async {
+                callback(image)
             }
         }
     }
