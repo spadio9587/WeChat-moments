@@ -69,7 +69,7 @@ class WechatView: UIView {
             self.avatarSender.image = image
         }
         updateContent(tweet.content)
-        updateImageArea(images: tweet.images)
+        updateImages(tweet.images)
         updateComments(tweet.comments)
     }
     
@@ -79,13 +79,11 @@ class WechatView: UIView {
         self.content.isHidden = false
     }
     
-    func updateImageArea(images: [Image]?) {
+    func updateImages(_ images: [Image]?) {
         guard let images = images else { return }
         contentImage.removeAll()
         imageArea.isHidden = false
-        for subview in imageArea.subviews {
-            subview.removeFromSuperview()
-        }
+        removeSubviews(view: imageArea)
         for index in images.indices {
             let imageView = UIImageView()
             loadImage(from: images[index].url) { image in
@@ -95,39 +93,21 @@ class WechatView: UIView {
         }
     }
     
-    func updateImages(_ images: [Image]?) {
-        if let images = images {
-            contentImage.removeAll()
-            for subview in imageArea.subviews {
-                subview.removeFromSuperview()
-            }
-            for index in images.indices {
-                let imageView = UIImageView()
-                loadImage(from: images[index].url) { image in
-                    imageView.image = image
-                }
-                contentImage.append(imageView)
-                imageArea.isHidden = false
-            }
-        } else {
-            imageArea.isHidden = true
+    func removeSubviews(view: UIView) {
+        for subview in view.subviews {
+            subview.removeFromSuperview()
         }
     }
     
     func updateComments(_ comments: [Comment]?) {
-        if let comments = comments {
-            commentsContent.removeAll()
-            for subView in commentsArea.subviews {
-                subView.removeFromSuperview()
-            }
-            for index in comments.indices {
-                let labelView = UILabel()
-                labelView.text = comments[index].sender.username + ":" + " " + comments[index].content
-                commentsContent.append(labelView)
-                commentsArea.isHidden = false
-            }
-        } else {
-            commentsArea.isHidden = true
+        guard let comments = comments else { return }
+        commentsContent.removeAll()
+        removeSubviews(view: commentsArea)
+        for index in comments.indices {
+            let labelView = UILabel()
+            labelView.text = comments[index].sender.username + ":" + " " + comments[index].content
+            commentsContent.append(labelView)
+            commentsArea.isHidden = false
         }
     }
     
