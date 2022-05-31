@@ -3,20 +3,12 @@
 //  wechat_moments
 //
 //  Created by Sixiao He on 2022/4/19.
-// 代码格式！！！
-// swift lint
-// vscode 调整代码格式
 
 import Foundation
 import UIKit
 
 class WechatView: UIView {
     var tweet: Tweet?
-    var margin: CGFloat = 8
-    var labelSpace: CGFloat = 5
-    let avatarFrame: CGFloat = 50
-    let fontSize: CGFloat = 17
-    let attCoefficient: CGFloat = -0.5
     var avatarSender = UIImageView()
     var sender = UILabel()
     var containerView = UIStackView()
@@ -34,34 +26,32 @@ class WechatView: UIView {
         configureSender()
         configureContainerView()
     }
-    
+
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         configureContent()
         configureImageArea()
         configureCommentsArea()
     }
-    
+
     func loadImage(from  imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl),
                   let data = try? Data(contentsOf: url),
                   let image = UIImage(data: data)
-            else {
-                return
-            }
+            else { return }
             DispatchQueue.main.async {
                 callback(image)
             }
         }
     }
-    
+
     func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
@@ -72,13 +62,13 @@ class WechatView: UIView {
         updateImages(tweet.images)
         updateComments(tweet.comments)
     }
-    
+
     func updateContent(_ content: String?) {
         guard let content = content else { return }
         self.content.text = content
         self.content.isHidden = false
     }
-    
+
     func updateImages(_ images: [Image]?) {
         guard let images = images else { return }
         contentImage.removeAll()
@@ -92,13 +82,13 @@ class WechatView: UIView {
             contentImage.append(imageView)
         }
     }
-    
+
     func removeSubviews(view: UIView) {
         for subview in view.subviews {
             subview.removeFromSuperview()
         }
     }
-    
+
     func updateComments(_ comments: [Comment]?) {
         guard let comments = comments else { return }
         commentsContent.removeAll()
@@ -110,7 +100,7 @@ class WechatView: UIView {
             commentsArea.isHidden = false
         }
     }
-    
+
     func configureAvatarSender() {
         avatarSender.contentMode = .scaleAspectFill
         avatarSender.translatesAutoresizingMaskIntoConstraints = false
@@ -121,7 +111,7 @@ class WechatView: UIView {
             avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: margin)
         ])
     }
-    
+
     func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
@@ -133,7 +123,7 @@ class WechatView: UIView {
             sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin)
         ])
     }
-    
+
     func configureContainerView() {
         containerView.axis = .vertical
         containerView.alignment = .leading
@@ -150,7 +140,7 @@ class WechatView: UIView {
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
+
     func configureContent() {
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
@@ -161,7 +151,7 @@ class WechatView: UIView {
             content.isHidden = true
         }
     }
-    
+
     func configureImageArea() {
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -194,17 +184,15 @@ class WechatView: UIView {
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
             }
-            guard let view = imageArea.subviews.last else {
-                return
-            }
+            guard let view = imageArea.subviews.last else { return }
             imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
         }
     }
-    
+
     func configureCommentsArea() {
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: margin).isActive = true
+        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -doubleMargin).isActive = true
         commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor).isActive = true
         commentsArea.backgroundColor = .systemGray6
         if (commentsContent.count) != 0 {
@@ -229,7 +217,6 @@ class WechatView: UIView {
                     seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin)
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
-                
             default:
                 let count = commentsContent.count
                 let seperateComment = commentsContent[count - 2]
@@ -252,11 +239,10 @@ class WechatView: UIView {
                 setSpecialColorText(seperateComment: nextSeperateComment)
             }
             guard let comment = commentsArea.subviews.last else { return }
-            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: labelSpace).isActive = true
+            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: margin).isActive = true
         }
     }
 
-    
     func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
         let imageView = contentImage[count]
         imageArea.addSubview(imageView)
