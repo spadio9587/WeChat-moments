@@ -7,13 +7,13 @@ opt_in_rules: # 一些规则仅仅是可选的
   - missing_docs
   # 可以通过执行如下指令来查找所有可用的规则:
   # swiftlint rules
-# included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。
-#   - Sources --path
-# excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。
-#   - Carthage
-#   - Pods
-#   - Sources/ExcludedFolder
-#   - Sources/ExcludedFile.swift
+ included: # 执行 linting 时包含的路径。如果出现这个 `--path` 会被忽略。
+   - Sources --path
+ excluded: # 执行 linting 时忽略的路径。 优先级比 `included` 更高。
+   - Carthage
+   - Pods
+   - Sources/ExcludedFolder
+   - Sources/ExcludedFile.swift
 
 # 可配置的规则可以通过这个配置文件来自定义
 # 二进制规则可以设置他们的严格程度
@@ -35,15 +35,16 @@ file_length:
 # 此外它们也可以设置排除在外的名字
 type_name:
   min_length: 3 # 只是警告
-  max_length: # 警告和错误
+  max_length: 100# 警告和错误
     warning: 50
     error: 50
   excluded: iPhone # 排除某个名字
 variable_name:
-  min_length: # 只有最小长度
+  min_length: 20 # 只有最小长度
     error: 3 # 只有错误
   excluded: # 排除某些名字
     - id
     - URL
     - GlobalAPIKey
+    - Pods
 reporter: "xcode" # 报告类型 (xcode, json, csv, checkstyle)
