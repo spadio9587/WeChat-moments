@@ -23,7 +23,8 @@
 		AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */; };
 		AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60A0382823731C00BF2489 /* HeaderView.swift */; };
 		AC872EA82845E4BF0096E3C2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EA72845E4BF0096E3C2 /* Network.swift */; };
-		AC872EAA28460B4B0096E3C2 /* tweetSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EA928460B4B0096E3C2 /* tweetSetting.swift */; };
+		AC872EAA28460B4B0096E3C2 /* TweetSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EA928460B4B0096E3C2 /* TweetSetting.swift */; };
+		AC872EAF2846FCDD0096E3C2 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */; };
 		ACB3036F282A36CC0075662E /* WechatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB3036E282A36CC0075662E /* WechatView.swift */; };
 		E9070CDA045C47F4BDFDA7ED /* Pods_wechat_moments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D7E29B573FDB745BEC4158 /* Pods_wechat_moments.framework */; };
 /* End PBXBuildFile section */
@@ -68,7 +69,8 @@
 		AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		AC60A0382823731C00BF2489 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		AC872EA72845E4BF0096E3C2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
-		AC872EA928460B4B0096E3C2 /* tweetSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tweetSetting.swift; sourceTree = "<group>"; };
+		AC872EA928460B4B0096E3C2 /* TweetSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetSetting.swift; sourceTree = "<group>"; };
+		AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		ACB3036E282A36CC0075662E /* WechatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatView.swift; sourceTree = "<group>"; };
 		BFAB4B455A9ECA815E46BD4A /* Pods-wechat_momentsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wechat_momentsTests.release.xcconfig"; path = "Target Support Files/Pods-wechat_momentsTests/Pods-wechat_momentsTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA3D826B15EE40008DE6C1E6 /* Pods_wechat_momentsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wechat_momentsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,8 +162,9 @@
 				AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */,
 				ACB3036E282A36CC0075662E /* WechatView.swift */,
 				AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */,
+				AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */,
 				AC872EA72845E4BF0096E3C2 /* Network.swift */,
-				AC872EA928460B4B0096E3C2 /* tweetSetting.swift */,
+				AC872EA928460B4B0096E3C2 /* TweetSetting.swift */,
 				AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */,
 				AC2D7BCC280E531C0044AE25 /* SceneDelegate.swift */,
 				AC2D7BD3280E53210044AE25 /* Assets.xcassets */,
@@ -417,9 +420,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC872EAA28460B4B0096E3C2 /* tweetSetting.swift in Sources */,
+				AC872EAA28460B4B0096E3C2 /* TweetSetting.swift in Sources */,
 				AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */,
 				AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */,
+				AC872EAF2846FCDD0096E3C2 /* ViewModel.swift in Sources */,
 				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
