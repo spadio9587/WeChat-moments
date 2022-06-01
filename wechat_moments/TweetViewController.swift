@@ -9,6 +9,7 @@ import UIKit
 
 class TweetViewController: UIViewController {
     var viewModel = TweetViewModel()
+    var testViewModel = ViewModel()
     var headerView = HeaderView()
     @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
@@ -18,16 +19,20 @@ class TweetViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorInset = UIEdgeInsets.zero
-        viewModel.getDataFromUrl(callback: {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        })
-        viewModel.getUserInfo(callback: {
-            DispatchQueue.main.async {
-                self.headerView.setUserInfo(userInfo: self.viewModel.userInfo)
-            }
-        })
+        testViewModel.getDataFromUrl()
+        self.tableView.reloadData()
+        testViewModel.getUserInfo()
+        self.headerView.setUserInfo(userInfo: self.testViewModel.userInfo)
+//        testViewModel.getDataFromUrl(callback: {
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        })
+//        testViewModel.getUserInfo(callback: {
+//            DispatchQueue.main.async {
+//                self.headerView.setUserInfo(userInfo: self.testViewModel.userInfo)
+//            }
+//        })
         tableView.addSubview(headerView)
     }
 }
@@ -37,11 +42,11 @@ extension TweetViewController: UITableViewDataSource {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
             return UITableViewCell()
         }
-        tweet.setTweet(tweet: viewModel.tweet[indexPath.row])
+        tweet.setTweet(tweet: testViewModel.tweet[indexPath.row])
         return tweet
     }
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        viewModel.tweet.count
+        testViewModel.tweet.count
     }
 }
