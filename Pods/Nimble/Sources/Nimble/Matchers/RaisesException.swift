@@ -125,7 +125,8 @@
                 matches = false
             }
             if let userInfo = userInfo, let exceptionUserInfo = exception.userInfo,
-               (exceptionUserInfo as NSDictionary) != userInfo {
+               (exceptionUserInfo as NSDictionary) != userInfo
+            {
                 matches = false
             }
             if let closure = closure {

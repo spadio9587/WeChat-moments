@@ -61,7 +61,8 @@ extension NMBExceptionCapture {
 public func withAssertionHandler(_ tempAssertionHandler: AssertionHandler,
                                  file: FileString = #file,
                                  line: UInt = #line,
-                                 closure: () throws -> Void) {
+                                 closure: () throws -> Void)
+{
     let environment = NimbleEnvironment.activeInstance
     let oldRecorder = environment.assertionHandler
     let capturer = NMBExceptionCapture(handler: nil, finally: ({

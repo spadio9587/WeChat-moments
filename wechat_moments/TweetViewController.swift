@@ -20,9 +20,9 @@ class TweetViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorInset = UIEdgeInsets.zero
         testViewModel.getDataFromUrl()
-        self.tableView.reloadData()
+        tableView.reloadData()
         testViewModel.getUserInfo()
-        self.headerView.setUserInfo(userInfo: self.testViewModel.userInfo)
+        headerView.setUserInfo(userInfo: testViewModel.userInfo)
 //        testViewModel.getDataFromUrl(callback: {
 //            DispatchQueue.main.async {
 //                self.tableView.reloadData()

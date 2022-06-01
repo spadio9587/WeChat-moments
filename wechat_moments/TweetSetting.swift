@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//
 // 背景的宽，高
 let backgroundFrame: CGFloat = 360
 // 使用者头像的位置

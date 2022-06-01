@@ -9,9 +9,9 @@ import Foundation
 
 class HttpNetWork {
     var userInfo: UserInfo?
-    func getTweet(urlString: String, callback:@escaping (([Tweet]?) -> Void)) {
+    func getTweet(urlString: String, callback: @escaping (([Tweet]?) -> Void)) {
         let url = URL(string: urlString)
-        let task = URLSession.shared.dataTask(with: url!) {data, _ , _ in
+        let task = URLSession.shared.dataTask(with: url!) { data, _, _ in
             guard data != nil else {
                 return
             }
@@ -22,15 +22,15 @@ class HttpNetWork {
         }
         task.resume()
     }
-    
+
     func decodeData(data: Data) -> [Tweet]? {
         let tweet = try? JSONDecoder().decode([Tweet].self, from: data)
         return tweet
     }
-    
-    func getUser(urlString: String, callback:@escaping (UserInfo?) -> Void) {
+
+    func getUser(urlString: String, callback: @escaping (UserInfo?) -> Void) {
         let url = URL(string: urlString)
-        let task = URLSession.shared.dataTask(with: url!) {data, _, _ in
+        let task = URLSession.shared.dataTask(with: url!) { data, _, _ in
             guard data != nil else {
                 return
             }
@@ -41,7 +41,7 @@ class HttpNetWork {
         }
         task.resume()
     }
-    
+
     func decodeInfo(data: Data) -> UserInfo? {
         let userInfo = try? JSONDecoder().decode(UserInfo.self, from: data)
         return userInfo

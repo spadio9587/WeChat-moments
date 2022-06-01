@@ -2,7 +2,8 @@
 ///
 /// This is a matcher abstraction for https://developer.apple.com/documentation/swift/sequence/2854218-starts
 public func beginWith<Seq1: Sequence, Seq2: Sequence>(prefix expectedPrefix: Seq2?)
-    -> Predicate<Seq1> where Seq1.Element: Equatable, Seq1.Element == Seq2.Element {
+    -> Predicate<Seq1> where Seq1.Element: Equatable, Seq1.Element == Seq2.Element
+{
     return Predicate.define("begin with <\(stringify(expectedPrefix))>") { actualExpression, msg in
         let actualPrefix = try actualExpression.evaluate()
         switch (expectedPrefix, actualPrefix) {

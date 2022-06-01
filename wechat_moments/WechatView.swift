@@ -39,7 +39,7 @@ class WechatView: UIView {
         configureCommentsArea()
     }
 
-    func loadImage(from  imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
+    func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl),
@@ -108,7 +108,7 @@ class WechatView: UIView {
             avatarSender.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: margin),
             avatarSender.widthAnchor.constraint(equalToConstant: avatarFrame),
             avatarSender.heightAnchor.constraint(equalToConstant: avatarFrame),
-            avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: margin)
+            avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: margin),
         ])
     }
 
@@ -120,7 +120,7 @@ class WechatView: UIView {
         NSLayoutConstraint.activate([
             sender.topAnchor.constraint(equalTo: avatarSender.topAnchor),
             sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: margin),
-            sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin)
+            sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
         ])
     }
 
@@ -137,7 +137,7 @@ class WechatView: UIView {
             containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
             containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: margin),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
 
@@ -155,7 +155,7 @@ class WechatView: UIView {
     func configureImageArea() {
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+            imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ])
         if contentImage.isEmpty == false {
             switch contentImage.count {
@@ -214,7 +214,7 @@ class WechatView: UIView {
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin)
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
             default:
@@ -233,7 +233,7 @@ class WechatView: UIView {
                     seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
                     nextSeperateComment.topAnchor.constraint(equalTo: seperateComment.bottomAnchor, constant: labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin)
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
                 setSpecialColorText(seperateComment: nextSeperateComment)
@@ -251,7 +251,7 @@ class WechatView: UIView {
             imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: CGFloat(leftEdge)),
             imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: CGFloat(topEdge)),
             imageView.widthAnchor.constraint(equalToConstant: CGFloat(imageWidth)),
-            imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight))
+            imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight)),
         ])
     }
 }

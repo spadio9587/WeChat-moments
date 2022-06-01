@@ -27,7 +27,7 @@ class HeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func loadImage(from  imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
+    func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl),
@@ -61,7 +61,7 @@ class HeaderView: UIView {
             backgroundView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             backgroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             backgroundView.widthAnchor.constraint(equalToConstant: backgroundFrame),
-            backgroundView.heightAnchor.constraint(equalToConstant: backgroundFrame)
+            backgroundView.heightAnchor.constraint(equalToConstant: backgroundFrame),
         ])
     }
 
@@ -72,7 +72,7 @@ class HeaderView: UIView {
             userAvatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: userAvaterLocation),
             userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: userAvaterLocation),
             userAvatar.widthAnchor.constraint(equalToConstant: userAvaterFrame),
-            userAvatar.heightAnchor.constraint(equalToConstant: userAvaterFrame)
+            userAvatar.heightAnchor.constraint(equalToConstant: userAvaterFrame),
         ])
     }
 
@@ -81,7 +81,7 @@ class HeaderView: UIView {
         userNameLabel.numberOfLines = 1
         NSLayoutConstraint.activate([
             userNameLabel.rightAnchor.constraint(equalTo: userAvatar.leftAnchor, constant: margin),
-            userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: nameLabelLocation)
+            userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: nameLabelLocation),
         ])
     }
 }
