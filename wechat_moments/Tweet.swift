@@ -7,29 +7,29 @@
 
 import Foundation
 
-struct Tweet: Codable {
+public struct Tweet: Codable {
     let content: String?
     let images: [Image]?
     let sender: Sender?
     let comments: [Comment]?
 }
 
-struct Image: Codable {
+public struct Image: Codable {
     let url: String
 }
 
-struct Sender: Codable {
+public struct Sender: Codable {
     let username: String
     let nick: String
     let avatar: String
 }
 
-struct Comment: Codable {
+public struct Comment: Codable {
     let content: String
     let sender: Sender
 }
 
-struct UserInfo: Codable {
+public struct UserInfo: Codable {
     let profileImage: String
     let avatar: String
     let nick: String

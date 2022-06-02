@@ -12,7 +12,7 @@ import UIKit
 // 背景的宽，高
 let backgroundFrame: CGFloat = 360
 // 使用者头像的位置
-let userAvaterLocation: CGFloat = 310
+let userAvatarLocation: CGFloat = 310
 // 使用者头像的宽，高
 let userAvaterFrame: CGFloat = 70
 // 使用者名字的位置

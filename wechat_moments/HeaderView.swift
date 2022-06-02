@@ -8,6 +8,7 @@
 import UIKit
 
 class HeaderView: UIView {
+    
     var userInfo: UserInfo?
     let backgroundView = UIImageView()
     let userAvatar = UIImageView()
@@ -69,8 +70,8 @@ class HeaderView: UIView {
         userAvatar.contentMode = .scaleAspectFill
         userAvatar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            userAvatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: userAvaterLocation),
-            userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: userAvaterLocation),
+            userAvatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: userAvatarLocation),
+            userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: userAvatarLocation),
             userAvatar.widthAnchor.constraint(equalToConstant: userAvaterFrame),
             userAvatar.heightAnchor.constraint(equalToConstant: userAvaterFrame),
         ])
