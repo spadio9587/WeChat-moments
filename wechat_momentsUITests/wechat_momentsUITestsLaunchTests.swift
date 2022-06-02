@@ -7,8 +7,7 @@
 
 import XCTest
 
-class wechat_momentsUITestsLaunchTests: XCTestCase {
-
+class WechatMomentsUITestsLaunchTests: XCTestCase {
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
