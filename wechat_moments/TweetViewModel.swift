@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class TweetViewModel {
+public class TweetViewModel {
     var tweet: [Tweet] = []
     var userInfo: UserInfo?
     func getDataFromUrl(callback: @escaping () -> Void) {
@@ -26,19 +26,19 @@ class TweetViewModel {
         task.resume()
     }
 
-    func decodeData(data: Data) -> [Tweet]? {
+    private func decodeData(data: Data) -> [Tweet]? {
         let tweet = try? JSONDecoder().decode([Tweet].self, from: data)
         return tweet
     }
 
-    func filterData(with newTweet: [Tweet]) -> [Tweet] {
+    private func filterData(with newTweet: [Tweet]) -> [Tweet] {
         let tweet = newTweet.filter { $0.content != nil || $0.images != nil }
         return tweet
     }
 
     // gettweets (对网络层数据进行处理)
 
-    func getUserInfo(callback: @escaping () -> Void) {
+    public func getUserInfo(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {

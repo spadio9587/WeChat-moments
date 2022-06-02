@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum HeConstant {
+private enum HeConstant {
     // 背景的宽，高
     static let backgroundFrame: CGFloat = 360
     // 使用者头像的位置
@@ -20,7 +20,7 @@ enum HeConstant {
     static let margin: CGFloat = 8
 }
 
-class HeaderView: UIView {
+public class HeaderView: UIView {
     var userInfo: UserInfo?
     let backgroundView = UIImageView()
     let userAvatar = UIImageView()
@@ -40,7 +40,7 @@ class HeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
+    private func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl),
@@ -55,7 +55,7 @@ class HeaderView: UIView {
         }
     }
 
-    func setUserInfo(userInfo: UserInfo?) {
+    public func setUserInfo(userInfo: UserInfo?) {
         loadImage(from: userInfo?.profileImage) {
             image in
             self.backgroundView.image = image
@@ -67,7 +67,7 @@ class HeaderView: UIView {
         userNameLabel.text = userInfo?.userName
     }
 
-    func configureBackgroundView() {
+    private func configureBackgroundView() {
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -78,7 +78,7 @@ class HeaderView: UIView {
         ])
     }
 
-    func configureUserAvatar() {
+    private func configureUserAvatar() {
         userAvatar.contentMode = .scaleAspectFill
         userAvatar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -89,7 +89,7 @@ class HeaderView: UIView {
         ])
     }
 
-    func configureUserNameLabel() {
+    private func configureUserNameLabel() {
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.numberOfLines = 1
         NSLayoutConstraint.activate([

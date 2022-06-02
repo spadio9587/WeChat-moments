@@ -8,23 +8,23 @@
 import Foundation
 import UIKit
 
-class ViewModel {
+public class ViewModel {
     var tweet: [Tweet] = []
     var userInfo: UserInfo?
     var netWork = HttpNetWork()
-    func getDataFromUrl() {
+    public func getDataFromUrl() {
         netWork.getTweet(urlString: "https://emagrorrim.github.io/mock-api/moments.json") { tweet in
             let fixTweet = self.filterData(with: tweet!)
             self.tweet = fixTweet
         }
     }
 
-    func filterData(with newTweet: [Tweet]) -> [Tweet] {
+    private func filterData(with newTweet: [Tweet]) -> [Tweet] {
         let tweet = newTweet.filter { $0.content != nil || $0.images != nil }
         return tweet
     }
 
-    func getUserInfo() {
+    public func getUserInfo() {
         netWork.getUser(urlString: "https://emagrorrim.github.io/mock-api/user/jsmith.json") { userInfo in
             self.userInfo = userInfo
         }

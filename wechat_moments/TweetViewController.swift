@@ -7,26 +7,26 @@
 
 import UIKit
 
-class TweetViewController: UIViewController {
+public class TweetViewController: UIViewController {
     var viewModel = TweetViewModel()
     var testViewModel = ViewModel()
     var headerView = HeaderView()
     @IBOutlet var tableView: UITableView!
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(TweetCell.self, forCellReuseIdentifier: "TweetCell")
         tableView.dataSource = self
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorInset = UIEdgeInsets.zero
-        testViewModel.getDataFromUrl(callback: {
+        viewModel.getDataFromUrl(callback: {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         })
-        testViewModel.getUserInfo(callback: {
+        viewModel.getUserInfo(callback: {
             DispatchQueue.main.async {
-                self.headerView.setUserInfo(userInfo: self.testViewModel.userInfo)
+                self.headerView.setUserInfo(userInfo: self.viewModel.userInfo)
             }
         })
         tableView.addSubview(headerView)
@@ -34,15 +34,15 @@ class TweetViewController: UIViewController {
 }
 
 extension TweetViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tweet = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as? TweetCell else {
             return UITableViewCell()
         }
-        tweet.setTweet(tweet: testViewModel.tweet[indexPath.row])
+        tweet.setTweet(tweet: viewModel.tweet[indexPath.row])
         return tweet
     }
 
-    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        testViewModel.tweet.count
+    public func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        viewModel.tweet.count
     }
 }

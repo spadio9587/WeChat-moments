@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-enum WeConstant {
+private enum WeConstant {
     // 间隙
     static let margin: CGFloat = 8
     // 双倍间隙
@@ -24,7 +24,7 @@ enum WeConstant {
     static let screenWidth: CGFloat = UIScreen.main.bounds.width
 }
 
-class WechatView: UIView {
+public class WechatView: UIView {
     var tweet: Tweet?
     let avatarSender = UIImageView()
     let sender = UILabel()
@@ -49,14 +49,14 @@ class WechatView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         configureContent()
         configureImageArea()
         configureCommentsArea()
     }
 
-    func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
+    private func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             guard let imageUrl = imageUrl,
                   let url = URL(string: imageUrl),
@@ -69,7 +69,7 @@ class WechatView: UIView {
         }
     }
 
-    func setTweet(tweet: Tweet) {
+    public func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
         loadImage(from: tweet.sender?.avatar) { image in
@@ -80,13 +80,13 @@ class WechatView: UIView {
         updateComments(tweet.comments)
     }
 
-    func updateContent(_ content: String?) {
+    private func updateContent(_ content: String?) {
         guard let content = content else { return }
         self.content.text = content
         self.content.isHidden = false
     }
 
-    func updateImages(_ images: [Image]?) {
+    private func updateImages(_ images: [Image]?) {
         guard let images = images else { return }
         contentImage.removeAll()
         imageArea.isHidden = false
@@ -100,13 +100,13 @@ class WechatView: UIView {
         }
     }
 
-    func removeSubviews(view: UIView) {
+    private func removeSubviews(view: UIView) {
         for subview in view.subviews {
             subview.removeFromSuperview()
         }
     }
 
-    func updateComments(_ comments: [Comment]?) {
+    private func updateComments(_ comments: [Comment]?) {
         guard let comments = comments else { return }
         commentsContent.removeAll()
         removeSubviews(view: commentsArea)
@@ -118,7 +118,7 @@ class WechatView: UIView {
         }
     }
 
-    func configureAvatarSender() {
+    private func configureAvatarSender() {
         avatarSender.contentMode = .scaleAspectFill
         avatarSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -129,7 +129,7 @@ class WechatView: UIView {
         ])
     }
 
-    func configureSender() {
+    private func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
         sender.font = UIFont.systemFont(ofSize: WeConstant.fontSize)
@@ -141,7 +141,7 @@ class WechatView: UIView {
         ])
     }
 
-    func configureContainerView() {
+    private func configureContainerView() {
         containerView.axis = .vertical
         containerView.alignment = .leading
         containerView.distribution = .equalSpacing
@@ -158,7 +158,7 @@ class WechatView: UIView {
         ])
     }
 
-    func configureContent() {
+    private func configureContent() {
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
         content.lineBreakMode = .byWordWrapping
@@ -169,7 +169,7 @@ class WechatView: UIView {
         }
     }
 
-    func configureImageArea() {
+    private func configureImageArea() {
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
@@ -206,7 +206,7 @@ class WechatView: UIView {
         }
     }
 
-    func configureCommentsArea() {
+    private func configureCommentsArea() {
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -WeConstant.doubleMargin).isActive = true
@@ -260,7 +260,7 @@ class WechatView: UIView {
         }
     }
 
-    func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
+    private func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
         let imageView = contentImage[count]
         imageArea.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
