@@ -7,15 +7,32 @@
 import Foundation
 import UIKit
 
+enum WeConstant {
+    // 间隙
+    static let margin: CGFloat = 8
+    // 双倍间隙
+    static let doubleMargin: CGFloat = 16
+    // 评论之间的间隙
+    static let labelSpace: CGFloat = 5
+    // 用户头像的宽，高
+    static let avatarFrame: CGFloat = 50
+    // 字体
+    static let fontSize: CGFloat = 17
+    // 评论标注文字相关系数
+    static let attCoefficient: CGFloat = -0.5
+    // 屏幕宽度
+    static let screenWidth: CGFloat = UIScreen.main.bounds.width
+}
+
 class WechatView: UIView {
     var tweet: Tweet?
-    var avatarSender = UIImageView()
-    var sender = UILabel()
-    var containerView = UIStackView()
-    var content = UILabel()
-    var imageArea = UIView()
+    let avatarSender = UIImageView()
+    let sender = UILabel()
+    let containerView = UIStackView()
+    let content = UILabel()
+    let imageArea = UIView()
+    let commentsArea = UIView()
     var contentImage = [UIImageView]()
-    var commentsArea = UIView()
     var commentsContent = [UILabel]()
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -105,22 +122,22 @@ class WechatView: UIView {
         avatarSender.contentMode = .scaleAspectFill
         avatarSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            avatarSender.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: margin),
-            avatarSender.widthAnchor.constraint(equalToConstant: avatarFrame),
-            avatarSender.heightAnchor.constraint(equalToConstant: avatarFrame),
-            avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: margin),
+            avatarSender.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: WeConstant.margin),
+            avatarSender.widthAnchor.constraint(equalToConstant: WeConstant.avatarFrame),
+            avatarSender.heightAnchor.constraint(equalToConstant: WeConstant.avatarFrame),
+            avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: WeConstant.margin),
         ])
     }
 
     func configureSender() {
         sender.numberOfLines = 1
         sender.textColor = .systemBlue
-        sender.font = UIFont.systemFont(ofSize: fontSize)
+        sender.font = UIFont.systemFont(ofSize: WeConstant.fontSize)
         sender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             sender.topAnchor.constraint(equalTo: avatarSender.topAnchor),
-            sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: margin),
-            sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
+            sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: WeConstant.margin),
+            sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WeConstant.margin),
         ])
     }
 
@@ -128,15 +145,15 @@ class WechatView: UIView {
         containerView.axis = .vertical
         containerView.alignment = .leading
         containerView.distribution = .equalSpacing
-        containerView.spacing = margin
+        containerView.spacing = WeConstant.margin
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addArrangedSubview(content)
         containerView.addArrangedSubview(imageArea)
         containerView.addArrangedSubview(commentsArea)
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
-            containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: margin),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WeConstant.margin),
+            containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: WeConstant.margin),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
@@ -145,8 +162,8 @@ class WechatView: UIView {
         content.translatesAutoresizingMaskIntoConstraints = false
         content.numberOfLines = 0
         content.lineBreakMode = .byWordWrapping
-        content.font = UIFont.systemFont(ofSize: fontSize)
-        content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2 * margin).isActive = true
+        content.font = UIFont.systemFont(ofSize: WeConstant.fontSize)
+        content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2 * WeConstant.margin).isActive = true
         if content.text == nil {
             content.isHidden = true
         }
@@ -161,7 +178,7 @@ class WechatView: UIView {
             switch contentImage.count {
             case 1:
                 for count in 0 ... (contentImage.count - 1) {
-                    let width = (UIScreen.main.bounds.width - avatarFrame - 3 * margin - 3 - 2 * margin)
+                    let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 - 2 * WeConstant.margin)
                     let height = width * 3 / 4
                     let left = 0
                     let top = 0
@@ -169,35 +186,35 @@ class WechatView: UIView {
                 }
             case 2, 4:
                 for count in 0 ... (contentImage.count - 1) {
-                    let width = (UIScreen.main.bounds.width - avatarFrame - 3 * margin - 3 * margin) / 2
+                    let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 * WeConstant.margin) / 2
                     let height = width
-                    let left = CGFloat(count % 2) * margin + CGFloat(count % 2) * width
-                    let top = CGFloat(count / 2 + 1) * margin + CGFloat(count / 2) * height
+                    let left = CGFloat(count % 2) * WeConstant.margin + CGFloat(count % 2) * width
+                    let top = CGFloat(count / 2 + 1) * WeConstant.margin + CGFloat(count / 2) * height
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
             default:
                 for count in 0 ... (contentImage.count - 1) {
-                    let width = (UIScreen.main.bounds.width - avatarFrame - 3 * margin - 4 * margin) / 3
+                    let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 4 * WeConstant.margin) / 3
                     let height = width
-                    let left = CGFloat(count % 3) * margin + CGFloat(count % 3) * width
-                    let top = CGFloat(count / 3 + 1) * margin + CGFloat(count / 3) * height
+                    let left = CGFloat(count % 3) * WeConstant.margin + CGFloat(count % 3) * width
+                    let top = CGFloat(count / 3 + 1) * WeConstant.margin + CGFloat(count / 3) * height
                     setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
                 }
             }
             guard let view = imageArea.subviews.last else { return }
-            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: margin).isActive = true
+            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: WeConstant.margin).isActive = true
         }
     }
 
     func configureCommentsArea() {
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
         commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -doubleMargin).isActive = true
+        commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -WeConstant.doubleMargin).isActive = true
         commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor).isActive = true
         commentsArea.backgroundColor = .systemGray6
         if (commentsContent.count) != 0 {
             func setSpecialColorText(seperateComment: UILabel) {
-                let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: attCoefficient]))
+                let mutableAttribString = NSMutableAttributedString(attributedString: NSAttributedString(string: seperateComment.text!, attributes: [.kern: WeConstant.attCoefficient]))
                 let number = seperateComment.text!.firstIndex(of: ":")
                 mutableAttribString.addAttributes(
                     [.foregroundColor: UIColor.blue],
@@ -212,9 +229,9 @@ class WechatView: UIView {
                 seperateComment.translatesAutoresizingMaskIntoConstraints = false
                 seperateComment.numberOfLines = 0
                 NSLayoutConstraint.activate([
-                    seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: labelSpace),
+                    seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: WeConstant.labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin),
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
             default:
@@ -228,18 +245,18 @@ class WechatView: UIView {
                 nextSeperateComment.translatesAutoresizingMaskIntoConstraints = false
                 nextSeperateComment.numberOfLines = 0
                 NSLayoutConstraint.activate([
-                    seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: labelSpace),
+                    seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: WeConstant.labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
-                    nextSeperateComment.topAnchor.constraint(equalTo: seperateComment.bottomAnchor, constant: labelSpace),
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin),
+                    nextSeperateComment.topAnchor.constraint(equalTo: seperateComment.bottomAnchor, constant: WeConstant.labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -margin),
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin),
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
                 setSpecialColorText(seperateComment: nextSeperateComment)
             }
             guard let comment = commentsArea.subviews.last else { return }
-            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: margin).isActive = true
+            commentsArea.bottomAnchor.constraint(equalTo: comment.bottomAnchor, constant: WeConstant.margin).isActive = true
         }
     }
 

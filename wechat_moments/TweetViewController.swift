@@ -19,20 +19,16 @@ class TweetViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorInset = UIEdgeInsets.zero
-        testViewModel.getDataFromUrl()
-        tableView.reloadData()
-        testViewModel.getUserInfo()
-        headerView.setUserInfo(userInfo: testViewModel.userInfo)
-//        testViewModel.getDataFromUrl(callback: {
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        })
-//        testViewModel.getUserInfo(callback: {
-//            DispatchQueue.main.async {
-//                self.headerView.setUserInfo(userInfo: self.testViewModel.userInfo)
-//            }
-//        })
+        testViewModel.getDataFromUrl(callback: {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
+        testViewModel.getUserInfo(callback: {
+            DispatchQueue.main.async {
+                self.headerView.setUserInfo(userInfo: self.testViewModel.userInfo)
+            }
+        })
         tableView.addSubview(headerView)
     }
 }
