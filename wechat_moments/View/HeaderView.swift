@@ -33,6 +33,7 @@ public class HeaderView: UIView {
         configureBackgroundView()
         configureUserAvatar()
         configureUserNameLabel()
+        layoutIfNeeded()
     }
 
     @available(*, unavailable)
@@ -68,13 +69,14 @@ public class HeaderView: UIView {
     }
 
     private func configureBackgroundView() {
+        // 通过屏幕高度宽度判断屏幕是横评还是竖屏并设置
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backgroundView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            backgroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            backgroundView.widthAnchor.constraint(equalToConstant: HeConstant.backgroundFrame),
-            backgroundView.heightAnchor.constraint(equalToConstant: HeConstant.backgroundFrame),
+            backgroundView.topAnchor.constraint(equalTo: self.topAnchor,constant: -47),
+            backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor),
+            backgroundView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height*0.45),
         ])
     }
 
@@ -82,8 +84,8 @@ public class HeaderView: UIView {
         userAvatar.contentMode = .scaleAspectFill
         userAvatar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            userAvatar.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: HeConstant.userAvatarLocation),
-            userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: HeConstant.userAvatarLocation),
+            userAvatar.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: UIScreen.main.bounds.width * 0.85),
+            userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.34),
             userAvatar.widthAnchor.constraint(equalToConstant: HeConstant.userAvaterFrame),
             userAvatar.heightAnchor.constraint(equalToConstant: HeConstant.userAvaterFrame),
         ])
@@ -93,7 +95,7 @@ public class HeaderView: UIView {
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userNameLabel.numberOfLines = 1
         NSLayoutConstraint.activate([
-            userNameLabel.rightAnchor.constraint(equalTo: userAvatar.leftAnchor, constant: HeConstant.margin),
+            userNameLabel.rightAnchor.constraint(equalTo: userAvatar.leftAnchor, constant: -HeConstant.margin),
             userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: HeConstant.nameLabelLocation),
         ])
     }

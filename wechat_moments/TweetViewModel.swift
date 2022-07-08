@@ -26,17 +26,15 @@ public class TweetViewModel {
         task.resume()
     }
 
-    private func decodeData(data: Data) -> [Tweet]? {
+    func decodeData(data: Data) -> [Tweet]? {
         let tweet = try? JSONDecoder().decode([Tweet].self, from: data)
         return tweet
     }
 
-    private func filterData(with newTweet: [Tweet]) -> [Tweet] {
+    func filterData(with newTweet: [Tweet]) -> [Tweet] {
         let tweet = newTweet.filter { $0.content != nil || $0.images != nil }
         return tweet
     }
-
-    // gettweets (对网络层数据进行处理)
 
     public func getUserInfo(callback: @escaping () -> Void) {
         let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!

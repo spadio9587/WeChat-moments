@@ -13,7 +13,7 @@ private enum WeConstant {
     // 双倍间隙
     static let doubleMargin: CGFloat = 16
     // 评论之间的间隙
-    static let labelSpace: CGFloat = 5
+    static let labelSpace: CGFloat = 8
     // 用户头像的宽，高
     static let avatarFrame: CGFloat = 50
     // 字体
@@ -25,15 +25,15 @@ private enum WeConstant {
 }
 
 public class WechatView: UIView {
-    var tweet: Tweet?
-    let avatarSender = UIImageView()
-    let sender = UILabel()
-    let containerView = UIStackView()
-    let content = UILabel()
-    let imageArea = UIView()
-    let commentsArea = UIView()
-    var contentImage = [UIImageView]()
-    var commentsContent = [UILabel]()
+    private var tweet: Tweet?
+    private let avatarSender = UIImageView()
+    private let sender = UILabel()
+    private let containerView = UIStackView()
+    private let content = UILabel()
+    private let imageArea = UIView()
+    private let commentsArea = UIView()
+    private var contentImage = [UIImageView]()
+    private var commentsContent = [UILabel]()
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(avatarSender)
@@ -122,10 +122,10 @@ public class WechatView: UIView {
         avatarSender.contentMode = .scaleAspectFill
         avatarSender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            avatarSender.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: WeConstant.margin),
+            avatarSender.topAnchor.constraint(equalTo: topAnchor),
+            avatarSender.leadingAnchor.constraint(equalTo: leadingAnchor, constant: WeConstant.margin),
             avatarSender.widthAnchor.constraint(equalToConstant: WeConstant.avatarFrame),
             avatarSender.heightAnchor.constraint(equalToConstant: WeConstant.avatarFrame),
-            avatarSender.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: WeConstant.margin),
         ])
     }
 
@@ -135,9 +135,8 @@ public class WechatView: UIView {
         sender.font = UIFont.systemFont(ofSize: WeConstant.fontSize)
         sender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sender.topAnchor.constraint(equalTo: avatarSender.topAnchor),
+            sender.topAnchor.constraint(equalTo: topAnchor),
             sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: WeConstant.margin),
-            sender.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WeConstant.margin),
         ])
     }
 
@@ -146,12 +145,11 @@ public class WechatView: UIView {
         containerView.alignment = .leading
         containerView.distribution = .equalSpacing
         containerView.spacing = WeConstant.margin
+
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addArrangedSubview(content)
-        containerView.addArrangedSubview(imageArea)
-        containerView.addArrangedSubview(commentsArea)
+        layoutIfNeeded()
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: sender.leadingAnchor),
+            containerView.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor,constant: 5),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WeConstant.margin),
             containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: WeConstant.margin),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -159,58 +157,61 @@ public class WechatView: UIView {
     }
 
     private func configureContent() {
+        containerView.addArrangedSubview(content)
+        self.containerView.layoutIfNeeded()
         content.translatesAutoresizingMaskIntoConstraints = false
+        content.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         content.numberOfLines = 0
         content.lineBreakMode = .byWordWrapping
         content.font = UIFont.systemFont(ofSize: WeConstant.fontSize)
-        content.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2 * WeConstant.margin).isActive = true
         if content.text == nil {
             content.isHidden = true
         }
     }
-
+    //先加入视图 再设置大小范围
     private func configureImageArea() {
+        containerView.addArrangedSubview(imageArea)
+        self.containerView.layoutIfNeeded()
         imageArea.translatesAutoresizingMaskIntoConstraints = false
+        imageArea.setContentHuggingPriority(.defaultLow, for: .vertical)
         NSLayoutConstraint.activate([
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ])
         if contentImage.isEmpty == false {
+        for count in 0 ... (contentImage.count - 1){
+            let imageView = contentImage[count]
+            imageArea.addSubview(imageView)
             switch contentImage.count {
             case 1:
-                for count in 0 ... (contentImage.count - 1) {
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 - 2 * WeConstant.margin)
                     let height = width * 3 / 4
                     let left = 0
                     let top = 0
-                    setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
-                }
+                setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
             case 2, 4:
-                for count in 0 ... (contentImage.count - 1) {
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 * WeConstant.margin) / 2
                     let height = width
                     let left = CGFloat(count % 2) * WeConstant.margin + CGFloat(count % 2) * width
                     let top = CGFloat(count / 2 + 1) * WeConstant.margin + CGFloat(count / 2) * height
-                    setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
-                }
+                    setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
             default:
-                for count in 0 ... (contentImage.count - 1) {
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 4 * WeConstant.margin) / 3
                     let height = width
                     let left = CGFloat(count % 3) * WeConstant.margin + CGFloat(count % 3) * width
                     let top = CGFloat(count / 3 + 1) * WeConstant.margin + CGFloat(count / 3) * height
-                    setImageConstraint(count: count, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
-                }
+                    setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
             }
-            guard let view = imageArea.subviews.last else { return }
-            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: WeConstant.margin).isActive = true
         }
+        }
+            guard let view = imageArea.subviews.last else { return }
+            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 10).isActive = true
     }
 
     private func configureCommentsArea() {
+        containerView.addArrangedSubview(commentsArea)
+        self.containerView.layoutIfNeeded()
         commentsArea.translatesAutoresizingMaskIntoConstraints = false
-        commentsArea.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         commentsArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -WeConstant.doubleMargin).isActive = true
-        commentsArea.topAnchor.constraint(equalTo: imageArea.bottomAnchor).isActive = true
         commentsArea.backgroundColor = .systemGray6
         if (commentsContent.count) != 0 {
             func setSpecialColorText(seperateComment: UILabel) {
@@ -260,12 +261,10 @@ public class WechatView: UIView {
         }
     }
 
-    private func setImageConstraint(count: Int, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
-        let imageView = contentImage[count]
-        imageArea.addSubview(imageView)
+    private func setImageConstraint(imageView: UIImageView, leftEdge: Float, topEdge: Float, imageWidth: Float, imageHeight: Float) {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.leftAnchor.constraint(equalTo: imageArea.leftAnchor, constant: CGFloat(leftEdge)),
+            imageView.leadingAnchor.constraint(equalTo: imageArea.leadingAnchor, constant: CGFloat(leftEdge)),
             imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: CGFloat(topEdge)),
             imageView.widthAnchor.constraint(equalToConstant: CGFloat(imageWidth)),
             imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight)),

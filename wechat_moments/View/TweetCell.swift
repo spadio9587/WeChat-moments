@@ -8,7 +8,7 @@
 import UIKit
 
 public class TweetCell: UITableViewCell {
-    var wechatView: WechatView!
+    private var wechatView: WechatView!
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         wechatView = WechatView()
@@ -20,7 +20,6 @@ public class TweetCell: UITableViewCell {
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
     private func configureWechatView() {
         wechatView.translatesAutoresizingMaskIntoConstraints = false
         wechatView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
