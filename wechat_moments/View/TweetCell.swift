@@ -8,7 +8,7 @@
 import UIKit
 
 public class TweetCell: UITableViewCell {
-    private var wechatView: WechatView!
+    var wechatView: WechatView!
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         wechatView = WechatView()

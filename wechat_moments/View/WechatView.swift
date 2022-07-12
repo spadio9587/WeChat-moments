@@ -7,6 +7,9 @@
 import Foundation
 import UIKit
 
+protocol WechatViewDelegate {
+    func didTapImageView()
+}
 private enum WeConstant {
     // 间隙
     static let margin: CGFloat = 8
@@ -34,6 +37,7 @@ public class WechatView: UIView {
     private let commentsArea = UIView()
     private var contentImage = [UIImageView]()
     private var commentsContent = [UILabel]()
+    var delegate: WechatViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(avatarSender)
@@ -180,7 +184,12 @@ public class WechatView: UIView {
         if contentImage.isEmpty == false {
         for count in 0 ... (contentImage.count - 1){
             let imageView = contentImage[count]
+            imageView.isUserInteractionEnabled = true
             imageArea.addSubview(imageView)
+            let tapSingle = UITapGestureRecognizer(target: self, action: #selector(imageViewTap(_:)))
+            tapSingle.numberOfTapsRequired = 1
+            tapSingle.numberOfTouchesRequired = 1
+            imageView.addGestureRecognizer(tapSingle)
             switch contentImage.count {
             case 1:
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 - 2 * WeConstant.margin)
@@ -206,7 +215,12 @@ public class WechatView: UIView {
             guard let view = imageArea.subviews.last else { return }
             imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 10).isActive = true
     }
-
+    
+    @objc func imageViewTap(_ recognizer:UITapGestureRecognizer) {
+        print("It has been tapped")
+            delegate?.didTapImageView()
+    }
+    
     private func configureCommentsArea() {
         containerView.addArrangedSubview(commentsArea)
         self.containerView.layoutIfNeeded()

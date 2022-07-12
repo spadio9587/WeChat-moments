@@ -73,7 +73,7 @@ public class HeaderView: UIView {
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor,constant: -47),
+            backgroundView.topAnchor.constraint(equalTo: self.topAnchor,constant: -88),
             backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor),
             backgroundView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
             backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height*0.45),
