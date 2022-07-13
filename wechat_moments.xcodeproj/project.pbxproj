@@ -20,7 +20,7 @@
 		AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */; };
 		AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */; };
 		AC5A143A287D152600F3A340 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A1439287D152600F3A340 /* ImageViewController.swift */; };
-		AC5A143C287D44B500F3A340 /* ImagePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A143B287D44B500F3A340 /* ImagePreviewCell.swift */; };
+		AC5A143C287D44B500F3A340 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5A143B287D44B500F3A340 /* ImageCell.swift */; };
 		AC60A0392823731C00BF2489 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60A0382823731C00BF2489 /* HeaderView.swift */; };
 		AC872EA82845E4BF0096E3C2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EA72845E4BF0096E3C2 /* Network.swift */; };
 		AC872EAF2846FCDD0096E3C2 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */; };
@@ -67,7 +67,7 @@
 		AC2D7BFE280E9B9C0044AE25 /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		AC5A1439287D152600F3A340 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		AC5A143B287D44B500F3A340 /* ImagePreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewCell.swift; sourceTree = "<group>"; };
+		AC5A143B287D44B500F3A340 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		AC60A0382823731C00BF2489 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		AC872EA72845E4BF0096E3C2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 				AC2D7C02280FAD2C0044AE25 /* TweetCell.swift */,
 				AC2D7BCE280E531C0044AE25 /* TweetViewController.swift */,
 				AC5A1439287D152600F3A340 /* ImageViewController.swift */,
-				AC5A143B287D44B500F3A340 /* ImagePreviewCell.swift */,
+				AC5A143B287D44B500F3A340 /* ImageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -407,7 +407,7 @@
 				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,
 				AC2D7BCB280E531C0044AE25 /* AppDelegate.swift in Sources */,
-				AC5A143C287D44B500F3A340 /* ImagePreviewCell.swift in Sources */,
+				AC5A143C287D44B500F3A340 /* ImageCell.swift in Sources */,
 				AC872EA82845E4BF0096E3C2 /* Network.swift in Sources */,
 				ACB3036F282A36CC0075662E /* WechatView.swift in Sources */,
 				AC2D7BCD280E531C0044AE25 /* SceneDelegate.swift in Sources */,

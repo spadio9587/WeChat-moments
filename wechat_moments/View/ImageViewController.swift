@@ -8,27 +8,48 @@
 import UIKit
 
 class ImageViewController: UIViewController {
-    var collectionView: UICollectionView!
-    var collectionViewLayout: UICollectionViewFlowLayout!
-    var pageControl: UIPageControl!
-    var wechatView: WechatView!
-
+    public var index: Int?
+    private var collectionView: UICollectionView!
+    private var collectionViewLayout: UICollectionViewFlowLayout!
+    private let viewModel = TweetViewModel()
+//    private var pageControl: UIPageControl!
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black
         collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.minimumLineSpacing = 0
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.scrollDirection = .horizontal
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionViewLayout)
-        collectionView.backgroundColor = .black
-        collectionView.register(ImagePreviewCell.self, forCellWithReuseIdentifier: "ImagePreviewCell")
+//        collectionViewLayout.sectionInset = UIEdgeInsets.zero
+        collectionViewLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        viewModel.getDataFromUrl(callback: {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        })
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width*3, height: UIScreen.main.bounds.height), collectionViewLayout: collectionViewLayout)
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.isPagingEnabled = true
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .white
         collectionView.contentInsetAdjustmentBehavior = .never
         view.addSubview(collectionView)
-        pageControl = UIPageControl()
-        pageControl.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 10)
-        pageControl.isUserInteractionEnabled = false
-        view.addSubview(pageControl)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("index number \(self.index ?? 0)")
+    }
+}
+
+extension ImageViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        viewModel.tweet[section].images!.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
+            return UICollectionViewCell()
+        }
+        imageCell.setImage(tweet: viewModel.tweet[indexPath.row])
+        return imageCell
     }
 }
