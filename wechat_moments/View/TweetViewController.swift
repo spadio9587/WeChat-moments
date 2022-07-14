@@ -8,8 +8,7 @@
 import UIKit
 
 class TweetViewController: UIViewController, WechatViewDelegate {
-    func didTapImageView(at index: Int) {
-        imageViewController.index = index
+    func didTapImageView(_: image) {
         self.navigationController?.pushViewController(imageViewController, animated: true)
         navigationController?.navigationBar.isHidden = false
     }
@@ -46,7 +45,6 @@ extension TweetViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         tweetCell.wechatView.delegate = self
-        tweetCell.wechatView.index = indexPath.row
         tweetCell.setTweet(tweet: viewModel.tweet[indexPath.row])
         return tweetCell
     }

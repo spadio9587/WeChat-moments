@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 protocol WechatViewDelegate {
-    func didTapImageView(at index: Int)
+    func didTapImageView(_: image)
 }
 private enum WeConstant {
     // 间隙
@@ -33,11 +33,10 @@ public class WechatView: UIView {
     private let sender = UILabel()
     private let containerView = UIStackView()
     private let content = UILabel()
-    private let imageArea = UIView()
+    let imageArea = UIView()
     private let commentsArea = UIView()
-    private var contentImage = [UIImageView]()
+    var contentImage = [UIImageView]()
     private var commentsContent = [UILabel]()
-    var index: Int?
     var delegate: WechatViewDelegate?
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,10 +82,6 @@ public class WechatView: UIView {
         updateContent(tweet.content)
         updateImages(tweet.images)
         updateComments(tweet.comments)
-    }
-    
-    public func setImage(tweet: Tweet) {
-        updateImages(tweet.images)
     }
 
     private func updateContent(_ content: String?) {
@@ -189,6 +184,8 @@ public class WechatView: UIView {
         if contentImage.isEmpty == false {
         for count in 0 ... (contentImage.count - 1){
             let imageView = contentImage[count]
+            // tag
+            imageView.tag = count
             imageView.isUserInteractionEnabled = true
             imageArea.addSubview(imageView)
             let tapSingle = UITapGestureRecognizer(target: self, action: #selector(imageViewTap(_:)))
@@ -221,12 +218,13 @@ public class WechatView: UIView {
             imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 10).isActive = true
     }
     
-    @objc func imageViewTap(_ recognizer:UITapGestureRecognizer) {
+    @objc func imageViewTap(_ recognizer: UITapGestureRecognizer) {
+        print("add tag \(String(describing: contentImage[tag].image))")
         print("It has been tapped")
-        guard let index = index else {
-            return
-        }
-            delegate?.didTapImageView(at: index)
+        let imageView = viewWithTag(recognizer.view!.tag)
+        let tag = imageView?.tag
+        let image = contentImage[tag!].image
+        delegate?.didTapImageView(image)
     }
     
     private func configureCommentsArea() {
