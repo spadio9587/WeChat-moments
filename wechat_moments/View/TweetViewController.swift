@@ -8,7 +8,7 @@
 import UIKit
 
 class TweetViewController: UIViewController, WechatViewDelegate {
-    func didTapImageView(_: image) {
+    func didTapImageView(clickImage: UIImage) {
         self.navigationController?.pushViewController(imageViewController, animated: true)
         navigationController?.navigationBar.isHidden = false
     }
