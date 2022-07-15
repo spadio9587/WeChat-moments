@@ -8,9 +8,12 @@
 import UIKit
 
 class TweetViewController: UIViewController, WechatViewDelegate {
-    func didTapImageView(clickImage: UIImage) {
+    
+    func didTapImageView(tag: Int) {
+        imageViewController.tweet = viewModel.tweet[tag]
         self.navigationController?.pushViewController(imageViewController, animated: true)
         navigationController?.navigationBar.isHidden = false
+//        imageViewController.imageView.image = clickImage
     }
     private let imageViewController = ImageViewController()
     private let viewModel = TweetViewModel()

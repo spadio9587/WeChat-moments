@@ -8,10 +8,9 @@
 import UIKit
 
 public class ImageCell: UICollectionViewCell {
-    private var imageView: ImageView!
+    private var imageView = ImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView = ImageView()
         contentView.addSubview(imageView)
         configureImageView()
     }
@@ -29,11 +28,8 @@ public class ImageCell: UICollectionViewCell {
     }
     
     public func setImage(tweet: Tweet?) {
-        guard let tweet = tweet else {
-            return
-        }
+        guard let tweet = tweet else { return }
         imageView.setImage(tweet: tweet)
-        //缺少一个将ImageCell和ImageView连接的过程
         layoutIfNeeded()
     }
 }

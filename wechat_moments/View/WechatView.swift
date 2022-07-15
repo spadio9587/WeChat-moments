@@ -8,7 +8,8 @@ import Foundation
 import UIKit
 
 protocol WechatViewDelegate {
-    func didTapImageView(clickImage: UIImage)
+//    func didTapImageView(clickImage: UIImage)
+    func didTapImageView(tag: Int)
 }
 private enum WeConstant {
     // 间隙
@@ -219,12 +220,12 @@ public class WechatView: UIView {
     }
     
     @objc func imageViewTap(_ recognizer: UITapGestureRecognizer) {
-        print("add tag \(String(describing: contentImage[tag].image))")
         print("It has been tapped")
-        let imageView = viewWithTag(recognizer.view!.tag)
-        let tag = imageView?.tag
-        let image = contentImage[tag!].image
-        delegate?.didTapImageView(clickImage: image!)
+//        let imageView = viewWithTag(recognizer.view!.tag)
+//        guard let imageView = imageView else { return }
+//        guard let image = contentImage[imageView.tag].image else { return }
+//        delegate?.didTapImageView(clickImage: image)
+        delegate?.didTapImageView(tag: recognizer.view!.tag)
     }
     
     private func configureCommentsArea() {

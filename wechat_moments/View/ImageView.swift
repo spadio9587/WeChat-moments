@@ -8,10 +8,15 @@
 import UIKit
 
 class ImageView: UIView {
+    private var tweet: Tweet?
     private var imageContent = [UIImageView]()
+    private var label = UILabel()
+    private var pageControl = UIPageControl()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureLabel()
         configureImageView()
+        configurePageControl()
     }
     
     required init?(coder: NSCoder) {
@@ -31,34 +36,46 @@ class ImageView: UIView {
         }
     }
     
-    public func setImage(tweet: Tweet) {
-        updateImages(tweet.images)
+    private func configureLabel() {
+        addSubview(label)
+        label.text = "What are u doing"
+        label.frame = CGRect(x: 0, y: 0, width: 300, height: 20)
     }
     
-    func updateImages(_ images: [Image]?) {
+    private func configurePageControl() {
+        addSubview(pageControl)
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 120).isActive = true
+        pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        pageControl.numberOfPages = 6
+    }
+    
+    public func setImage(tweet: Tweet) {
+        self.tweet = tweet
+        for im in tweet.images {
+            let imageView = UIImageView()
+            imageView.image = im
+            imageContent.append(imageView)
+        }
+    }
+    
+    func updateImages(_ images: [UIImage]?) {
         guard let images = images else {
             return
         }
-        for index in images.indices {
+        for im in images {
             let imageView = UIImageView()
-            loadImage(from: images[index].url) {image in
-                imageView.image = image
-            }
+            imageView.image = im
             imageContent.append(imageView)
         }
     }
     
     func configureImageView() {
         for imageView in imageContent {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        imageView.isUserInteractionEnabled = true
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .blue
-        addSubview(imageView)
+            if imageContent.count == 1 {
+            addSubview(imageView)
+            imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        }
         }
     }
 }

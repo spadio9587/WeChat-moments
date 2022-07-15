@@ -34,6 +34,7 @@ public class ImageViewModel {
 
     func filterData(with newTweet: [Tweet]) -> [Tweet] {
         let tweet = newTweet.filter { $0.content != nil || $0.images != nil }
-        return tweet
+        let fixtweet = tweet.filter { $0.images != nil}
+        return fixtweet
     }
 }
