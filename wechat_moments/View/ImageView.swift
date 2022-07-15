@@ -9,7 +9,8 @@ import UIKit
 
 class ImageView: UIView {
     private var tweet: Tweet?
-    private var imageContent = [UIImageView]()
+    var imageContent = [UIImageView]()
+    var image : [Image] = []
     private var label = UILabel()
     private var pageControl = UIPageControl()
     override init(frame: CGRect) {
@@ -52,20 +53,18 @@ class ImageView: UIView {
     
     public func setImage(tweet: Tweet) {
         self.tweet = tweet
-        for im in tweet.images {
-            let imageView = UIImageView()
-            imageView.image = im
-            imageContent.append(imageView)
-        }
+        updateImages(tweet.images)
     }
     
-    func updateImages(_ images: [UIImage]?) {
+    func updateImages(_ images: [Image]?) {
         guard let images = images else {
             return
         }
-        for im in images {
+        for index in images.indices {
             let imageView = UIImageView()
-            imageView.image = im
+            loadImage(from: images[index].url) {image in
+                imageView.image = image
+            }
             imageContent.append(imageView)
         }
     }
@@ -75,7 +74,7 @@ class ImageView: UIView {
             if imageContent.count == 1 {
             addSubview(imageView)
             imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        }
+            }
         }
     }
 }

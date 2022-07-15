@@ -30,6 +30,7 @@ public class ImageCell: UICollectionViewCell {
     public func setImage(tweet: Tweet?) {
         guard let tweet = tweet else { return }
         imageView.setImage(tweet: tweet)
+        //缺少一个将ImageCell和ImageView连接的过程
         layoutIfNeeded()
     }
 }

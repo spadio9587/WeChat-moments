@@ -10,32 +10,16 @@ import UIKit
 class ImageViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
-    var tweet: Tweet? {
-        didSet {
-            updateCollection()
-        }
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nil, bundle: nil)
-        configureCollectionView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    //    var imageView = ImageView()
+    private let imageViewModel = ImageViewModel()
+    var image: [Image]? = []
+    var imageView = ImageView()
 //    var imageView = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
 //        view.addSubview(imageView)
 //        configureImageView()
         view.backgroundColor = .white
-        
-    }
-    
-    private func updateCollection() {
-        collectionView.reloadData()
+        configureCollectionView()
     }
     
 //    private func configureImageView() {
@@ -66,15 +50,14 @@ class ImageViewController: UIViewController {
 
 extension ImageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let tweet = tweet else { return 0 }
-        return tweet.images!.count
+        return image!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
             return UICollectionViewCell()
         }
-        imageCell.setImage(tweet: tweet)
+        imageCell.setImage(tweet: image![indexPath.row])
         return imageCell
     }
 }
