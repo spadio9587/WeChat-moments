@@ -9,32 +9,16 @@ import UIKit
 
 class ImageView: UIView {
     private var tweet: Tweet?
-    var imageContent = [UIImageView]()
-    var image : [Image] = []
     private var label = UILabel()
     private var pageControl = UIPageControl()
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLabel()
-        configureImageView()
         configurePageControl()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global().async {
-            guard let imageUrl = imageUrl,
-                  let url = URL(string: imageUrl),
-                  let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data)
-            else { return }
-            DispatchQueue.main.async {
-                callback(image)
-            }
-        }
     }
     
     private func configureLabel() {
@@ -48,33 +32,21 @@ class ImageView: UIView {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 120).isActive = true
         pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-        pageControl.numberOfPages = 6
+        pageControl.numberOfPages = 4
     }
     
-    public func setImage(tweet: Tweet) {
-        self.tweet = tweet
-        updateImages(tweet.images)
-    }
-    
-    func updateImages(_ images: [Image]?) {
-        guard let images = images else {
-            return
-        }
-        for index in images.indices {
-            let imageView = UIImageView()
-            loadImage(from: images[index].url) {image in
-                imageView.image = image
+    func setImage(imageViewModel: ImageViewModel) {
+        for subview in subviews {
+            if subview is UIImageView {
+                subview.removeFromSuperview()
             }
-            imageContent.append(imageView)
         }
-    }
-    
-    func configureImageView() {
-        for imageView in imageContent {
-            if imageContent.count == 1 {
+        
+        for index in 0...(imageViewModel.images.count - 1) {
+            let imageView = UIImageView(frame: CGRect(x: bounds.width * CGFloat(index), y: 0, width: bounds.width, height: bounds.height))
+            imageView.image = imageViewModel.images[index]
             addSubview(imageView)
-            imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            }
+            imageView.contentMode = .scaleAspectFill
         }
     }
 }

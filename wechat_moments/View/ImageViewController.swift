@@ -10,32 +10,23 @@ import UIKit
 class ImageViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
-    private let imageViewModel = ImageViewModel()
-    var image: [Image]? = []
-    var imageView = ImageView()
-//    var imageView = UIImageView()
+    var imageViewModel: ImageViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.addSubview(imageView)
-//        configureImageView()
         view.backgroundColor = .white
         configureCollectionView()
     }
     
-//    private func configureImageView() {
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 300).isActive = true
-//        imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300).isActive = true
-//        imageView.contentMode = .scaleAspectFit
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.reloadData()
+    }
     
     private func configureCollectionView() {
         collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.minimumLineSpacing = 0
         collectionViewLayout.minimumInteritemSpacing = 0
-        collectionViewLayout.scrollDirection = .vertical
+        collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 300, width: Int(UIScreen.main.bounds.width) * 3, height: 300), collectionViewLayout: collectionViewLayout)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
@@ -50,14 +41,14 @@ class ImageViewController: UIViewController {
 
 extension ImageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return image!.count
+        (imageViewModel?.images.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
+        guard let imageViewModel = imageViewModel, let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
             return UICollectionViewCell()
         }
-        imageCell.setImage(tweet: image![indexPath.row])
+        imageCell.setImageViewModel(imageViewModel: imageViewModel)
         return imageCell
     }
 }

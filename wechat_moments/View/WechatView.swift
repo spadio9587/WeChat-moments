@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 protocol WechatViewDelegate {
-    func didTapImageView(clickImage: UIImage)
+    func didTapImageView(imageViewModel: ImageViewModel)
 }
 private enum WeConstant {
     // 间隙
@@ -35,9 +35,11 @@ public class WechatView: UIView {
     private let content = UILabel()
     let imageArea = UIView()
     private let commentsArea = UIView()
-    var contentImage = [UIImageView]()
+    var contentImages = [UIImageView]()
     private var commentsContent = [UILabel]()
     var delegate: WechatViewDelegate?
+    var imageViewModel = ImageViewModel()
+    var showView = ImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(avatarSender)
@@ -92,7 +94,7 @@ public class WechatView: UIView {
 
     private func updateImages(_ images: [Image]?) {
         guard let images = images else { return }
-        contentImage.removeAll()
+        contentImages.removeAll()
         imageArea.isHidden = false
         removeSubviews(view: imageArea)
         for index in images.indices {
@@ -100,7 +102,7 @@ public class WechatView: UIView {
             loadImage(from: images[index].url) { image in
                 imageView.image = image
             }
-            contentImage.append(imageView)
+            contentImages.append(imageView)
         }
     }
 
@@ -149,11 +151,10 @@ public class WechatView: UIView {
         containerView.alignment = .leading
         containerView.distribution = .equalSpacing
         containerView.spacing = WeConstant.margin
-
         containerView.translatesAutoresizingMaskIntoConstraints = false
         layoutIfNeeded()
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor,constant: 5),
+            containerView.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor,constant: WeConstant.margin),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WeConstant.margin),
             containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: WeConstant.margin),
             containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -181,9 +182,9 @@ public class WechatView: UIView {
         NSLayoutConstraint.activate([
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ])
-        if contentImage.isEmpty == false {
-        for count in 0 ... (contentImage.count - 1){
-            let imageView = contentImage[count]
+        if contentImages.isEmpty == false {
+        for count in 0 ... (contentImages.count - 1){
+            let imageView = contentImages[count]
             // tag
             imageView.tag = count
             imageView.isUserInteractionEnabled = true
@@ -192,7 +193,7 @@ public class WechatView: UIView {
             tapSingle.numberOfTapsRequired = 1
             tapSingle.numberOfTouchesRequired = 1
             imageView.addGestureRecognizer(tapSingle)
-            switch contentImage.count {
+            switch contentImages.count {
             case 1:
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 - 2 * WeConstant.margin)
                     let height = width * 3 / 4
@@ -220,10 +221,10 @@ public class WechatView: UIView {
     
     @objc func imageViewTap(_ recognizer: UITapGestureRecognizer) {
         print("It has been tapped")
-        let imageView = viewWithTag(recognizer.view!.tag)
-        guard let imageView = imageView else { return }
-        guard let image = contentImage[imageView.tag].image else { return }
-        delegate?.didTapImageView(clickImage: image)
+        for contentImage in contentImages {
+            imageViewModel.images.append(contentImage.image!)
+        }
+        delegate?.didTapImageView(imageViewModel: imageViewModel)
     }
     
     private func configureCommentsArea() {
