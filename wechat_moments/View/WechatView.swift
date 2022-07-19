@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 protocol WechatViewDelegate {
-    func didTapImageView(imageViewModel: ImageViewModel)
+    func didTapImageView(imageViewModel: ImageViewModel, index: Int)
 }
 private enum WeConstant {
     // 间隙
@@ -39,7 +39,6 @@ public class WechatView: UIView {
     private var commentsContent = [UILabel]()
     var delegate: WechatViewDelegate?
     var imageViewModel = ImageViewModel()
-    var showView = ImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(avatarSender)
@@ -221,10 +220,12 @@ public class WechatView: UIView {
     
     @objc func imageViewTap(_ recognizer: UITapGestureRecognizer) {
         print("It has been tapped")
+        imageViewModel.images.removeAll()
+        guard let index = recognizer.view?.tag else { return }
         for contentImage in contentImages {
             imageViewModel.images.append(contentImage.image!)
         }
-        delegate?.didTapImageView(imageViewModel: imageViewModel)
+        delegate?.didTapImageView(imageViewModel: imageViewModel, index: index)
     }
     
     private func configureCommentsArea() {

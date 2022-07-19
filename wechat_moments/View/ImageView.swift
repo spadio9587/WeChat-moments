@@ -8,45 +8,33 @@
 import UIKit
 
 class ImageView: UIView {
-    private var tweet: Tweet?
-    private var label = UILabel()
-    private var pageControl = UIPageControl()
+    private let label = UILabel()
+    let tapImageView = UIImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureImage()
         configureLabel()
-        configurePageControl()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func configureLabel() {
         addSubview(label)
-        label.text = "What are u doing"
-        label.frame = CGRect(x: 0, y: 0, width: 300, height: 20)
+        label.frame = CGRect(x: 0, y: 0, width: 300, height: 30)
     }
     
-    private func configurePageControl() {
-        addSubview(pageControl)
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 120).isActive = true
-        pageControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-        pageControl.numberOfPages = 4
-    }
-    
-    func setImage(imageViewModel: ImageViewModel) {
-        for subview in subviews {
-            if subview is UIImageView {
-                subview.removeFromSuperview()
-            }
-        }
-        
-        for index in 0...(imageViewModel.images.count - 1) {
-            let imageView = UIImageView(frame: CGRect(x: bounds.width * CGFloat(index), y: 0, width: bounds.width, height: bounds.height))
-            imageView.image = imageViewModel.images[index]
-            addSubview(imageView)
-            imageView.contentMode = .scaleAspectFill
-        }
+    private func configureImage() {
+        addSubview(tapImageView)
+        tapImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tapImageView.topAnchor.constraint(equalTo: topAnchor),
+            tapImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tapImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tapImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+        tapImageView.contentMode = .scaleAspectFill
     }
 }

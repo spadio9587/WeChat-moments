@@ -8,7 +8,7 @@
 import UIKit
 
 public class ImageCell: UICollectionViewCell {
-    private var imageView = ImageView()
+    let imageView = ImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
@@ -17,10 +17,6 @@ public class ImageCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setImageViewModel(imageViewModel:ImageViewModel) {
-        imageView.setImage(imageViewModel: imageViewModel)
     }
     
     private func configureImageView() {

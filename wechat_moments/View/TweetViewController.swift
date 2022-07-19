@@ -8,17 +8,15 @@
 import UIKit
 
 class TweetViewController: UIViewController, WechatViewDelegate {
-    func didTapImageView(imageViewModel: ImageViewModel) {
+    func didTapImageView(imageViewModel: ImageViewModel, index: Int) {
+        let imageViewController = ImageViewController()
         imageViewController.imageViewModel = imageViewModel
+        imageViewController.index = index
         self.navigationController?.pushViewController(imageViewController, animated: true)
-        navigationController?.navigationBar.isHidden = false
-//        imageViewController.imageView.image = clickImage
     }
-    private let imageViewController = ImageViewController()
     private let viewModel = TweetViewModel()
 //    private let testViewModel = ViewModel()
     private let headerView = HeaderView()
-    var filterImage : [Image] = []
     @IBOutlet var tableView: UITableView! 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +37,10 @@ class TweetViewController: UIViewController, WechatViewDelegate {
             }
         })
         tableView.addSubview(headerView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
 }
 
