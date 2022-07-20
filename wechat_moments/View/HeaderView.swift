@@ -73,10 +73,10 @@ public class HeaderView: UIView {
         backgroundView.contentMode = .scaleAspectFill
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: self.topAnchor,constant: -88),
+            backgroundView.topAnchor.constraint(equalTo: self.topAnchor, constant: -88),
             backgroundView.leftAnchor.constraint(equalTo: self.leftAnchor),
             backgroundView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height*0.45),
+            backgroundView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height*0.50)
         ])
     }
 
@@ -87,7 +87,7 @@ public class HeaderView: UIView {
             userAvatar.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor, constant: UIScreen.main.bounds.width * 0.85),
             userAvatar.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: UIScreen.main.bounds.height * 0.34),
             userAvatar.widthAnchor.constraint(equalToConstant: HeConstant.userAvaterFrame),
-            userAvatar.heightAnchor.constraint(equalToConstant: HeConstant.userAvaterFrame),
+            userAvatar.heightAnchor.constraint(equalToConstant: HeConstant.userAvaterFrame)
         ])
     }
 
@@ -96,7 +96,7 @@ public class HeaderView: UIView {
         userNameLabel.numberOfLines = 1
         NSLayoutConstraint.activate([
             userNameLabel.rightAnchor.constraint(equalTo: userAvatar.leftAnchor, constant: -HeConstant.margin),
-            userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: HeConstant.nameLabelLocation),
+            userNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: HeConstant.nameLabelLocation)
         ])
     }
 }

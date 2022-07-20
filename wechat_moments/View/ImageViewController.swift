@@ -12,14 +12,14 @@ class ImageViewController: UIViewController {
     private var collectionViewLayout: UICollectionViewFlowLayout!
     private var pageControl: UIPageControl!
     var index: Int! = nil
-    var imageViewModel: ImageViewModel? = nil
+    var imageViewModel: ImageViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureCollectionView()
         configurePageControl()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
@@ -28,7 +28,7 @@ class ImageViewController: UIViewController {
         super.viewDidAppear(animated)
         collectionView.reloadData()
     }
-    
+
     private func configureCollectionView() {
         collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.minimumLineSpacing = 0
@@ -46,7 +46,7 @@ class ImageViewController: UIViewController {
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
-    
+
     private func configurePageControl() {
         pageControl = UIPageControl(frame: CGRect(x: 140, y: 570, width: 150, height: 20))
         view.addSubview(pageControl)
@@ -60,12 +60,11 @@ class ImageViewController: UIViewController {
     }
 }
 
-
 extension ImageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         (imageViewModel?.images.count)!
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let imageViewModel = imageViewModel, let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCell else {
             return UICollectionViewCell()

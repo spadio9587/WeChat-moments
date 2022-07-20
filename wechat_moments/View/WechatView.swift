@@ -130,7 +130,7 @@ public class WechatView: UIView {
             avatarSender.topAnchor.constraint(equalTo: topAnchor),
             avatarSender.leadingAnchor.constraint(equalTo: leadingAnchor, constant: WeConstant.margin),
             avatarSender.widthAnchor.constraint(equalToConstant: WeConstant.avatarFrame),
-            avatarSender.heightAnchor.constraint(equalToConstant: WeConstant.avatarFrame),
+            avatarSender.heightAnchor.constraint(equalToConstant: WeConstant.avatarFrame)
         ])
     }
 
@@ -141,7 +141,7 @@ public class WechatView: UIView {
         sender.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             sender.topAnchor.constraint(equalTo: topAnchor),
-            sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: WeConstant.margin),
+            sender.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: WeConstant.margin)
         ])
     }
 
@@ -153,10 +153,10 @@ public class WechatView: UIView {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         layoutIfNeeded()
         NSLayoutConstraint.activate([
-            containerView.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor,constant: WeConstant.margin),
+            containerView.leadingAnchor.constraint(equalTo: avatarSender.trailingAnchor, constant: WeConstant.margin),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -WeConstant.margin),
             containerView.topAnchor.constraint(equalTo: sender.bottomAnchor, constant: WeConstant.margin),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 
@@ -172,17 +172,17 @@ public class WechatView: UIView {
             content.isHidden = true
         }
     }
-    //先加入视图 再设置大小范围
+    // 先加入视图 再设置大小范围
     private func configureImageArea() {
         containerView.addArrangedSubview(imageArea)
         self.containerView.layoutIfNeeded()
         imageArea.translatesAutoresizingMaskIntoConstraints = false
         imageArea.setContentHuggingPriority(.defaultLow, for: .vertical)
         NSLayoutConstraint.activate([
-            imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if contentImages.isEmpty == false {
-        for count in 0 ... (contentImages.count - 1){
+        for count in 0 ... (contentImages.count - 1) {
             let imageView = contentImages[count]
             // tag
             imageView.tag = count
@@ -215,9 +215,9 @@ public class WechatView: UIView {
         }
         }
             guard let view = imageArea.subviews.last else { return }
-            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 10).isActive = true
+            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
     }
-    
+
     @objc func imageViewTap(_ recognizer: UITapGestureRecognizer) {
         print("It has been tapped")
         imageViewModel.images.removeAll()
@@ -227,7 +227,7 @@ public class WechatView: UIView {
         }
         delegate?.didTapImageView(imageViewModel: imageViewModel, index: index)
     }
-    
+
     private func configureCommentsArea() {
         containerView.addArrangedSubview(commentsArea)
         self.containerView.layoutIfNeeded()
@@ -253,7 +253,7 @@ public class WechatView: UIView {
                 NSLayoutConstraint.activate([
                     seperateComment.topAnchor.constraint(equalTo: commentsArea.topAnchor, constant: WeConstant.labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin),
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin)
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
             default:
@@ -272,7 +272,7 @@ public class WechatView: UIView {
                     seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin),
                     nextSeperateComment.topAnchor.constraint(equalTo: seperateComment.bottomAnchor, constant: WeConstant.labelSpace),
                     seperateComment.leadingAnchor.constraint(equalTo: commentsArea.leadingAnchor),
-                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin),
+                    seperateComment.trailingAnchor.constraint(equalTo: commentsArea.trailingAnchor, constant: -WeConstant.margin)
                 ])
                 setSpecialColorText(seperateComment: seperateComment)
                 setSpecialColorText(seperateComment: nextSeperateComment)
@@ -288,7 +288,7 @@ public class WechatView: UIView {
             imageView.leadingAnchor.constraint(equalTo: imageArea.leadingAnchor, constant: CGFloat(leftEdge)),
             imageView.topAnchor.constraint(equalTo: imageArea.topAnchor, constant: CGFloat(topEdge)),
             imageView.widthAnchor.constraint(equalToConstant: CGFloat(imageWidth)),
-            imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight)),
+            imageView.heightAnchor.constraint(equalToConstant: CGFloat(imageHeight))
         ])
     }
 }

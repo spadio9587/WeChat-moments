@@ -12,12 +12,12 @@ class TweetViewController: UIViewController, WechatViewDelegate {
         let imageViewController = ImageViewController()
         imageViewController.imageViewModel = imageViewModel
         imageViewController.index = index
-        self.navigationController?.pushViewController(imageViewController, animated: true)
+        navigationController?.pushViewController(imageViewController, animated: true)
     }
     private let viewModel = TweetViewModel()
 //    private let testViewModel = ViewModel()
     private let headerView = HeaderView()
-    @IBOutlet var tableView: UITableView! 
+    @IBOutlet var tableView: UITableView!
     override public func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
@@ -38,7 +38,7 @@ class TweetViewController: UIViewController, WechatViewDelegate {
         })
         tableView.addSubview(headerView)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
     }
