@@ -15,7 +15,7 @@ class ImageViewController: UIViewController {
     var imageViewModel: ImageViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         configureCollectionView()
         configurePageControl()
     }
@@ -35,10 +35,11 @@ class ImageViewController: UIViewController {
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.scrollDirection = .horizontal
         collectionViewLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 300, width: Int(UIScreen.main.bounds.width), height: 300), collectionViewLayout: collectionViewLayout)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 300, left: 0, bottom: 300, right: 0)
+        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: collectionViewLayout)
         view.addSubview(collectionView)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
-        collectionView.backgroundColor = .lightGray
+        collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -48,7 +49,7 @@ class ImageViewController: UIViewController {
     }
 
     private func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 140, y: 570, width: 150, height: 20))
+        pageControl = UIPageControl(frame: CGRect(x: 140, y: 860, width: 150, height: 20))
         view.addSubview(pageControl)
         if imageViewModel!.images.count == 1 {
             pageControl.isHidden = true

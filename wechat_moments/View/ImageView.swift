@@ -8,7 +8,7 @@
 import UIKit
 
 class ImageView: UIView {
-    let tapImageView = UIImageView()
+    var tapImageView = UIImageView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureImage()

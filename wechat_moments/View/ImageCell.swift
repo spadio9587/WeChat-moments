@@ -31,17 +31,14 @@ public class ImageCell: UICollectionViewCell {
         let tapDouble = UITapGestureRecognizer(target: self, action: #selector(tapDoubleDid))
         tapDouble.numberOfTapsRequired = 2
         tapDouble.numberOfTouchesRequired = 1
-        let tapSingle = UITapGestureRecognizer(target: self, action: #selector(tapSingleDid))
-        tapSingle.numberOfTapsRequired = 1
-        tapSingle.numberOfTouchesRequired = 1
-        tapSingle.require(toFail: tapDouble)
         imageView.addGestureRecognizer(tapDouble)
-        imageView.addGestureRecognizer(tapSingle)
     }
 
     @objc func tapSingleDid() {
         print("tap single")
         UIView.animate(withDuration: 0.5) {
+            self.imageView.tapImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 300)
+            self.imageView.tapImageView.center = self.center
             if self.scrollView.zoomScale == 3.0 {
                 self.scrollView.zoomScale = 1.0
             }
@@ -49,12 +46,25 @@ public class ImageCell: UICollectionViewCell {
     }
 
     @objc func tapDoubleDid() {
-        print("tap twice")
         UIView.animate(withDuration: 0.5) {
+            self.imageView.tapImageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             if self.scrollView.zoomScale == 1.0 {
                 self.scrollView.zoomScale = 3.0
             }
         }
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panGesture))
+        imageView.addGestureRecognizer(panGesture)
+        let tapSingle = UITapGestureRecognizer(target: self, action: #selector(tapSingleDid))
+        imageView.addGestureRecognizer(tapSingle)
+        tapSingle.numberOfTapsRequired = 1
+        tapSingle.numberOfTouchesRequired = 1
+    }
+
+    @objc func panGesture(sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: imageView.superview)
+        sender.view?.center = CGPoint(
+            x: sender.view!.center.x + translation.x, y: sender.view!.center.y + translation.y)
+        sender.setTranslation(.zero, in: imageView.superview)
     }
 
     private func configureImageView() {
