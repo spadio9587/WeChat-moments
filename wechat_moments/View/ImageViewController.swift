@@ -71,7 +71,7 @@ extension ImageViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let image = imageViewModel.images[indexPath.row]
-        imageCell.imageView.tapImageView.image = image
+        imageCell.imageView.image = image
         return imageCell
     }
 }
