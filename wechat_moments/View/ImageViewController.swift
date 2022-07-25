@@ -7,6 +7,11 @@
 
 import UIKit
 
+private enum Constant {
+    static let screenWidth = UIScreen.main.bounds.width
+    static let screenHeight = UIScreen.main.bounds.height
+}
+
 class ImageViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -22,7 +27,7 @@ class ImageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -34,8 +39,7 @@ class ImageViewController: UIViewController {
         collectionViewLayout.minimumLineSpacing = 0
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.scrollDirection = .horizontal
-        collectionViewLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
-        collectionViewLayout.sectionInset = UIEdgeInsets(top: 300, left: 0, bottom: 300, right: 0)
+        collectionViewLayout.itemSize = CGSize(width: Constant.screenWidth, height: Constant.screenHeight)
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: collectionViewLayout)
         view.addSubview(collectionView)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
