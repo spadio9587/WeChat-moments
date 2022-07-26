@@ -26,13 +26,15 @@ public class ImageCell: UICollectionViewCell {
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
         contentView.addSubview(scrollView)
         scrollView.delegate = self
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.maximumZoomScale = 4.0
         scrollView.minimumZoomScale = 1.0
         tapEvent()
     }
 
     private func configureImageView() {
-        imageView.frame = CGRect(x: 0, y: 300, width: scrollView.bounds.width, height: 300)
+        imageView.frame = CGRect(x: 0, y: 300, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFill
         scrollView.addSubview(imageView)
@@ -45,13 +47,34 @@ public class ImageCell: UICollectionViewCell {
     }
 
     @objc func tapDoubleDid(recognizer: UITapGestureRecognizer) {
-        let point = recognizer.location(in: self.imageView)
+        let tapPositionOfPicture = recognizer.location(in: imageView)
+        print("picture location \(tapPositionOfPicture)")
+        print("picture center \(imageView.center)")
+        let tapPositionOfScreen = recognizer.location(in: scrollView)
+        print("Screen location \(tapPositionOfScreen)")
+        print("screen center \(scrollView.center)")
         UIView.animate(withDuration: 0.5) { [self] in
             if scrollView.zoomScale == 1.0 {
-                scrollView.zoomScale = 4.0
+                scrollView.zoomScale = 3.0
+                let newTapPositonPicture = CGPoint(x: tapPositionOfPicture.x * 3.0, y: tapPositionOfPicture.y * 3.0)
+                if newTapPositonPicture.y < scrollView.frame.size.height {
+                    scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: 0)
+                } else {
+                    if newTapPositonPicture.y > imageView.frame.size.height - scrollView.frame.size.height {
+                        scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: imageView.frame.size.height - scrollView.frame.size.height)
+                    } else {
+                        scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: newTapPositonPicture.y - tapPositionOfScreen.y)
+                    }
+                }
             } else {
                 scrollView.zoomScale = 1.0
             }
+        }
+    }
+
+    @objc func respondToSwipeGesture() {
+        if let viewController = self.responderViewController() {
+            viewController.navigationController?.popViewController(animated: false)
         }
     }
 
@@ -65,6 +88,9 @@ public class ImageCell: UICollectionViewCell {
         tapSingle.numberOfTapsRequired = 1
         tapSingle.numberOfTouchesRequired = 1
         tapSingle.require(toFail: tapDouble)
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeUp.direction = .up
+        imageView.addGestureRecognizer(swipeUp)
     }
 
     func responderViewController() -> UIViewController? {
