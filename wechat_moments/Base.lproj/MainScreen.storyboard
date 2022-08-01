@@ -10,7 +10,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LVF-0Y-X96">
             <objects>
-                <navigationController id="Rrq-K0-yj2" sceneMemberID="viewController">
+                <navigationController id="Rrq-K0-yj2" customClass="NavigationController" customModule="wechat_moments" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ckG-7I-FO0">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -15,6 +15,8 @@ public class ImageCell: UICollectionViewCell {
         super.init(frame: frame)
         configureScrollView()
         configureImageView()
+        layoutIfNeeded()
+//        NotificationCenter.default.addObserver(self, selector: #selector(updateLayout), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     @available(*, unavailable)
@@ -22,22 +24,45 @@ public class ImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+//    public override func layoutSubviews() {
+//        layoutIfNeeded()
+//    }
+
+//    @objc func updateLayout() {
+//        if UIDevice.current.orientation.isLandscape {
+//            self.imageView.frame = CGRect(x: 300, y: 0, width: 300, height: UIScreen.main.bounds.height)
+//        }
+//    }
+
+    override public func prepareForReuse() {
+        layoutIfNeeded()
+    }
+
     private func configureScrollView() {
-        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: contentView.bounds.width, height: contentView.bounds.height))
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         contentView.addSubview(scrollView)
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        scrollView.maximumZoomScale = 4.0
+        scrollView.maximumZoomScale = 3.0
         scrollView.minimumZoomScale = 1.0
         tapEvent()
     }
 
     private func configureImageView() {
-        imageView.frame = CGRect(x: 0, y: 300, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
-        imageView.isUserInteractionEnabled = true
-        imageView.contentMode = .scaleAspectFill
-        scrollView.addSubview(imageView)
+        // 垂直水平居中
+        if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
+            imageView.frame = CGRect(x: 0, y: 300, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
+            imageView.isUserInteractionEnabled = true
+            imageView.contentMode = .scaleAspectFit
+            scrollView.addSubview(imageView)
+        } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+            imageView.frame = CGRect(x: 300, y: 0, width: UIScreen.main.bounds.height * 3 / 4, height: UIScreen.main.bounds.height)
+            imageView.isUserInteractionEnabled = true
+            imageView.contentMode = .scaleAspectFill
+            scrollView.addSubview(imageView)
+        }
+
     }
 
     @objc func tapSingleDid() {
@@ -48,26 +73,16 @@ public class ImageCell: UICollectionViewCell {
 
     @objc func tapDoubleDid(recognizer: UITapGestureRecognizer) {
         let tapPositionOfPicture = recognizer.location(in: imageView)
-        print("picture location \(tapPositionOfPicture)")
-        print("picture center \(imageView.center)")
         let tapPositionOfScreen = recognizer.location(in: scrollView)
-        print("Screen location \(tapPositionOfScreen)")
-        print("screen center \(scrollView.center)")
         UIView.animate(withDuration: 0.5) { [self] in
-            if scrollView.zoomScale == 1.0 {
-                scrollView.zoomScale = 3.0
-                let newTapPositonPicture = CGPoint(x: tapPositionOfPicture.x * 3.0, y: tapPositionOfPicture.y * 3.0)
+            if scrollView.zoomScale == scrollView.minimumZoomScale {
+                scrollView.zoomScale = scrollView.maximumZoomScale
+                let newTapPositonPicture = CGPoint(x: tapPositionOfPicture.x * scrollView.zoomScale, y: tapPositionOfPicture.y * scrollView.zoomScale)
                 if newTapPositonPicture.y < scrollView.frame.size.height {
                     scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: 0)
-                } else {
-                    if newTapPositonPicture.y > imageView.frame.size.height - scrollView.frame.size.height {
-                        scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: imageView.frame.size.height - scrollView.frame.size.height)
-                    } else {
-                        scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: newTapPositonPicture.y - tapPositionOfScreen.y)
-                    }
                 }
             } else {
-                scrollView.zoomScale = 1.0
+                scrollView.zoomScale = scrollView.minimumZoomScale
             }
         }
     }
@@ -113,8 +128,8 @@ extension ImageCell: UIScrollViewDelegate {
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         var centerX = scrollView.center.x
         var centerY = scrollView.center.y
-        centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width/2 : centerX
-        centerY = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : centerY
+        centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width / 2 : centerX
+        centerY = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height / 2 : centerY
         print(centerX, centerY)
         imageView.center = CGPoint(x: centerX, y: centerY)
     }

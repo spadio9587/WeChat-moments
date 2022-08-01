@@ -23,15 +23,38 @@ class ImageViewController: UIViewController {
         view.backgroundColor = .black
         configureCollectionView()
         configurePageControl()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.reloadData()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
+            coordinator.animate(alongsideTransition: nil) { _ in
+                    print("rotated rotate")
+                    self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        return UIInterfaceOrientation.portrait
     }
 
     private func configureCollectionView() {
@@ -39,21 +62,26 @@ class ImageViewController: UIViewController {
         collectionViewLayout.minimumLineSpacing = 0
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.scrollDirection = .horizontal
-        collectionViewLayout.itemSize = CGSize(width: Constant.screenWidth, height: Constant.screenHeight)
-        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: collectionViewLayout)
+        collectionViewLayout.itemSize = CGSize(width: view.frame.width, height: view.frame.height)
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
         view.addSubview(collectionView)
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "ImageCell")
         collectionView.backgroundColor = .black
         collectionView.isPagingEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.contentInsetAdjustmentBehavior = .never
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
 
     private func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: 140, y: 860, width: 150, height: 20))
+        pageControl = UIPageControl(frame: CGRect(x: (UIScreen.main.bounds.width / 2 - 150 / 2), y:(UIScreen.main.bounds.height - 30), width: 150, height: 20))
         view.addSubview(pageControl)
         if imageViewModel!.images.count == 1 {
             pageControl.isHidden = true
