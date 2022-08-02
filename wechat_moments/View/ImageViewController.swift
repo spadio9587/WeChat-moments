@@ -7,11 +7,6 @@
 
 import UIKit
 
-private enum Constant {
-    static let screenWidth = UIScreen.main.bounds.width
-    static let screenHeight = UIScreen.main.bounds.height
-}
-
 class ImageViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -42,7 +37,6 @@ class ImageViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
             coordinator.animate(alongsideTransition: nil) { _ in
-                    print("rotated rotate")
                 self.collectionView.reloadData()
                 (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
                 self.collectionView.collectionViewLayout.invalidateLayout()

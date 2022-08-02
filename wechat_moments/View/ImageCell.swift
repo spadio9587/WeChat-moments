@@ -29,7 +29,7 @@ public class ImageCell: UICollectionViewCell {
 
     override public func layoutSubviews() {
         contentView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        scrollView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        scrollView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
         if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
             imageView.frame = CGRect(x: 0, y: ImageViewConstant.verticalGap, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
             imageView.isUserInteractionEnabled = true
