@@ -23,7 +23,6 @@ class ImageViewController: UIViewController {
         view.backgroundColor = .black
         configureCollectionView()
         configurePageControl()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -36,12 +35,16 @@ class ImageViewController: UIViewController {
         collectionView.reloadData()
     }
     
+    override func viewWillLayoutSubviews() {
+        pageControl.frame = CGRect(x: (UIScreen.main.bounds.width / 2 - 150 / 2), y:(UIScreen.main.bounds.height - 30), width: 150, height: 20)
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape {
             coordinator.animate(alongsideTransition: nil) { _ in
                     print("rotated rotate")
-                    self.collectionView.reloadData()
-            }
+                self.collectionView.reloadData()
+                (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                self.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     

@@ -7,6 +7,11 @@
 
 import UIKit
 
+private enum ImageViewConstant {
+    static let verticalGap: CGFloat = 300
+    static let horizontalGap: CGFloat = 250
+}
+
 public class ImageCell: UICollectionViewCell {
     private var scrollView = UIScrollView()
     let imageView = UIImageView()
@@ -15,8 +20,6 @@ public class ImageCell: UICollectionViewCell {
         super.init(frame: frame)
         configureScrollView()
         configureImageView()
-        layoutIfNeeded()
-//        NotificationCenter.default.addObserver(self, selector: #selector(updateLayout), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     @available(*, unavailable)
@@ -24,18 +27,18 @@ public class ImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-//    public override func layoutSubviews() {
-//        layoutIfNeeded()
-//    }
-
-//    @objc func updateLayout() {
-//        if UIDevice.current.orientation.isLandscape {
-//            self.imageView.frame = CGRect(x: 300, y: 0, width: 300, height: UIScreen.main.bounds.height)
-//        }
-//    }
-
-    override public func prepareForReuse() {
-        layoutIfNeeded()
+    override public func layoutSubviews() {
+        contentView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        scrollView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
+            imageView.frame = CGRect(x: 0, y: ImageViewConstant.verticalGap, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
+            imageView.isUserInteractionEnabled = true
+            imageView.contentMode = .scaleAspectFill
+        } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+            imageView.frame = CGRect(x: ImageViewConstant.horizontalGap, y: 0, width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.height)
+            imageView.isUserInteractionEnabled = true
+            imageView.contentMode = .scaleAspectFill
+        }
     }
 
     private func configureScrollView() {
@@ -50,19 +53,9 @@ public class ImageCell: UICollectionViewCell {
     }
 
     private func configureImageView() {
-        // 垂直水平居中
-        if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
-            imageView.frame = CGRect(x: 0, y: 300, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFit
-            scrollView.addSubview(imageView)
-        } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-            imageView.frame = CGRect(x: 300, y: 0, width: UIScreen.main.bounds.height * 3 / 4, height: UIScreen.main.bounds.height)
-            imageView.isUserInteractionEnabled = true
-            imageView.contentMode = .scaleAspectFill
-            scrollView.addSubview(imageView)
-        }
-
+        scrollView.addSubview(imageView)
+        imageView.isUserInteractionEnabled = true
+        imageView.contentMode = .scaleAspectFill
     }
 
     @objc func tapSingleDid() {
