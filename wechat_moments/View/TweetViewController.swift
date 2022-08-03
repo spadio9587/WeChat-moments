@@ -14,6 +14,7 @@ class TweetViewController: UIViewController, WechatViewDelegate {
         imageViewController.index = index
         navigationController?.pushViewController(imageViewController, animated: true)
     }
+
     private let viewModel = TweetViewModel()
 //    private let testViewModel = ViewModel()
     private let headerView = HeaderView()
@@ -39,18 +40,18 @@ class TweetViewController: UIViewController, WechatViewDelegate {
         tableView.addSubview(headerView)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_: Bool) {
         navigationController?.navigationBar.isHidden = true
     }
-    
+
     override var shouldAutorotate: Bool {
         return true
     }
-    
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.all
     }
-    
+
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }
@@ -66,7 +67,7 @@ extension TweetViewController: UITableViewDataSource {
         return tweetCell
     }
 
-     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.tweet.count
     }
 }

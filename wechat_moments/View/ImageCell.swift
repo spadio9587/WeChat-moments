@@ -7,11 +7,6 @@
 
 import UIKit
 
-private enum ImageViewConstant {
-    static let verticalGap: CGFloat = 300
-    static let horizontalGap: CGFloat = 250
-}
-
 public class ImageCell: UICollectionViewCell {
     private var scrollView = UIScrollView()
     let imageView = UIImageView()
@@ -30,12 +25,23 @@ public class ImageCell: UICollectionViewCell {
     override public func layoutSubviews() {
         contentView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
         scrollView.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
+        guard let image = imageView.image else { return }
+        let screenRatio = UIScreen.main.bounds.width / UIScreen.main.bounds.height
+        let imageRatio = image.size.width / image.size.height
         if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
-            imageView.frame = CGRect(x: 0, y: ImageViewConstant.verticalGap, width: scrollView.bounds.width, height: scrollView.bounds.width * 3 / 4)
+            if imageRatio > screenRatio {
+                imageView.frame = CGRect(x: 0, y: (UIScreen.main.bounds.height - (scrollView.bounds.width * 1 / imageRatio)) / 2, width: scrollView.bounds.width, height: scrollView.bounds.width * 1 / imageRatio)
+            } else {
+                imageView.frame = CGRect(x: (UIScreen.main.bounds.width - (scrollView.bounds.height * imageRatio)) / 2, y: 0, width: scrollView.bounds.height * imageRatio, height: scrollView.bounds.height)
+            }
             imageView.isUserInteractionEnabled = true
             imageView.contentMode = .scaleAspectFill
         } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-            imageView.frame = CGRect(x: ImageViewConstant.horizontalGap, y: 0, width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.height)
+            if imageRatio < screenRatio {
+                imageView.frame = CGRect(x: (UIScreen.main.bounds.width - (scrollView.bounds.height * imageRatio)) / 2, y: 0, width: scrollView.bounds.height * imageRatio, height: scrollView.bounds.height)
+            } else {
+                imageView.frame = CGRect(x: 0, y: (UIScreen.main.bounds.height - (scrollView.bounds.width * 1 / imageRatio)) / 2, width: scrollView.bounds.width, height: scrollView.bounds.width * 1 / imageRatio)
+            }
             imageView.isUserInteractionEnabled = true
             imageView.contentMode = .scaleAspectFill
         }
@@ -73,6 +79,12 @@ public class ImageCell: UICollectionViewCell {
                 let newTapPositonPicture = CGPoint(x: tapPositionOfPicture.x * scrollView.zoomScale, y: tapPositionOfPicture.y * scrollView.zoomScale)
                 if newTapPositonPicture.y < scrollView.frame.size.height {
                     scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: 0)
+                } else {
+                    if newTapPositonPicture.y > imageView.frame.size.height - scrollView.frame.size.height {
+                        scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: imageView.frame.size.height - scrollView.frame.size.height)
+                    } else {
+                        scrollView.contentOffset = CGPoint(x: newTapPositonPicture.x - tapPositionOfScreen.x, y: newTapPositonPicture.y - tapPositionOfScreen.y)
+                    }
                 }
             } else {
                 scrollView.zoomScale = scrollView.minimumZoomScale

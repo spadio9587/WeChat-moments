@@ -10,6 +10,7 @@ import UIKit
 protocol WechatViewDelegate {
     func didTapImageView(imageViewModel: ImageViewModel, index: Int)
 }
+
 private enum WeConstant {
     // 间隙
     static let margin: CGFloat = 8
@@ -24,7 +25,7 @@ private enum WeConstant {
     // 评论标注文字相关系数
     static let attCoefficient: CGFloat = -0.5
     // 屏幕宽度
-    static let screenWidth: CGFloat = UIScreen.main.bounds.width
+    static let screenWidth: CGFloat = 414
 }
 
 public class WechatView: UIView {
@@ -172,6 +173,7 @@ public class WechatView: UIView {
             content.isHidden = true
         }
     }
+
     // 先加入视图 再设置大小范围
     private func configureImageArea() {
         containerView.addArrangedSubview(imageArea)
@@ -182,40 +184,40 @@ public class WechatView: UIView {
             imageArea.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ])
         if contentImages.isEmpty == false {
-        for count in 0 ... (contentImages.count - 1) {
-            let imageView = contentImages[count]
-            // tag
-            imageView.tag = count
-            imageView.isUserInteractionEnabled = true
-            imageArea.addSubview(imageView)
-            let tapSingle = UITapGestureRecognizer(target: self, action: #selector(imageViewTap(_:)))
-            tapSingle.numberOfTapsRequired = 1
-            tapSingle.numberOfTouchesRequired = 1
-            imageView.addGestureRecognizer(tapSingle)
-            switch contentImages.count {
-            case 1:
+            for count in 0 ... (contentImages.count - 1) {
+                let imageView = contentImages[count]
+                // tag
+                imageView.tag = count
+                imageView.isUserInteractionEnabled = true
+                imageArea.addSubview(imageView)
+                let tapSingle = UITapGestureRecognizer(target: self, action: #selector(imageViewTap(_:)))
+                tapSingle.numberOfTapsRequired = 1
+                tapSingle.numberOfTouchesRequired = 1
+                imageView.addGestureRecognizer(tapSingle)
+                switch contentImages.count {
+                case 1:
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 - 2 * WeConstant.margin)
                     let height = width * 3 / 4
                     let left = 0
                     let top = 0
-                setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
-            case 2, 4:
+                    setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
+                case 2, 4:
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 3 * WeConstant.margin) / 2
                     let height = width
                     let left = CGFloat(count % 2) * WeConstant.margin + CGFloat(count % 2) * width
                     let top = CGFloat(count / 2 + 1) * WeConstant.margin + CGFloat(count / 2) * height
                     setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
-            default:
+                default:
                     let width = (WeConstant.screenWidth - WeConstant.avatarFrame - 3 * WeConstant.margin - 4 * WeConstant.margin) / 3
                     let height = width
                     let left = CGFloat(count % 3) * WeConstant.margin + CGFloat(count % 3) * width
                     let top = CGFloat(count / 3 + 1) * WeConstant.margin + CGFloat(count / 3) * height
                     setImageConstraint(imageView: imageView, leftEdge: Float(left), topEdge: Float(top), imageWidth: Float(width), imageHeight: Float(height))
+                }
             }
         }
-        }
-            guard let view = imageArea.subviews.last else { return }
-            imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
+        guard let view = imageArea.subviews.last else { return }
+        imageArea.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
     }
 
     @objc func imageViewTap(_ recognizer: UITapGestureRecognizer) {

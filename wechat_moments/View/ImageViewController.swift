@@ -11,7 +11,7 @@ class ImageViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
     private var pageControl: UIPageControl!
-    var index: Int! = nil
+    var index: Int!
     var imageViewModel: ImageViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,33 +24,33 @@ class ImageViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.reloadData()
     }
-    
+
     override func viewWillLayoutSubviews() {
         collectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        pageControl.frame = CGRect(x: (UIScreen.main.bounds.width / 2 - 150 / 2), y:(UIScreen.main.bounds.height - 30), width: 150, height: 20)
+        pageControl.frame = CGRect(x: UIScreen.main.bounds.width / 2 - 150 / 2, y: UIScreen.main.bounds.height - 30, width: 150, height: 20)
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-            coordinator.animate(alongsideTransition: nil) { _ in
-                self.collectionView.reloadData()
-                (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-                self.collectionView.collectionViewLayout.invalidateLayout()
+        coordinator.animate(alongsideTransition: nil) { _ in
+            self.collectionView.reloadData()
+            (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            self.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
-    
+
     override var shouldAutorotate: Bool {
         return true
     }
-    
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return UIInterfaceOrientationMask.all
     }
-    
+
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return UIInterfaceOrientation.portrait
     }
@@ -74,7 +74,7 @@ class ImageViewController: UIViewController {
     }
 
     private func configurePageControl() {
-        pageControl = UIPageControl(frame: CGRect(x: (UIScreen.main.bounds.width / 2 - 150 / 2), y:(UIScreen.main.bounds.height - 30), width: 150, height: 20))
+        pageControl = UIPageControl(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 150 / 2, y: UIScreen.main.bounds.height - 30, width: 150, height: 20))
         view.addSubview(pageControl)
         if imageViewModel!.images.count == 1 {
             pageControl.isHidden = true
