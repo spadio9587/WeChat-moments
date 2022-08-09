@@ -27,6 +27,8 @@
 		AC872EA82845E4BF0096E3C2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EA72845E4BF0096E3C2 /* Network.swift */; };
 		AC872EAF2846FCDD0096E3C2 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */; };
 		ACB3036F282A36CC0075662E /* WechatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB3036E282A36CC0075662E /* WechatView.swift */; };
+		ACD5DA3228A0AB0800964922 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD5DA3128A0AB0800964922 /* ImageCache.swift */; };
+		ACD5DA3428A10D0A00964922 /* WebImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD5DA3328A10D0A00964922 /* WebImageCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		AC872EA72845E4BF0096E3C2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		ACB3036E282A36CC0075662E /* WechatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatView.swift; sourceTree = "<group>"; };
+		ACD5DA3128A0AB0800964922 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		ACD5DA3328A10D0A00964922 /* WebImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageCache.swift; sourceTree = "<group>"; };
 		F241936CB0ADC6CCB9B41FD1 /* Pods-wechat_moments-wechat_momentsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wechat_moments-wechat_momentsUITests.release.xcconfig"; path = "Target Support Files/Pods-wechat_moments-wechat_momentsUITests/Pods-wechat_moments-wechat_momentsUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +136,8 @@
 				ACEE6A032875264500B48042 /* View */,
 				AC872EAB28460DD00096E3C2 /* ViewModel */,
 				AC2D7BCA280E531C0044AE25 /* AppDelegate.swift */,
+				ACD5DA3128A0AB0800964922 /* ImageCache.swift */,
+				ACD5DA3328A10D0A00964922 /* WebImageCache.swift */,
 				AC872EAE2846FCDD0096E3C2 /* ViewModel.swift */,
 				AC872EA72845E4BF0096E3C2 /* Network.swift */,
 				AC2D7BCC280E531C0044AE25 /* SceneDelegate.swift */,
@@ -407,8 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACD5DA3228A0AB0800964922 /* ImageCache.swift in Sources */,
 				AC2D7BFF280E9B9C0044AE25 /* TweetViewModel.swift in Sources */,
 				AC2D7C03280FAD2C0044AE25 /* TweetCell.swift in Sources */,
+				ACD5DA3428A10D0A00964922 /* WebImageCache.swift in Sources */,
 				AC872EAF2846FCDD0096E3C2 /* ViewModel.swift in Sources */,
 				AC2D7BCF280E531C0044AE25 /* TweetViewController.swift in Sources */,
 				AC2D7BFD280E53A00044AE25 /* Tweet.swift in Sources */,

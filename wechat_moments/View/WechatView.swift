@@ -62,25 +62,10 @@ public class WechatView: UIView {
         configureCommentsArea()
     }
 
-    private func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global().async {
-            guard let imageUrl = imageUrl,
-                  let url = URL(string: imageUrl),
-                  let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data)
-            else { return }
-            DispatchQueue.main.async {
-                callback(image)
-            }
-        }
-    }
-
     public func setTweet(tweet: Tweet) {
         self.tweet = tweet
         sender.text = tweet.sender?.username
-        loadImage(from: tweet.sender?.avatar) { image in
-            self.avatarSender.image = image
-        }
+        avatarSender.setWebImage(url: tweet.sender?.avatar as NSString?, isCache: true)
         updateContent(tweet.content)
         updateImages(tweet.images)
         updateComments(tweet.comments)
@@ -99,9 +84,7 @@ public class WechatView: UIView {
         removeSubviews(view: imageArea)
         for index in images.indices {
             let imageView = UIImageView()
-            loadImage(from: images[index].url) { image in
-                imageView.image = image
-            }
+            imageView.setWebImage(url: images[index].url as NSString, isCache: true)
             contentImages.append(imageView)
         }
     }

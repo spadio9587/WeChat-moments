@@ -46,30 +46,9 @@ public class HeaderView: UIView {
         configureUserNameLabel()
     }
 
-    private func loadImage(from imageUrl: String?, callback: @escaping (UIImage?) -> Void) {
-        DispatchQueue.global().async {
-            guard let imageUrl = imageUrl,
-                  let url = URL(string: imageUrl),
-                  let data = try? Data(contentsOf: url),
-                  let image = UIImage(data: data)
-            else {
-                return
-            }
-            DispatchQueue.main.async {
-                callback(image)
-            }
-        }
-    }
-
     public func setUserInfo(userInfo: UserInfo?) {
-        loadImage(from: userInfo?.profileImage) {
-            image in
-            self.backgroundView.image = image
-        }
-        loadImage(from: userInfo?.avatar) {
-            image in
-            self.userAvatar.image = image
-        }
+        backgroundView.setWebImage(url: userInfo?.profileImage as NSString?, isCache: true)
+        userAvatar.setWebImage(url: userInfo?.avatar as NSString?, isCache: true)
         userNameLabel.text = userInfo?.userName
     }
 
