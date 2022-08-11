@@ -5,29 +5,29 @@
 //  Created by Sixiao He on 2022/8/8.
 //
 
-import Foundation
 import UIKit
 
 extension UIImageView {
     func setWebImage(url: NSString?, isCache: Bool) {
-        var image: UIImage?
-        if url == nil {
+        guard let url = url else {
             return
         }
-
         if isCache {
-            let data: NSData? = WebImageCache.readCacheFromUrl(url: url!)
+            let data = WebImageCache.readCacheFromUrl(url: url)
             if data != nil {
-                image = UIImage(data: data! as Data)
-                    self.image = image
+                guard let data = data else {
+                    return
+                }
+                let image = UIImage(data: data as Data)
+                self.image = image
             } else {
                 DispatchQueue.global().async {
-                    let URL: NSURL = .init(string: url! as String)!
+                    let URL = NSURL(string: url as String)!
                     // 磁盘缓存拿数据
-                    let data: NSData? = NSData(contentsOf: URL as URL)
+                    let data = NSData(contentsOf: URL as URL)
                     if data != nil {
-                        image = UIImage(data: data! as Data)
-                        WebImageCache.writeCacheToUrl(url: url!, data: data!)
+                        let image = UIImage(data: data! as Data)
+                        WebImageCache.writeCacheToUrl(url: url, data: data!)
                         DispatchQueue.main.async {
                             self.image = image
                         }
@@ -36,10 +36,13 @@ extension UIImageView {
             }
         } else {
             DispatchQueue.global().async {
-                let URL: NSURL = .init(string: url! as String)!
-                let data: NSData? = NSData(contentsOf: URL as URL)
+                let URL = NSURL(string: url as String)!
+                let data = NSData(contentsOf: URL as URL)
                 if data != nil {
-                    image = UIImage(data: data! as Data)
+                    guard let data = data else {
+                        return
+                    }
+                    let image = UIImage(data: data as Data)
                     DispatchQueue.main.async {
                         self.image = image
                     }
