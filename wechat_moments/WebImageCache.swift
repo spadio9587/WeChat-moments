@@ -10,6 +10,9 @@ import Foundation
 class WebImageCache {
     private static var cache: NSCache = NSCache<NSString, NSData>()
     // 外部还是使用原始string，data
+    class func getCacheFromUrl(url: String) {
+        
+    }
     class func readCacheFromUrl(url: NSString) -> NSData? {
         var data: NSData?
         let path: NSString = WebImageCache.getFullCachePathFromUrl(url: url)
@@ -41,7 +44,14 @@ class WebImageCache {
         let path: NSString = WebImageCache.getFullCachePathFromUrl(url: url)
         data.write(toFile: path as String, atomically: true)
     }
-
+    
+    class func getCachePathFromUrl(imageUrl: String) {
+        let cachePath = NSHomeDirectory().appending("/Caches")
+        let url = URL(string: imageUrl)
+        if !(FileManager.default.fileExists(atPath: cachePath)) {
+            try? FileManager.default.createDirectory(atPath: cachePath, withIntermediateDirectories: true, attributes: nil)
+        }
+    }
     // 设置缓存路径
     class func getFullCachePathFromUrl(url: NSString) -> NSString {
         let cachePath = NSHomeDirectory().appending("/MyCache")
