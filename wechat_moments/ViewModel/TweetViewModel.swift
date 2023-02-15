@@ -12,7 +12,7 @@ public class TweetViewModel {
     var tweet: [Tweet] = []
     var userInfo: UserInfo?
     func getDataFromUrl(callback: @escaping () -> Void) {
-        let url = URL(string: "https://emagrorrim.github.io/mock-api/moments.json")
+        let url = URL(string: "https://tw-mobile-xian.github.io/moments-data/tweets.json")
         let task = URLSession.shared.dataTask(with: url!) {
             data, _, _ in
             guard let data = data else { return }
@@ -37,7 +37,7 @@ public class TweetViewModel {
     }
 
     public func getUserInfo(callback: @escaping () -> Void) {
-        let url = URL(string: "https://emagrorrim.github.io/mock-api/user/jsmith.json")!
+        let url = URL(string: "https://tw-mobile-xian.github.io/moments-data/user.json")!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data, error == nil else {
                 return
